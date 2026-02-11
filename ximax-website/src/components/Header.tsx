@@ -435,7 +435,7 @@ const Header = () => {
       </header>
 
       {/* Spacer to prevent content from hiding behind fixed header */}
-      <div className={`${isScrolled ? 'h-20' : 'h-32'} lg:${isScrolled ? 'h-20' : 'h-40'}`}></div>
+      <div className={`${isScrolled ? 'h-20' : 'h-32'} lg:${isScrolled ? 'h-20' : 'h-32'}`}></div>
     </>
   );
 };

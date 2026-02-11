@@ -13,9 +13,7 @@ import {
   FaHeart,
   FaShieldAlt,
   FaAward,
-  FaRegBuilding,
-  FaCalendarAlt,
-  FaMapMarkerAlt
+  FaRegBuilding
 } from 'react-icons/fa';
 
 // Dropdown Component
@@ -36,14 +34,14 @@ export const AboutDropdown: React.FC<{ items: DropdownItem[] }> = ({ items }) =>
       {items.map((item, index) => (
         <div key={index} className="mb-2">
           <button
-            className="flex justify-between items-center w-full p-4 bg-sky-50 hover:bg-sky-100 text-sky-800 font-semibold rounded-lg transition-all duration-300"
+            className="flex justify-between items-center w-full p-4 bg-blue-50 hover:bg-blue-100 text-blue-800 font-semibold rounded-lg transition-all duration-300"
             onClick={() => toggleDropdown(index)}
           >
             <span>{item.title}</span>
             <FaCaretDown className={`transition-transform duration-300 ${openIndex === index ? 'rotate-180' : ''}`} />
           </button>
           <div className={`overflow-hidden transition-all duration-500 ${openIndex === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
-            <div className="p-6 bg-white border border-t-0 border-sky-100 rounded-b-lg shadow-sm">
+            <div className="p-6 bg-white border border-t-0 border-blue-100 rounded-b-lg shadow-sm">
               {item.content}
             </div>
           </div>
@@ -53,7 +51,7 @@ export const AboutDropdown: React.FC<{ items: DropdownItem[] }> = ({ items }) =>
   );
 };
 
-// Icon Card Component
+// Icon Card Component - Modified to match reference
 interface IconCardProps {
   icon: React.ReactNode;
   title: string;
@@ -61,16 +59,16 @@ interface IconCardProps {
 }
 
 const IconCard: React.FC<IconCardProps> = ({ icon, title, description }) => (
-  <div className="flex flex-col items-center text-center p-6 bg-white rounded-xl hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-sky-200">
-    <div className="mb-4 p-4 bg-gradient-to-br from-sky-50 to-blue-50 text-sky-600 rounded-2xl">
+  <div className="flex flex-col items-center text-center p-4 hover:rounded-xl hover:shadow-lg transition-shadow duration-300">
+    <div className="mb-4 p-3 bg-blue-100 text-blue-600 rounded-full">
       {icon}
     </div>
-    <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-3">{title}</h3>
-    <p className="text-gray-600 text-sm md:text-base leading-relaxed">{description}</p>
+    <h3 className="text-med md:text-xl font-semibold text-gray-800 mb-3">{title}</h3>
+    <p className="text-gray-600 text-xs md:text-sm">{description}</p>
   </div>
 );
 
-// Culture Card Component
+// Culture Card Component - Modified to match reference
 interface CultureCardProps {
   icon: React.ReactNode;
   title: string;
@@ -78,31 +76,27 @@ interface CultureCardProps {
 }
 
 const CultureCard: React.FC<CultureCardProps> = ({ icon, title, description }) => (
-  <div className="p-6 bg-white rounded-xl border-l-4 border-sky-500 shadow-md hover:shadow-lg transition-all duration-300">
-    <div className="flex items-start gap-4">
-      <div className="p-3 bg-sky-50 text-sky-600 rounded-lg">
-        {icon}
-      </div>
-      <div>
-        <h4 className="text-lg font-bold text-gray-900 mb-2">{title}</h4>
-        <p className="text-gray-600 text-sm leading-relaxed">{description}</p>
-      </div>
+  <div className="flex flex-col items-center text-center p-4 hover:rounded-xl hover:shadow-lg transition-shadow duration-300">
+    <div className="mb-4 p-3 bg-blue-100 text-blue-600 rounded-full">
+      {icon}
     </div>
+    <h3 className="text-med md:text-xl font-semibold text-gray-800 mb-3">{title}</h3>
+    <p className="text-gray-600 text-xs md:text-sm">{description}</p>
   </div>
 );
 
-// Value Card Component
+// Value Card Component - Modified to match reference
 interface ValueCardProps {
   icon: React.ReactNode;
   title: string;
 }
 
 const ValueCard: React.FC<ValueCardProps> = ({ icon, title }) => (
-  <div className="flex items-center gap-3 p-4 bg-gradient-to-br from-sky-50 to-blue-50 rounded-lg">
-    <div className="p-2 bg-white text-sky-600 rounded-lg shadow-sm">
+  <div className="flex items-center gap-3 p-3 bg-white rounded-lg border border-gray-100">
+    <div className="p-2 bg-blue-100 text-blue-600 rounded-lg">
       {icon}
     </div>
-    <span className="text-gray-800 font-medium text-sm md:text-base">{title}</span>
+    <span className="text-gray-700 font-medium text-xs md:text-sm">{title}</span>
   </div>
 );
 
@@ -165,286 +159,90 @@ const AboutPage: React.FC = () => {
     }
   ];
 
-  // Dropdown items for Company History
-  const dropdownItems: DropdownItem[] = [
-    {
-      title: "Our Journey Since 2006",
-      content: (
-        <div className="space-y-4">
-          <p className="text-gray-700">
-            <strong>Ximax Automation</strong> is an IT consulting and software services company founded in March 2006. 
-            Running its operations from its base in London with 100+ strong work forces, we offer Software Product Development, 
-            Application Development, Web Development, Outsourced IT Managed & Infrastructure services, IT Staffing, and 
-            Technology Consulting services to our clients across the globe.
-          </p>
-          <div className="flex items-center gap-4 text-sm text-gray-600">
-            <div className="flex items-center gap-2">
-              <FaCalendarAlt className="text-sky-600" />
-              <span>Founded: March 2006</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <FaMapMarkerAlt className="text-sky-600" />
-              <span>Headquarters: London</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <FaUsers className="text-sky-600" />
-              <span>100+ Team Members</span>
-            </div>
-          </div>
-        </div>
-      )
-    },
-    {
-      title: "Our Services & Solutions",
-      content: (
-        <div className="space-y-4">
-          <p className="text-gray-700">
-            Ximax Automation furnishes both software services and products to companies ranging from startups to Fortune 500's. 
-            We supply a broad range of IT applications solutions and services including; e-Business solutions, 
-            Enterprise Resource Planning (ERP) Implementation and Post Implementation Support, Application Development, 
-            Application Maintenance, Software Customizations, and Remote Database Administration Services.
-          </p>
-        </div>
-      )
-    },
-    {
-      title: "Our Expertise",
-      content: (
-        <div className="space-y-4">
-          <p className="text-gray-700">
-            We offer a wide range of services in the areas of analysis, design, development, and maintenance of various IT systems. 
-            Our services are designed to help our clients generate revenue, reduce costs, and access information necessary to 
-            operate their business on a timely basis. Ximax Automation is a leading provider of advanced software consulting and 
-            development services specializing in the next generation Internet applications.
-          </p>
-        </div>
-      )
-    },
-    {
-      title: "Our People & Staffing",
-      content: (
-        <div className="space-y-4">
-          <p className="text-gray-700">
-            Ximax Automation offers professional consulting services to help clients meet their staffing challenges. 
-            At Ximax Automation, our strength is our People. We specialize in finding the consultant's best matched to 
-            specific project requirements. Working in close collaboration with a client, our recruitment team will identify 
-            which resources need to be supplemented and on what basis they should be taken on to best suit the needs of the company.
-          </p>
-          <p className="text-gray-700 mt-2">
-            Today, businesses need to be pro-active and flexible to meet unforeseen challenges. They are also under pressure 
-            to guarantee the technical competency of resources, to make cost savings and meet project deadlines. To meet such 
-            challenges, companies need to be flexible. One important area is that of human resources. Companies need to hire 
-            flexible resources cost-effectively, where possible avoiding taking on any long-term risk or liability.
-          </p>
-        </div>
-      )
-    }
-  ];
-
   return (
-    <div id='about-company' className="min-h-screen bg-white">
-      {/* Hero Section with Gradient Background */}
+    <div id='about-company' className="min-h-screen bg-gray-50 -mt-8">
+      {/* Hero Section with Gradient Background and Background Image */}
       <section 
-        className="pt-28 pb-24 relative overflow-visible -mb-20"
+        className="pt-28 py-5 relative overflow-hidden"
         style={{
           background: 'linear-gradient(135deg, #0A6B7E 0%, #075985 50%, #0C4A6E 100%)'
         }}
       >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center max-w-4xl mx-auto">
-            <div className="inline-flex items-center justify-center mb-6">
-              <span className="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-white text-sm font-semibold border border-white/20">
-                Established 2006
-              </span>
+        {/* Background Image Overlay */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="/ximax-hero-bg.jpg" 
+            alt="Ximax Automation Background" 
+            className="w-full h-full object-cover opacity-10"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-blue-800/80 mix-blend-multiply"></div>
+        </div>
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center">
+            <div className="inline-flex items-center justify-center mb-3">
+              <h1 className="text-3xl md:text-3xl lg:text-4xl font-bold text-white">
+                About Us
+              </h1>
             </div>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-              About <span className="text-sky-300">Ximax Automation</span>
-            </h1>
-            
-            <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto mb-12 leading-relaxed">
+            <p className="text-xs md:text-base text-white/90 max-w-3xl mx-auto mb-12">
               Pioneering IT consulting and software services since 2006, transforming businesses worldwide 
               through innovation, expertise, and a commitment to excellence.
             </p>
           </div>
         </div>
-
-        {/* Image Gallery Section - Modern Lantern Layout */}
-        <div className="absolute bottom-0 left-0 right-0 transform translate-y-1/2 z-20">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="w-[90%] lg:w-[85%] mx-auto">
-              {/* Desktop layout - Lantern style staggered images */}
-              <div className="hidden lg:flex justify-center items-end gap-6">
-                <div className="w-1/4 relative group">
-                  <div className="relative overflow-hidden rounded-2xl shadow-2xl h-72">
-                    <img 
-                      src="/ximax-office-1.jpg" 
-                      alt="Ximax Automation Team Collaboration" 
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                  </div>
-                </div>
-                
-                <div className="w-1/4 relative group -mb-8">
-                  <div className="relative overflow-hidden rounded-2xl shadow-2xl h-56">
-                    <img 
-                      src="/ximax-office-2.jpg" 
-                      alt="Ximax Automation Innovation Hub" 
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                  </div>
-                </div>
-                
-                <div className="w-1/4 relative group">
-                  <div className="relative overflow-hidden rounded-2xl shadow-2xl h-72">
-                    <img 
-                      src="/ximax-office-3.jpg" 
-                      alt="Ximax Automation Strategic Planning" 
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                  </div>
-                </div>
-                
-                <div className="w-1/4 relative group -mb-8">
-                  <div className="relative overflow-hidden rounded-2xl shadow-2xl h-56">
-                    <img 
-                      src="/ximax-office-4.jpg" 
-                      alt="Ximax Automation Project Excellence" 
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Tablet layout */}
-              <div className="hidden md:flex lg:hidden justify-center items-end gap-6">
-                <div className="w-1/2 relative group">
-                  <div className="relative overflow-hidden rounded-2xl shadow-2xl h-72">
-                    <img 
-                      src="/ximax-office-1.jpg" 
-                      alt="Ximax Automation Team" 
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                  </div>
-                </div>
-                
-                <div className="w-1/2 relative group -mb-8">
-                  <div className="relative overflow-hidden rounded-2xl shadow-2xl h-56">
-                    <img 
-                      src="/ximax-office-2.jpg" 
-                      alt="Ximax Automation Innovation" 
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Mobile layout */}
-              <div className="flex md:hidden justify-center items-end gap-3">
-                <div className="w-[48%] relative group">
-                  <div className="relative overflow-hidden rounded-xl shadow-2xl h-48">
-                    <img 
-                      src="/ximax-office-1.jpg" 
-                      alt="Ximax Automation Team" 
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                  </div>
-                </div>
-                
-                <div className="w-[48%] relative group -mb-6">
-                  <div className="relative overflow-hidden rounded-xl shadow-2xl h-36">
-                    <img 
-                      src="/ximax-office-2.jpg" 
-                      alt="Ximax Automation Innovation" 
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </section>
 
       {/* Spacer for images */}
-      <div className="h-48 lg:h-56"></div>
+      {/* <div className="h-48 lg:h-56"></div> */}
 
-      {/* About Content Section - Two Column Layout */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+      {/* About Content Section - Two Column Layout - Modified font sizes */}
+      <section className="py-5 bg-white">
+        <div className="container mx-auto px-4 mt-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Left Column */}
-            <div className="space-y-6">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-sky-50 rounded-full">
-                <FaRegBuilding className="text-sky-600" />
-                <span className="text-sky-700 font-semibold text-sm">About Ximax</span>
-              </div>
-              
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
-                IT Consulting & Software Services Company
-              </h2>
-              
-              <div className="prose prose-lg text-gray-600 space-y-4">
-                <p className="leading-relaxed">
-                  <strong>Ximax Automation</strong> is an IT consulting and software services company founded in March 2006. 
-                  Running its operations from its base in London with 100+ strong work forces, Ximax Automation offers 
-                  Software Product Development, Application Development, Web Development, Outsourced IT Managed & Infrastructure 
-                  services, IT Staffing and Technology Consulting services to its clients across the globe.
-                </p>
-                
-                <p className="leading-relaxed">
-                  Ximax Automation furnishes both software services and products to companies ranging from startups to fortune 500's. 
-                  We supply a broad range of IT applications solutions and services including; e-Business solutions, 
-                  Enterprise Resource Planning (ERP) Implementation and Post Implementation Support, Application Development, 
-                  Application Maintenance, Software Customizations and Remote Database Administration Services.
-                </p>
+            <div className="space-y-2">
+              <div className="flex items-start">
+                <div className="p-3 bg-blue-100 rounded-lg mr-4 mt-1 flex-shrink-0">
+                  <FaRegBuilding className="text-blue-600 text-xl" />
+                </div>
+                <div>
+                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+                    IT Consulting & Software Services Company
+                  </h2>
+                  <p className="text-gray-700 text-xs md:text-sm text-left leading-relaxed">
+                    <strong>Ximax Automation</strong> is an IT consulting and software services company founded in March 2006. 
+                    Running its operations from its base in London with 100+ strong work forces, Ximax Automation offers 
+                    Software Product Development, Application Development, Web Development, Outsourced IT Managed & Infrastructure 
+                    services, IT Staffing and Technology Consulting services to its clients across the globe.
+                  </p>
+                  <p className="text-gray-700 text-xs md:text-sm text-left leading-relaxed mt-4">
+                    Ximax Automation furnishes both software services and products to companies ranging from startups to fortune 500's. 
+                    We supply a broad range of IT applications solutions and services including; e-Business solutions, 
+                    Enterprise Resource Planning (ERP) Implementation and Post Implementation Support, Application Development, 
+                    Application Maintenance, Software Customizations and Remote Database Administration Services.
+                  </p>
+                </div>
               </div>
             </div>
 
             {/* Right Column */}
-            <div className="space-y-6">
-              <div className="bg-gradient-to-br from-sky-50 to-blue-50 p-8 rounded-2xl border border-sky-100">
-                <div className="flex items-start gap-4 mb-6">
-                  <div className="p-3 bg-white rounded-xl shadow-sm">
-                    <FaQuoteLeft className="text-3xl text-sky-600" />
-                  </div>
-                  <p className="text-gray-700 text-lg italic font-medium">
-                    Our strength is our People. We specialize in finding the consultant's best matched to specific project requirements.
+            <div className="space-y-2">
+              <div className="flex items-start">
+                <div className="p-3 bg-blue-100 rounded-lg mr-4 mt-1 flex-shrink-0">
+                  <FaQuoteLeft className="text-blue-600 text-xl" />
+                </div>
+                <div>
+                  <p className="text-gray-700 text-xs md:text-sm text-left leading-relaxed">
+                    <strong>Our strength is our People.</strong> We specialize in finding the consultant's best matched to specific project requirements.
                   </p>
-                </div>
-                
-                <p className="text-gray-600 leading-relaxed">
-                  We offer a wide range of services in the areas of analysis, design, development, and maintenance of various IT systems. 
-                  Our services are designed to help our clients generate revenue, reduce costs, and access information necessary to 
-                  operate their business on a timely basis. Ximax Automation is a leading provider of advanced software consulting and 
-                  development services specializing in the next generation Internet applications.
-                </p>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm">
-                  <div className="text-3xl font-bold text-sky-600 mb-1">100+</div>
-                  <div className="text-sm text-gray-600">Team Members</div>
-                </div>
-                <div className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm">
-                  <div className="text-3xl font-bold text-sky-600 mb-1">2006</div>
-                  <div className="text-sm text-gray-600">Year Founded</div>
-                </div>
-                <div className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm">
-                  <div className="text-3xl font-bold text-sky-600 mb-1">Global</div>
-                  <div className="text-sm text-gray-600">Client Base</div>
-                </div>
-                <div className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm">
-                  <div className="text-3xl font-bold text-sky-600 mb-1">24/7</div>
-                  <div className="text-sm text-gray-600">Support</div>
+                  <p className="text-gray-700 text-xs md:text-sm text-left leading-relaxed mt-4">
+                    We offer a wide range of services in the areas of analysis, design, development, and maintenance of various IT systems. 
+                    Our services are designed to help our clients generate revenue, reduce costs, and access information necessary to 
+                    operate their business on a timely basis. Ximax Automation is a leading provider of advanced software consulting and 
+                    development services specializing in the next generation Internet applications.
+                  </p>
                 </div>
               </div>
             </div>
@@ -452,99 +250,89 @@ const AboutPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Staffing & Consulting Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="order-2 lg:order-1">
-              <div className="relative">
-                <div className="absolute -top-4 -left-4 w-24 h-24 bg-sky-200 rounded-full opacity-30"></div>
-                <div className="relative bg-white p-8 rounded-2xl shadow-xl border border-gray-100">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="p-3 bg-sky-50 rounded-lg">
-                      <FaUsers className="text-2xl text-sky-600" />
-                    </div>
-                    <h3 className="text-2xl font-bold text-gray-900">Our People, Our Strength</h3>
-                  </div>
-                  
-                  <p className="text-gray-600 leading-relaxed mb-6">
-                    Ximax Automation offers professional consulting services to help clients meet their staffing challenges. 
-                    At Ximax Automation, our strength is our People. We specialize in finding the consultant's best matched 
-                    to specific project requirements. Working in close collaboration with a client, our recruitment team will 
-                    identify which resources need to be supplemented and on what basis they should be taken on to best suit 
-                    the needs of the company.
-                  </p>
-                  
-                  <p className="text-gray-600 leading-relaxed">
-                    Today, businesses need to be pro-active and flexible to meet unforeseen challenges. They are also under 
-                    pressure to guarantee the technical competency of resources, to make cost savings and meet project deadlines. 
-                    To meet such challenges, companies need to be flexible. One important area is that of human resources. 
-                    Companies need to hire flexible resources cost-effectively, where possible avoiding taking on any long-term 
-                    risk or liability.
-                  </p>
-                </div>
-              </div>
-            </div>
-            
-            <div className="order-1 lg:order-2">
-              <div className="space-y-6">
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-sky-100 rounded-full">
-                  <FaHandshake className="text-sky-600" />
-                  <span className="text-sky-700 font-semibold text-sm">Consulting Excellence</span>
-                </div>
-                
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
-                  Professional IT Staffing & Technology Consulting
-                </h2>
-                
-                <div className="bg-white p-6 rounded-xl shadow-md border-l-4 border-sky-500">
-                  <p className="text-gray-700 italic">
-                    "We help our clients meet their staffing challenges with flexible, cost-effective solutions 
-                    tailored to their specific project requirements."
-                  </p>
-                </div>
-                
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-sky-500 rounded-full"></div>
-                    <span className="text-gray-700 text-sm">Startups to Fortune 500</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-sky-500 rounded-full"></div>
-                    <span className="text-gray-700 text-sm">100+ IT Professionals</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-sky-500 rounded-full"></div>
-                    <span className="text-gray-700 text-sm">Global Delivery Model</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-sky-500 rounded-full"></div>
-                    <span className="text-gray-700 text-sm">Flexible Engagement</span>
-                  </div>
-                </div>
+     {/* Staffing & Consulting Section - Modified to match reference font sizes */}
+<section className="py-5 bg-gray-50">
+  <div className="container mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+    <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
+      {/* Left Side - Image - 30% width on desktop, below content on mobile */}
+      <div className="order-2 lg:order-1 w-full lg:w-[30%]">
+        <div className="relative rounded-xl overflow-hidden shadow-xl">
+          <div className="aspect-[4/3] lg:aspect-square relative">
+            <img 
+              src="/ximax-staffing.jpg" 
+              alt="Ximax Automation Staffing & Consulting" 
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-blue-900/60 to-transparent"></div>
+            <div className="absolute bottom-0 left-0 right-0 p-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/20 backdrop-blur-sm rounded-full">
+                <FaUsers className="w-4 h-4 text-white" />
+                <span className="text-white text-xs md:text-sm font-medium">100+ IT Professionals</span>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+      
+      {/* Right Side - Content - 70% width on desktop, above image on mobile */}
+      <div className="order-1 lg:order-2 w-full lg:w-[70%]">
+        <div className="space-y-4">
+          <div className="flex items-center gap-2">
+            <div className="p-2 bg-blue-100 rounded-lg">
+              <FaHandshake className="text-blue-600 text-lg" />
+            </div>
+            <span className="text-blue-700 font-semibold text-xs md:text-sm">Consulting Excellence</span>
+          </div>
+          
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">
+            Professional IT Staffing & Technology Consulting
+          </h2>
+          
+          <div className="bg-white p-4 rounded-xl border-l-4 border-blue-600">
+            <p className="text-gray-700 italic text-xs md:text-sm">
+              "We help our clients meet their staffing challenges with flexible, cost-effective solutions 
+              tailored to their specific project requirements."
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-2 gap-3">
+            <div className="flex items-center gap-2">
+              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full"></div>
+              <span className="text-gray-700 text-xs md:text-sm">Startups to Fortune 500</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full"></div>
+              <span className="text-gray-700 text-xs md:text-sm">100+ IT Professionals</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full"></div>
+              <span className="text-gray-700 text-xs md:text-sm">Global Delivery Model</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full"></div>
+              <span className="text-gray-700 text-xs md:text-sm">Flexible Engagement</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-      {/* Culture Section */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <span className="inline-flex items-center px-4 py-2 bg-sky-50 rounded-full text-sky-700 text-sm font-semibold mb-4">
-              Our Culture
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+      {/* Culture Section - Modified to match reference */}
+      <section className="py-5 bg-white">
+        <div className="container mx-auto px-4 mt-10">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
               The Values That Define Us
             </h2>
-            <p className="text-gray-600 text-lg">
+            <p className="text-xs md:text-base text-gray-600 max-w-3xl mx-auto">
               At Ximax Automation, we take great pride in the quality and integrity of our team. 
               We take serving our customers as seriously as we do our culture of fun, creativity and professionalism.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-12">
             {cultureItems.map((item, index) => (
               <CultureCard
                 key={index}
@@ -555,23 +343,23 @@ const AboutPage: React.FC = () => {
             ))}
           </div>
 
-          <div className="bg-gradient-to-r from-sky-900 to-blue-900 rounded-2xl p-8 md:p-12">
+          <div className="bg-gradient-to-r from-blue-900 to-blue-800 rounded-2xl p-6 md:p-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
               <div>
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-white text-sm mb-4">
-                  <FaEye className="text-sky-300" />
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-full text-white text-xs mb-3">
+                  <FaEye className="text-blue-300" />
                   <span>Our Vision</span>
                 </div>
-                <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-3">
                   To Be a Respected Brand
                 </h3>
-                <p className="text-white/90 text-lg leading-relaxed">
+                <p className="text-white/90 text-xs md:text-sm leading-relaxed">
                   Leading the knowledge industry towards innovative, proactive and optimized business results 
                   through Information Technology solutions and services.
                 </p>
               </div>
               <div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {valueItems.map((item, index) => (
                     <ValueCard
                       key={index}
@@ -586,41 +374,20 @@ const AboutPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Dropdown Section - Company History */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-10">
-              <span className="inline-flex items-center px-4 py-2 bg-sky-100 rounded-full text-sky-700 text-sm font-semibold mb-4">
-                Company History
-              </span>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                Our Journey Since 2006
-              </h2>
-              <p className="text-gray-600 text-lg">
-                Two decades of innovation, growth, and partnership with our clients
-              </p>
-            </div>
-            
-            <AboutDropdown items={dropdownItems} />
-          </div>
-        </div>
-      </section>
-
       {/* We Help You Grow Section */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-              We Help You Grow <span className="text-sky-600">Faster & Bigger</span>
+      <section className="py-5 bg-white">
+        <div className="container mx-auto px-4 mt-8">
+          {/* <div className="text-center mb-8">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              We Help You Grow <span className="text-blue-600">Faster & Bigger</span>
             </h2>
-            <p className="text-lg text-gray-600">
+            <p className="text-xs md:text-base text-gray-600 max-w-3xl mx-auto">
               Partner with us to accelerate your business growth with our comprehensive IT solutions 
               and outsourcing expertise
             </p>
-          </div>
+          </div> */}
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
             {growthSections.map((section, index) => (
               <IconCard
                 key={index}
@@ -633,18 +400,21 @@ const AboutPage: React.FC = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-sky-900 to-blue-900">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+      {/* CTA Section - Modified to match reference */}
+      <section className="py-5 bg-gradient-to-r from-blue-900 to-blue-800"
+      style={{
+          background: 'linear-gradient(135deg, #0A6B7E 0%, #075985 50%, #0C4A6E 100%)'
+        }}>
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-3">
             Ready to Transform Your Business?
           </h2>
-          <p className="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
+          <p className="text-white/90 text-xs md:text-sm mb-6 max-w-2xl mx-auto">
             Join our 100+ satisfied clients and experience the Ximax Automation difference
           </p>
-          <button className="inline-flex items-center gap-3 bg-white text-sky-900 hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:shadow-xl">
+          <button className="inline-flex items-center gap-2 bg-white text-blue-900 hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-300 hover:shadow-lg">
             Get In Touch
-            <FaRocket className="text-sky-600" />
+            <FaRocket className="text-blue-600" />
           </button>
         </div>
       </section>
