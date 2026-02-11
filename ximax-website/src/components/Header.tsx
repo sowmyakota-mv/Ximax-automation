@@ -1,6 +1,6 @@
 // components/Header.tsx
-import { useState, useEffect } from 'react';
-import { Menu, X, Mail, Phone, Linkedin } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { Menu, X, Mail, Phone, Linkedin, ChevronDown, ChevronRight } from 'lucide-react';
 
 // WhatsApp Icon Component
 const WhatsAppIcon = ({ size = 20 }: { size?: number }) => (
@@ -18,20 +18,57 @@ const WhatsAppIcon = ({ size = 20 }: { size?: number }) => (
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const navLinks = [
-    { name: 'About Us', href: '#about' },
-    { name: 'Services', href: '#services' },
-    { name: 'Technology', href: '#technology' },
-    { name: 'Industry Verticals', href: '#verticals' },
-    { name: 'Career', href: '#career' },
-    { name: 'Contact Us', href: '#contact' },
-  ];
+  // Dropdown data
+  const dropdowns = {
+    'About Us': [
+      { name: 'About Company', href: '/about-company' },
+      { name: 'Why Us?', href: '/why-us' },
+      { name: 'Our Capabilities', href: '/capabilities' },
+    ],
+    'Services': [
+      { name: 'Big Data & Analytics', href: '/services/big-data-analytics' },
+      { name: 'Cloud Applications', href: '/services/cloud-applications' },
+      { name: 'Application Development', href: '/services/application-development' },
+      { name: 'Digital Transformation', href: '/services/digital-transformation' },
+      { name: 'Testing & QA', href: '/services/testing-qa' },
+      { name: 'ERP Development', href: '/services/erp-development' },
+    ],
+    'Technology': [
+      { name: 'Microsoft .NET', href: '/technology/microsoft-dotnet' },
+      { name: 'Java/J2EE', href: '/technology/java-j2ee' },
+      { name: 'Enterprise Web Services', href: '/technology/enterprise-web-services' },
+      { name: 'Middleware', href: '/technology/middleware' },
+      { name: 'Oracle', href: '/technology/oracle' },
+    ],
+    'Industry Verticals': [
+      { name: 'Banking & Financial Services', href: '/industry/banking-financial' },
+      { name: 'Healthcare Solutions', href: '/industry/healthcare' },
+      { name: 'E-commerce', href: '/industry/ecommerce' },
+      { name: 'Manufacturing', href: '/industry/manufacturing' },
+      { name: 'Telecommunication', href: '/industry/telecommunication' },
+      { name: 'Travel, Transport & Logistics', href: '/industry/travel-transport-logistics' },
+    ],
+  };
 
   const contactLinks = [
     { icon: Mail, text: 'info@ximax.com', href: 'mailto:info@ximax.com' },
     { icon: Phone, text: '+1 234 567 8900', href: 'tel:+12345678900' },
   ];
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setActiveDropdown(null);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,37 +79,96 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const toggleDropdown = (dropdownName: string) => {
+    setActiveDropdown(activeDropdown === dropdownName ? null : dropdownName);
+  };
+
+  const handleNavigation = (href: string) => {
+    // For external links (mailto, tel) use window.location
+    if (href.startsWith('mailto:') || href.startsWith('tel:')) {
+      window.location.href = href;
+    } else {
+      // For internal links, use pushState for client-side navigation
+      window.history.pushState({}, '', href);
+      
+      // Dispatch a popstate event to notify any listeners
+      const popStateEvent = new PopStateEvent('popstate', { state: {} });
+      window.dispatchEvent(popStateEvent);
+    }
+    
+    setIsMobileMenuOpen(false);
+    setActiveDropdown(null);
+  };
+
+  const navLinks = [
+    { name: 'Home', href: '/', hasDropdown: false },
+    { name: 'About Us', href: '/about', hasDropdown: true },
+    { name: 'Services', href: '/services', hasDropdown: true },
+    { name: 'Technology', href: '/technology', hasDropdown: true },
+    { name: 'Industry Verticals', href: '/verticals', hasDropdown: true },
+    { name: 'Career', href: '/career', hasDropdown: false },
+    { name: 'Contact Us', href: '/contact', hasDropdown: false },
+  ];
+
   return (
     <>
       {/* Desktop Header */}
-      <header className="hidden lg:block fixed top-0 w-full z-50 transition-all duration-300">
+      <header className="hidden lg:block fixed top-0 w-full z-50 transition-all duration-300" ref={dropdownRef}>
         {/* Top Small Header - Hidden when scrolled */}
         <div className={`bg-sky-600 text-white transition-all duration-300 ${isScrolled ? 'opacity-0 h-0 overflow-hidden' : 'py-2 px-6'}`}>
           <div className="max-w-7xl mx-auto flex justify-between items-center">
             {/* All Navigation Links - Left */}
             <nav className="flex space-x-8">
               {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className="text-sm font-medium hover:text-sky-100 transition-colors"
-                >
-                  {link.name}
-                </a>
+                <div key={link.name} className="relative">
+                  <button
+                    onClick={() => {
+                      if (link.hasDropdown) {
+                        toggleDropdown(link.name);
+                      } else {
+                        handleNavigation(link.href);
+                      }
+                    }}
+                    className="text-sm font-medium hover:text-sky-100 transition-colors flex items-center gap-1"
+                  >
+                    {link.name}
+                    {link.hasDropdown && (
+                      <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === link.name ? 'rotate-180' : ''}`} />
+                    )}
+                  </button>
+                  
+                  {/* Dropdown Menu */}
+                  {link.hasDropdown && activeDropdown === link.name && (
+                    <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50">
+                      {dropdowns[link.name as keyof typeof dropdowns]?.map((item) => (
+                        <button
+                          key={item.name}
+                          onClick={() => handleNavigation(item.href)}
+                          className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-sky-50 hover:text-sky-600 transition-colors"
+                        >
+                          <div className="flex items-center gap-3">
+                            <ChevronRight className="w-4 h-4 text-sky-500" />
+                            <span className="font-medium">{item.name}</span>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
               ))}
             </nav>
 
             {/* Contact Links - Right */}
             <div className="flex items-center space-x-6">
               {contactLinks.map((link) => (
-                <a
+                <button
                   key={link.text}
-                  href={link.href}
+                  onClick={() => handleNavigation(link.href)}
                   className="flex items-center space-x-2 text-sm hover:text-sky-100 transition-colors"
                 >
                   <link.icon size={16} />
                   <span>{link.text}</span>
-                </a>
+                </button>
               ))}
               
               {/* Social Media Icons */}
@@ -102,7 +198,7 @@ const Header = () => {
 
         {/* Main Header with Logo Image - Hidden when scrolled */}
         <div className={`bg-white shadow-md transition-all duration-300 ${isScrolled ? 'opacity-0 h-0 overflow-hidden' : 'py-'}`}>
-          <div className="max-w-7xl mx-auto px-">
+          <div className="max-w-7xl mx-auto px-6">
             <div className="flex justify-center items-center">
               {/* Logo Image */}
               <img 
@@ -127,16 +223,44 @@ const Header = () => {
                 />
               </div>
 
-              {/* Navigation Links - Right */}
-              <nav className="flex space-x-10">
+              {/* Navigation Links with Dropdowns - Center */}
+              <nav className="flex space-x-8">
                 {navLinks.map((link) => (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    className="text-gray-800 hover:text-sky-600 font-medium transition-colors text-lg"
-                  >
-                    {link.name}
-                  </a>
+                  <div key={link.name} className="relative">
+                    <button
+                      onClick={() => {
+                        if (link.hasDropdown) {
+                          toggleDropdown(link.name);
+                        } else {
+                          handleNavigation(link.href);
+                        }
+                      }}
+                      className="text-gray-800 hover:text-sky-600 font-medium transition-colors text-lg flex items-center gap-1"
+                    >
+                      {link.name}
+                      {link.hasDropdown && (
+                        <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === link.name ? 'rotate-180' : ''}`} />
+                      )}
+                    </button>
+                    
+                    {/* Dropdown Menu for Scrolled State */}
+                    {link.hasDropdown && activeDropdown === link.name && (
+                      <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50">
+                        {dropdowns[link.name as keyof typeof dropdowns]?.map((item) => (
+                          <button
+                            key={item.name}
+                            onClick={() => handleNavigation(item.href)}
+                            className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-sky-50 hover:text-sky-600 transition-colors"
+                          >
+                            <div className="flex items-center gap-3">
+                              <ChevronRight className="w-4 h-4 text-sky-500" />
+                              <span className="font-medium">{item.name}</span>
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 ))}
               </nav>
             </div>
@@ -145,18 +269,18 @@ const Header = () => {
       </header>
 
       {/* Mobile & Tablet Header */}
-      <header className="lg:hidden fixed top-0 w-full z-50">
+      <header className="lg:hidden fixed top-0 w-full z-50" ref={dropdownRef}>
         {/* Top Small Header - Hidden when scrolled */}
         <div className={`bg-sky-600 text-white transition-all duration-300 ${isScrolled ? 'opacity-0 h-0 overflow-hidden' : 'py-1 px-4'}`}>
           <div className="flex justify-between items-center">
             {/* Left Icons */}
             <div className="flex items-center space-x-4">
-              <a href="mailto:info@ximax.com" className="hover:text-sky-100">
+              <button onClick={() => handleNavigation('mailto:info@ximax.com')} className="hover:text-sky-100">
                 <Mail size={20} />
-              </a>
-              <a href="tel:+12345678900" className="hover:text-sky-100">
+              </button>
+              <button onClick={() => handleNavigation('tel:+12345678900')} className="hover:text-sky-100">
                 <Phone size={20} />
-              </a>
+              </button>
               <a
                 href="https://wa.me/12345678900"
                 target="_blank"
@@ -188,7 +312,7 @@ const Header = () => {
         </div>
 
         {/* Main Header with Logo Image - Hidden when scrolled */}
-        <div className={`bg-white transition-all duration-300 ${isScrolled ? 'opacity-0 h-0 overflow-hidden' : 'py- px-'}`}>
+        <div className={`bg-white transition-all duration-300 ${isScrolled ? 'opacity-0 h-0 overflow-hidden' : 'py-2'}`}>
           <div className="flex justify-center items-center">
             <img 
               src="/ximax-logo1.png" 
@@ -222,19 +346,49 @@ const Header = () => {
 
         {/* Mobile Menu Dropdown */}
         {isMobileMenuOpen && (
-          <div className="absolute top-full left-0 right-0 bg-white shadow-lg border-t border-gray-200">
+          <div className="absolute top-full left-0 right-0 bg-white shadow-lg border-t border-gray-200 max-h-[80vh] overflow-y-auto">
             <div className="px-4 py-6">
-              {/* Navigation Links */}
+              {/* Navigation Links with Mobile Dropdowns */}
               <nav className="space-y-1">
                 {navLinks.map((link) => (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    className="block text-gray-800 hover:text-sky-600 hover:bg-sky-50 font-medium py-3 px-4 rounded-lg transition-colors"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {link.name}
-                  </a>
+                  <div key={link.name} className="border-b border-gray-100 last:border-b-0">
+                    {link.hasDropdown ? (
+                      <>
+                        <button
+                          onClick={() => toggleDropdown(link.name)}
+                          className="w-full flex items-center justify-between text-gray-800 hover:text-sky-600 font-medium py-3 px-4 rounded-lg transition-colors"
+                        >
+                          <span>{link.name}</span>
+                          <ChevronDown className={`w-5 h-5 transition-transform ${activeDropdown === link.name ? 'rotate-180' : ''}`} />
+                        </button>
+                        
+                        {/* Mobile Dropdown Content */}
+                        {activeDropdown === link.name && (
+                          <div className="pl-8 pr-4 pb-3 space-y-2">
+                            {dropdowns[link.name as keyof typeof dropdowns]?.map((item) => (
+                              <button
+                                key={item.name}
+                                onClick={() => handleNavigation(item.href)}
+                                className="block w-full text-left py-2.5 text-gray-600 hover:text-sky-600 transition-colors"
+                              >
+                                <div className="flex items-center gap-3">
+                                  <div className="w-1.5 h-1.5 rounded-full bg-sky-500"></div>
+                                  <span>{item.name}</span>
+                                </div>
+                              </button>
+                            ))}
+                          </div>
+                        )}
+                      </>
+                    ) : (
+                      <button
+                        onClick={() => handleNavigation(link.href)}
+                        className="block w-full text-left text-gray-800 hover:text-sky-600 hover:bg-sky-50 font-medium py-3 px-4 rounded-lg transition-colors"
+                      >
+                        {link.name}
+                      </button>
+                    )}
+                  </div>
                 ))}
               </nav>
 
@@ -243,14 +397,14 @@ const Header = () => {
                 <h3 className="font-semibold text-gray-900 mb-4 text-lg">Contact Us</h3>
                 <div className="space-y-4">
                   {contactLinks.map((link) => (
-                    <a
+                    <button
                       key={link.text}
-                      href={link.href}
-                      className="flex items-center space-x-3 text-gray-700 hover:text-sky-600 py-2"
+                      onClick={() => handleNavigation(link.href)}
+                      className="flex items-center space-x-3 text-gray-700 hover:text-sky-600 py-2 w-full text-left"
                     >
                       <link.icon size={20} className="text-sky-600" />
                       <span className="text-lg">{link.text}</span>
-                    </a>
+                    </button>
                   ))}
                   
                   <div className="flex space-x-4 mt-4">
@@ -281,7 +435,7 @@ const Header = () => {
       </header>
 
       {/* Spacer to prevent content from hiding behind fixed header */}
-      <div className={`${isScrolled ? 'h-20' : 'h-30'} lg:${isScrolled ? 'h-20' : 'h-30'}`}></div>
+      <div className={`${isScrolled ? 'h-20' : 'h-32'} lg:${isScrolled ? 'h-20' : 'h-40'}`}></div>
     </>
   );
 };

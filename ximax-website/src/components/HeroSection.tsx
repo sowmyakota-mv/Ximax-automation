@@ -204,7 +204,7 @@ const HeroSection: React.FC = () => {
   return (
     <section id="/" className="relative w-full h-screen overflow-hidden">
       {/* Loading Skeleton */}
-      {!imagesLoaded && (
+      {/* {!imagesLoaded && (
         <div className="absolute inset-0 z-0 bg-gradient-to-r from-gray-900 to-gray-800 animate-pulse">
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-white">
@@ -213,7 +213,7 @@ const HeroSection: React.FC = () => {
             </div>
           </div>
         </div>
-      )}
+      )} */}
 
       {/* Slides Container - 70% height */}
       <div className="relative w-full h-full">

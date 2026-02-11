@@ -7,6 +7,7 @@ import Header from './components/Header';
 import ServicesSection from './components/ServiceSection';
 import TechIndustrySection from './components/TechIndustrySection';
 import CallToActionSectionAlt from './components/CalToActionSection';
+import AboutPage from './pages/About/AboutCompany';
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
         <TechIndustrySection/>
         <CallToActionSectionAlt/>
        </div> }/>
-       {/* <Route path='/license' element={<LicensePage/>}/> */}
+       <Route path='/about-company' element={<AboutPage/>}/>
        </Routes> 
         <Footer/>       
         </Router>
