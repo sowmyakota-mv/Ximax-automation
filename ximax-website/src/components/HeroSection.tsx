@@ -177,12 +177,12 @@ const HeroSection: React.FC = () => {
     return () => window.clearInterval(interval);
   }, [currentSlide, imagesLoaded, slides.length]);
 
-  const goToSlide = (index: number) => {
-    if (index === currentSlide) return;
+  // const goToSlide = (index: number) => {
+  //   if (index === currentSlide) return;
     
-    setCurrentSlide(index);
-    startAnimationsForSlide(index);
-  };
+  //   setCurrentSlide(index);
+  //   startAnimationsForSlide(index);
+  // };
 
   const nextSlide = () => {
     const next = (currentSlide + 1) % slides.length;
