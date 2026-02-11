@@ -199,56 +199,56 @@ const AboutPage: React.FC = () => {
 
       {/* About Content Section - Two Column Layout - Modified font sizes */}
       <section className="py-5 bg-white">
-        <div className="container mx-auto px-4 mt-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Left Column */}
-            <div className="space-y-2">
-              <div className="flex items-start">
-                <div className="p-3 bg-blue-100 rounded-lg mr-4 mt-1 flex-shrink-0">
-                  <FaRegBuilding className="text-blue-600 text-xl" />
-                </div>
-                <div>
-                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                    IT Consulting & Software Services Company
-                  </h2>
-                  <p className="text-gray-700 text-xs md:text-sm text-left leading-relaxed">
-                    <strong>Ximax Automation</strong> is an IT consulting and software services company founded in March 2006. 
-                    Running its operations from its base in London with 100+ strong work forces, Ximax Automation offers 
-                    Software Product Development, Application Development, Web Development, Outsourced IT Managed & Infrastructure 
-                    services, IT Staffing and Technology Consulting services to its clients across the globe.
-                  </p>
-                  <p className="text-gray-700 text-xs md:text-sm text-left leading-relaxed mt-4">
-                    Ximax Automation furnishes both software services and products to companies ranging from startups to fortune 500's. 
-                    We supply a broad range of IT applications solutions and services including; e-Business solutions, 
-                    Enterprise Resource Planning (ERP) Implementation and Post Implementation Support, Application Development, 
-                    Application Maintenance, Software Customizations and Remote Database Administration Services.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Column */}
-            <div className="space-y-2">
-              <div className="flex items-start">
-                <div className="p-3 bg-blue-100 rounded-lg mr-4 mt-1 flex-shrink-0">
-                  <FaQuoteLeft className="text-blue-600 text-xl" />
-                </div>
-                <div>
-                  <p className="text-gray-700 text-xs md:text-sm text-left leading-relaxed">
-                    <strong>Our strength is our People.</strong> We specialize in finding the consultant's best matched to specific project requirements.
-                  </p>
-                  <p className="text-gray-700 text-xs md:text-sm text-left leading-relaxed mt-4">
-                    We offer a wide range of services in the areas of analysis, design, development, and maintenance of various IT systems. 
-                    Our services are designed to help our clients generate revenue, reduce costs, and access information necessary to 
-                    operate their business on a timely basis. Ximax Automation is a leading provider of advanced software consulting and 
-                    development services specializing in the next generation Internet applications.
-                  </p>
-                </div>
-              </div>
-            </div>
+  <div className="container mx-auto px-4 mt-10">
+    <div className="flex flex-col lg:flex-row gap-12">
+      {/* Left Column - 60% width */}
+      <div className="w-full lg:w-[60%] space-y-2">
+        <div className="flex items-start">
+          <div className="p-3 bg-blue-100 rounded-lg mr-4 mt-1 flex-shrink-0">
+            <FaRegBuilding className="text-blue-600 text-xl" />
+          </div>
+          <div>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              IT Consulting & Software Services Company
+            </h2>
+            <p className="text-gray-700 text-xs md:text-sm text-left leading-relaxed">
+              <strong>Ximax Automation</strong> is an IT consulting and software services company founded in March 2006. 
+              Running its operations from its base in London with 100+ strong work forces, Ximax Automation offers 
+              Software Product Development, Application Development, Web Development, Outsourced IT Managed & Infrastructure 
+              services, IT Staffing and Technology Consulting services to its clients across the globe.
+            </p>
+            <p className="text-gray-700 text-xs md:text-sm text-left leading-relaxed mt-4">
+              Ximax Automation furnishes both software services and products to companies ranging from startups to fortune 500's. 
+              We supply a broad range of IT applications solutions and services including; e-Business solutions, 
+              Enterprise Resource Planning (ERP) Implementation and Post Implementation Support, Application Development, 
+              Application Maintenance, Software Customizations and Remote Database Administration Services.
+            </p>
           </div>
         </div>
-      </section>
+      </div>
+
+      {/* Right Column - 40% width */}
+      <div className="w-full lg:w-[40%] space-y-2">
+        <div className="flex items-start border border-blue-100 rounded-xl bg-blue-50 p-4">
+          <div className="p-3 bg-blue-100 rounded-lg mr-4 mt-1 flex-shrink-0">
+            <FaQuoteLeft className="text-blue-600 text-base" />
+          </div>
+          <div>
+            <p className="text-gray-700 text-xs md:text-sm text-left leading-relaxed">
+              <strong>Our strength is our People.</strong> We specialize in finding the consultant's best matched to specific project requirements.
+            </p>
+            <p className="text-gray-700 text-xs md:text-sm text-left leading-relaxed mt-4">
+              We offer a wide range of services in the areas of analysis, design, development, and maintenance of various IT systems. 
+              Our services are designed to help our clients generate revenue, reduce costs, and access information necessary to 
+              operate their business on a timely basis. Ximax Automation is a leading provider of advanced software consulting and 
+              development services specializing in the next generation Internet applications.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
      {/* Staffing & Consulting Section - Modified to match reference font sizes */}
 <section className="py-5 bg-gray-50">
