@@ -7,7 +7,6 @@ import {
   Twitter, 
   Linkedin, 
   Instagram,
-  ArrowRight,
   ChevronRight
 } from 'lucide-react';
 
