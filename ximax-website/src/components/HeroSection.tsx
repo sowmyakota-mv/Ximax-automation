@@ -1,5 +1,5 @@
 // components/HeroSection.tsx
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ArrowRight, Code, Cpu, Cloud, Users, Target, Globe } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -15,7 +15,7 @@ const HeroSection: React.FC = () => {
   // Combined slides array with optimized image paths
   const slides = [
     {
-      image: "/digital-bghero.png",
+      image: "/digital-bghero.webp",
       title: "Digital Transformation Services",
       tagline: "Our Expertise",
       description: "Transform your business with cutting-edge digital solutions. We help organizations adapt, innovate, and thrive in the digital era through strategic technology implementation.",
@@ -25,7 +25,7 @@ const HeroSection: React.FC = () => {
       path: "/digital-transformation"
     },
     {
-      image: "/app-bghero.png",
+      image: "/app-bghero.webp",
       title: "Enterprise Application Development",
       tagline: "Our Expertise",
       description: "Build robust, scalable enterprise solutions tailored to your business needs. Our full-stack development services deliver secure, efficient, and future-proof applications.",
@@ -35,7 +35,7 @@ const HeroSection: React.FC = () => {
       path: "/application-development"
     },
     {
-      image: "/cloud-bghero.png",
+      image: "/cloud-bghero.webp",
       title: "Cloud Computing & DevOps Solutions",
       tagline: "Our Services",
       description: "Accelerate your digital journey with our cloud and DevOps expertise. Streamline operations, enhance scalability, and improve deployment efficiency.",
@@ -45,7 +45,7 @@ const HeroSection: React.FC = () => {
       path: "/cloud-applications"
     },
     {
-      image: "/ai-bghero.png",
+      image: "/ai-bghero.webp",
       title: "AI & Machine Learning Implementation",
       tagline: "Innovation",
       description: "Leverage artificial intelligence to gain competitive advantage. Our AI/ML solutions drive intelligent automation and data-driven decision making.",
@@ -55,7 +55,7 @@ const HeroSection: React.FC = () => {
       path: "/big-data-analytics"
     },
     {
-      image: "/fullstack-bghero.png",
+      image: "/fullstack-bghero.webp",
       title: "Full-Stack Development & UI/UX Design",
       tagline: "Technology",
       description: "Create exceptional digital experiences with our full-stack development and user-centric design services. From concept to deployment, we've got you covered.",
@@ -65,7 +65,7 @@ const HeroSection: React.FC = () => {
       path: "/application-development"
     },
     {
-      image: "/amazing-bghero.png",
+      image: "/amazing-bghero.webp",
       title: "Let's Build Something Amazing Together",
       tagline: "Our Moto",
       description: "Collaborate with our expert team to turn your vision into reality. We combine innovation, expertise, and passion to deliver exceptional results.",
