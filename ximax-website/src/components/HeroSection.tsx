@@ -8,6 +8,7 @@ const HeroSection: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [imagesLoaded, setImagesLoaded] = useState<boolean[]>([]);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isInitialLoading, setIsInitialLoading] = useState(true);
   const intervalRef = useRef<number | null>(null);
   const animationTimeoutRef = useRef<number | null>(null);
 
@@ -75,39 +76,40 @@ const HeroSection: React.FC = () => {
     }
   ];
 
-  // Preload only first image, lazy load others
+  // Preload all images on mount
   useEffect(() => {
-    const loadFirstImage = () => {
-      const img = new Image();
-      img.src = slides[0].image;
-      img.onload = () => {
-        const loadedState = new Array(slides.length).fill(false);
-        loadedState[0] = true;
-        setImagesLoaded(loadedState);
-        
-        // Start loading next images gradually
-        for (let i = 1; i < slides.length; i++) {
-          setTimeout(() => {
-            const nextImg = new Image();
-            nextImg.src = slides[i].image;
-            nextImg.onload = () => {
-              setImagesLoaded(prev => {
-                const newState = [...prev];
-                newState[i] = true;
-                return newState;
-              });
-            };
-          }, i * 1000); // Load one image per second
-        }
-      };
+    const loadAllImages = async () => {
+      const loadedState = new Array(slides.length).fill(false);
+      
+      // Load all images in parallel
+      const loadPromises = slides.map((slide, index) => {
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.src = slide.image;
+          img.onload = () => {
+            loadedState[index] = true;
+            setImagesLoaded([...loadedState]);
+            resolve(true);
+          };
+          img.onerror = () => {
+            console.error(`Failed to load image: ${slide.image}`);
+            loadedState[index] = true; // Mark as loaded anyway to prevent stuck loading
+            setImagesLoaded([...loadedState]);
+            resolve(true);
+          };
+        });
+      });
+
+      await Promise.all(loadPromises);
+      setIsInitialLoading(false);
     };
 
-    loadFirstImage();
+    loadAllImages();
   }, []);
 
-  // Simplified auto slide
+  // Auto slide
   useEffect(() => {
-    if (!imagesLoaded[0]) return;
+    if (isInitialLoading) return;
 
     const startInterval = () => {
       if (intervalRef.current) window.clearInterval(intervalRef.current);
@@ -122,9 +124,9 @@ const HeroSection: React.FC = () => {
     return () => {
       if (intervalRef.current) window.clearInterval(intervalRef.current);
     };
-  }, [imagesLoaded[0], isAnimating, slides.length]);
+  }, [isInitialLoading, isAnimating, slides.length]);
 
-  // Simplified animation trigger
+  // Animation trigger
   useEffect(() => {
     setIsAnimating(true);
     if (animationTimeoutRef.current) window.clearTimeout(animationTimeoutRef.current);
@@ -149,8 +151,8 @@ const HeroSection: React.FC = () => {
 
   return (
     <section className="relative w-full h-screen overflow-hidden">
-      {/* Loading indicator with company name */}
-      {!imagesLoaded[0] && (
+      {/* Initial Loading indicator with company name */}
+      {isInitialLoading && (
         <div className="absolute inset-0 z-50 bg-gradient-to-r from-sky-600 to-blue-600 flex flex-col items-center justify-center">
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Ximax Automation</h1>
@@ -176,11 +178,7 @@ const HeroSection: React.FC = () => {
                   src={slide.image} 
                   alt={slide.title} 
                   className="w-full h-full object-cover"
-                  loading={index === 0 ? "eager" : "lazy"}
                 />
-              )}
-              {!imagesLoaded[index] && (
-                <div className="w-full h-full bg-gradient-to-r from-sky-800 to-blue-800 animate-pulse"></div>
               )}
             </div>
             
@@ -190,8 +188,8 @@ const HeroSection: React.FC = () => {
         ))}
       </div>
 
-      {/* Content Container - Only renders when images are loaded */}
-      {imagesLoaded[currentSlide] && (
+      {/* Content Container - Always show once initial loading is done */}
+      {!isInitialLoading && (
         <div className="absolute inset-0 z-20 flex items-center justify-start">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
             <div className="flex flex-col lg:flex-row items-start justify-between">
@@ -221,7 +219,7 @@ const HeroSection: React.FC = () => {
                 <div className={`transition-all duration-700 delay-200 transform ${
                   !isAnimating ? 'translate-y-0 opacity-100' : 'translate-y-24 opacity-0'
                 }`}>
-                  <p className="text-sm  text-gray-200 mb-2 max-w-2xl leading-relaxed">
+                  <p className="text-sm text-gray-200 mb-2 max-w-2xl leading-relaxed">
                     {slides[currentSlide].description}
                   </p>
                 </div>
