@@ -1,17 +1,14 @@
 import React from 'react';
 import {
   FaCheckCircle,
-  FaChartLine,
   FaDatabase,
   FaCloud,
   FaBrain,
   FaRobot,
-  FaMicrochip,
   FaLanguage,
   FaTag,
   FaVideo,
   FaFilter,
-  FaCube,
   FaProjectDiagram,
   FaRegChartBar,
   FaRProject,
@@ -23,9 +20,7 @@ import {
   FaRegCopy,
   FaMicrophone,
   FaCogs,
-  FaDigitalTachograph,
-  FaServer,
-  FaCodeBranch
+  FaServer
 } from 'react-icons/fa';
 import { SiApachehadoop, SiPython} from 'react-icons/si';
 import { useNavigate } from 'react-router-dom';
@@ -33,45 +28,6 @@ import { useNavigate } from 'react-router-dom';
 const BigDataAnalyticsPage: React.FC = () => {
   const navigate = useNavigate();
 
-  // Solutions Data with navigation paths
-  const solutions = [
-    {
-      icon: <FaDatabase className="text-2xl text-[#38B2FF]" />,
-      title: "IT Outsourcing",
-      description: "Comprehensive outsourcing solutions for enhanced operational efficiency",
-      path: "/it-outsourcing"
-    },
-    {
-      icon: <FaFilter className="text-2xl text-[#7ED4FF]" />,
-      title: "Testing & QA",
-      description: "Quality assurance and testing services for flawless software delivery",
-      path: "/testing-qa"
-    },
-    {
-      icon: <FaCube className="text-2xl text-[#38B2FF]" />,
-      title: "Mortgage Solutions",
-      description: "Specialized technology solutions for the mortgage and banking industry",
-      path: "/mortgage-solutions"
-    },
-    {
-      icon: <FaMicrochip className="text-2xl text-[#7ED4FF]" />,
-      title: "Power Apps",
-      description: "Custom application development for business process automation",
-      path: "/power-apps"
-    },
-    {
-      icon: <FaCloud className="text-2xl text-[#38B2FF]" />,
-      title: "Cloud Solutions",
-      description: "Cloud migration, implementation, and management services",
-      path: "/cloud-solutions"
-    },
-    {
-      icon: <FaChartLine className="text-2xl text-[#7ED4FF]" />,
-      title: "IT Consulting",
-      description: "Strategic consulting services for technology implementation and optimization",
-      path: "/it-consulting"
-    }
-  ];
 
   // Services Portfolio Data
   const servicesPortfolio = [
@@ -184,12 +140,6 @@ const BigDataAnalyticsPage: React.FC = () => {
       title: "Video Annotations",
       description: "Automatic identification of classes, multiple shapes, localization support, image segmentation for actionable insights"
     }
-  ];
-
-  // Machine Learning Algorithms
-  const mlAlgorithms = [
-    "Decision tree", "SVM", "Knn", "Bayes theorem", "Bayesian network", 
-    "Neuron network", "ROC curve", "t-test", "support vector machines"
   ];
 
   // AI Technologies
