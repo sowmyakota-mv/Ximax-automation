@@ -29,11 +29,14 @@ import TelecommunicationPage from './pages/Industry Verticals/TelecommunicationP
 import LogisticsPage from './pages/Industry Verticals/LogisticsPage';
 import CareerPage from './pages/CareerPage';
 import ContactPage from './components/ContactSection';
+import ScrollToTop from './animation/ScrollToTop';
 
 function App() {
   return (
     <>
+    <div className="w-full min-h-screen overflow-x-hidden overflow-y-hidden relative">
     <Router>
+        <ScrollToTop/>
       <Header/>
       <Routes>
       <Route path='/' element={
@@ -69,6 +72,7 @@ function App() {
        </Routes> 
         <Footer/>       
         </Router>
+        </div>
     </>
   );
 }

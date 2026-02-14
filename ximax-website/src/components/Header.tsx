@@ -1,5 +1,6 @@
 // components/Header.tsx
 import { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Menu, X, Mail, Phone, Linkedin, ChevronDown, ChevronRight } from 'lucide-react';
 
 // WhatsApp Icon Component
@@ -16,6 +17,7 @@ const WhatsAppIcon = ({ size = 20 }: { size?: number }) => (
 );
 
 const Header = () => {
+  const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [hoverDropdown, setHoverDropdown] = useState<string | null>(null);
@@ -81,8 +83,6 @@ const Header = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Removed scroll effect as it's not being used
-
   const toggleDropdown = (dropdownName: string) => {
     setActiveDropdown(activeDropdown === dropdownName ? null : dropdownName);
     setHoverDropdown(null);
@@ -123,7 +123,7 @@ const Header = () => {
   };
 
   const handleNavigation = (href: string) => {
-    window.location.href = href;
+    navigate(href);
     setIsMobileMenuOpen(false);
     setActiveDropdown(null);
     setHoverDropdown(null);
@@ -206,10 +206,10 @@ const Header = () => {
             </nav>
 
             <div className="flex items-center space-x-4">
-              <button onClick={() => handleNavigation('mailto:info@ximax.com')} className="text-gray-600 hover:text-sky-600">
+              <button onClick={() => window.location.href = 'mailto:info@ximax.com'} className="text-gray-600 hover:text-sky-600">
                 <Mail size={20} />
               </button>
-              <button onClick={() => handleNavigation('tel:+12345678900')} className="text-gray-600 hover:text-sky-600">
+              <button onClick={() => window.location.href = 'tel:+12345678900'} className="text-gray-600 hover:text-sky-600">
                 <Phone size={20} />
               </button>
               <a
@@ -250,10 +250,10 @@ const Header = () => {
             </div>
 
             <div className="flex items-center space-x-4">
-              <button onClick={() => handleNavigation('mailto:info@ximax.com')} className="text-gray-600 hover:text-sky-600">
+              <button onClick={() => window.location.href = 'mailto:info@ximax.com'} className="text-gray-600 hover:text-sky-600">
                 <Mail size={20} />
               </button>
-              <button onClick={() => handleNavigation('tel:+12345678900')} className="text-gray-600 hover:text-sky-600">
+              <button onClick={() => window.location.href = 'tel:+12345678900'} className="text-gray-600 hover:text-sky-600">
                 <Phone size={20} />
               </button>
               <a
