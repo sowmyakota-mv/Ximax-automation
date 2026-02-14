@@ -2,7 +2,6 @@ import React from 'react';
 import { BsMicrosoft } from 'react-icons/bs';
 import {
   FaCheckCircle,
-  FaCloud,
   FaDatabase,
   FaShieldAlt,
   FaRocket,
