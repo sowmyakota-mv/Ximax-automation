@@ -22,10 +22,9 @@ const Header = () => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [hoverDropdown, setHoverDropdown] = useState<string | null>(null);
   const desktopDropdownRef = useRef<HTMLDivElement | null>(null);
-  const mobileDropdownRef = useRef<HTMLDivElement | null>(null);
+  const mobileMenuRef = useRef<HTMLDivElement | null>(null);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Dropdown data
   const dropdowns = {
     'About Us': [
       { name: 'About Company', href: '/about-company' },
@@ -57,49 +56,38 @@ const Header = () => {
     ],
   };
 
-  // Close dropdown when clicking outside for desktop (top header)
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
+      // Logic for Desktop
       if (desktopDropdownRef.current && !desktopDropdownRef.current.contains(event.target as Node)) {
         setActiveDropdown(null);
         setHoverDropdown(null);
       }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
-  // Close dropdown when clicking outside for mobile
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (mobileDropdownRef.current && !mobileDropdownRef.current.contains(event.target as Node)) {
+      // Logic for Mobile
+      if (isMobileMenuOpen && mobileMenuRef.current && !mobileMenuRef.current.contains(event.target as Node)) {
+        setIsMobileMenuOpen(false);
         setActiveDropdown(null);
-        setHoverDropdown(null);
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+    // Using 'click' instead of 'mousedown' to prevent interference with mobile touch events
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [isMobileMenuOpen]);
 
   const toggleDropdown = (dropdownName: string) => {
-    setActiveDropdown(activeDropdown === dropdownName ? null : dropdownName);
+    setActiveDropdown(prev => prev === dropdownName ? null : dropdownName);
     setHoverDropdown(null);
   };
 
   const handleMouseEnter = (dropdownName: string) => {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
     setHoverDropdown(dropdownName);
     setActiveDropdown(dropdownName);
   };
 
   const handleMouseLeave = () => {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => {
       setHoverDropdown(null);
       setActiveDropdown(null);
@@ -107,15 +95,11 @@ const Header = () => {
   };
 
   const handleDropdownMouseEnter = () => {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
   };
 
   const handleDropdownMouseLeave = () => {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => {
       setHoverDropdown(null);
       setActiveDropdown(null);
@@ -123,10 +107,10 @@ const Header = () => {
   };
 
   const handleNavigation = (href: string) => {
-    navigate(href);
     setIsMobileMenuOpen(false);
     setActiveDropdown(null);
     setHoverDropdown(null);
+    navigate(href);
   };
 
   const navLinks = [
@@ -144,16 +128,12 @@ const Header = () => {
   return (
     <>
       {/* Desktop Header */}
-      <header className="hidden lg:block fixed top-0 w-full z-50 transition-all duration-300 bg-white shadow-md">
+      <header className="hidden lg:block fixed top-0 w-full z-50 bg-white shadow-md">
         <div className="bg-white py-3 px-6">
           <div className="max-w-7xl mx-auto flex items-center h-10">
             <div className="flex items-center">
               <button onClick={() => handleNavigation('/')} className="flex items-center">
-                <img 
-                  src="/ximax-logo1.png" 
-                  alt="Ximax Logo" 
-                  className="h-16 w-auto"
-                />
+                <img src="/ximax-logo1.png" alt="Ximax Logo" className="h-16 w-auto" />
               </button>
             </div>
             
@@ -161,18 +141,12 @@ const Header = () => {
               {navLinks.map((link) => (
                 <div 
                   key={link.name} 
-                  className="relative"
-                  onMouseEnter={() => link.hasDropdown && handleMouseEnter(link.name)}
+                  className="relative" 
+                  onMouseEnter={() => link.hasDropdown && handleMouseEnter(link.name)} 
                   onMouseLeave={handleMouseLeave}
                 >
                   <button
-                    onClick={() => {
-                      if (link.hasDropdown) {
-                        toggleDropdown(link.name);
-                      } else {
-                        handleNavigation(link.href);
-                      }
-                    }}
+                    onClick={() => link.hasDropdown ? toggleDropdown(link.name) : handleNavigation(link.href)}
                     className="text-sm font-medium text-gray-700 hover:text-sky-600 transition-colors flex items-center gap-1"
                   >
                     {link.name}
@@ -206,76 +180,31 @@ const Header = () => {
             </nav>
 
             <div className="flex items-center space-x-4">
-              <button onClick={() => window.location.href = 'mailto:info@ximax.com'} className="text-gray-600 hover:text-sky-600">
-                <Mail size={20} />
-              </button>
-              <button onClick={() => window.location.href = 'tel:+12345678900'} className="text-gray-600 hover:text-sky-600">
-                <Phone size={20} />
-              </button>
-              <a
-                href="https://wa.me/12345678900"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-600 hover:text-green-600"
-                title="WhatsApp"
-              >
-                <WhatsAppIcon size={20} />
-              </a>
-              <a
-                href="https://linkedin.com/company/ximax"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-600 hover:text-sky-600"
-                title="LinkedIn"
-              >
-                <Linkedin size={20} />
-              </a>
+              <button onClick={() => window.location.href = 'mailto:info@ximax.com'} className="text-gray-600 hover:text-sky-600"><Mail size={20} /></button>
+              <button onClick={() => window.location.href = 'tel:+12345678900'} className="text-gray-600 hover:text-sky-600"><Phone size={20} /></button>
+              <a href="https://wa.me/12345678900" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-green-600"><WhatsAppIcon size={20} /></a>
+              <a href="https://linkedin.com/company/ximax" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-sky-600"><Linkedin size={20} /></a>
             </div>
           </div>
         </div>
       </header>
 
       {/* Mobile & Tablet Header */}
-      <header className="lg:hidden fixed top-0 w-full z-50">
+      <header className="lg:hidden fixed top-0 w-full z-50" ref={mobileMenuRef}>
         <div className="bg-white shadow-md py-2 px-4">
           <div className="flex justify-between items-center h-10">
-            <div className="flex items-center">
-              <button onClick={() => handleNavigation('/')}>
-                <img 
-                  src="/ximax-logo1.png" 
-                  alt="Ximax Logo" 
-                  className="h-8 w-auto"
-                />
-              </button>
-            </div>
+            <button onClick={() => handleNavigation('/')}>
+              <img src="/ximax-logo1.png" alt="Ximax Logo" className="h-8 w-auto" />
+            </button>
 
-            <div className="flex items-center space-x-4">
-              <button onClick={() => window.location.href = 'mailto:info@ximax.com'} className="text-gray-600 hover:text-sky-600">
-                <Mail size={20} />
-              </button>
-              <button onClick={() => window.location.href = 'tel:+12345678900'} className="text-gray-600 hover:text-sky-600">
-                <Phone size={20} />
-              </button>
-              <a
-                href="https://wa.me/12345678900"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-600 hover:text-green-600"
-                title="WhatsApp"
-              >
-                <WhatsAppIcon size={20} />
-              </a>
-              <a
-                href="https://linkedin.com/company/ximax"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-600 hover:text-sky-600"
-                title="LinkedIn"
-              >
-                <Linkedin size={20} />
-              </a>
+            <div className="flex items-center space-x-3">
+              <button onClick={() => window.location.href = 'mailto:info@ximax.com'} className="text-gray-600"><Mail size={18} /></button>
+              <button onClick={() => window.location.href = 'tel:+12345678900'} className="text-gray-600"><Phone size={18} /></button>
               <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsMobileMenuOpen(!isMobileMenuOpen);
+                }}
                 className="p-1 hover:bg-gray-100 rounded"
               >
                 {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -285,36 +214,36 @@ const Header = () => {
         </div>
 
         {isMobileMenuOpen && (
-          <div 
-            className="absolute top-full left-0 right-0 bg-white shadow-lg border-t border-gray-200 max-h-[80vh] overflow-y-auto"
-            ref={mobileDropdownRef}
-          >
-            <div className="px-4 py-6">
+          <div className="absolute top-full left-0 right-0 bg-white shadow-lg border-t border-gray-200 max-h-[85vh] overflow-y-auto">
+            <div className="px-4 py-4">
               <nav className="space-y-1">
                 {navLinks.map((link) => (
-                  <div key={link.name} className="border-b border-gray-100 last:border-b-0">
+                  <div key={link.name} className="border-b border-gray-50 last:border-b-0">
                     {link.hasDropdown ? (
                       <>
                         <button
-                          onClick={() => toggleDropdown(link.name)}
-                          className="w-full flex items-center justify-between text-gray-800 hover:text-sky-600 font-medium py-3 px-4 rounded-lg transition-colors"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            toggleDropdown(link.name);
+                          }}
+                          className="w-full flex items-center justify-between text-gray-800 py-3 px-4 font-medium"
                         >
                           <span>{link.name}</span>
                           <ChevronDown className={`w-5 h-5 transition-transform ${activeDropdown === link.name ? 'rotate-180' : ''}`} />
                         </button>
                         
                         {activeDropdown === link.name && (
-                          <div className="pl-8 pr-4 pb-3 space-y-2">
+                          <div className="bg-gray-50 py-2">
                             {dropdowns[link.name as keyof typeof dropdowns]?.map((item) => (
                               <button
                                 key={item.name}
-                                onClick={() => handleNavigation(item.href)}
-                                className="block w-full text-left py-2.5 text-gray-600 hover:text-sky-600 transition-colors"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleNavigation(item.href);
+                                }}
+                                className="block w-full text-left py-3 px-10 text-gray-600 hover:text-sky-600 border-l-2 border-transparent hover:border-sky-500"
                               >
-                                <div className="flex items-center gap-3">
-                                  <div className="w-1.5 h-1.5 rounded-full bg-sky-500"></div>
-                                  <span>{item.name}</span>
-                                </div>
+                                {item.name}
                               </button>
                             ))}
                           </div>
@@ -323,7 +252,7 @@ const Header = () => {
                     ) : (
                       <button
                         onClick={() => handleNavigation(link.href)}
-                        className="block w-full text-left text-gray-800 hover:text-sky-600 hover:bg-sky-50 font-medium py-3 px-4 rounded-lg transition-colors"
+                        className="block w-full text-left text-gray-800 py-3 px-4 font-medium"
                       >
                         {link.name}
                       </button>

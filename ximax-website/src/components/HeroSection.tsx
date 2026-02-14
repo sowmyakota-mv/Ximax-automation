@@ -1,377 +1,253 @@
 // components/HeroSection.tsx
 import React, { useState, useEffect, useRef } from "react";
 import { ArrowRight, Code, Cpu, Cloud, Users, Target, Globe } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const HeroSection: React.FC = () => {
+  const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [imagesLoaded, setImagesLoaded] = useState(false);
-  const [slideAnimations, setSlideAnimations] = useState<Record<string, boolean>>({});
-  const [imageErrors, setImageErrors] = useState<Record<number, boolean>>({});
-  const timeoutRefs = useRef<number[]>([]);
+  const [imagesLoaded, setImagesLoaded] = useState<boolean[]>([]);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const intervalRef = useRef<number | null>(null);
+  const animationTimeoutRef = useRef<number | null>(null);
 
-  // Clear all timeouts on unmount
-  useEffect(() => {
-    return () => {
-      timeoutRefs.current.forEach(clearTimeout);
-    };
-  }, []);
-
-  // Combined slides array with content and images
+  // Combined slides array with optimized image paths
   const slides = [
     {
       image: "/digital-bghero.png",
-      fallbackImage: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
       title: "Digital Transformation Services",
       tagline: "Our Expertise",
       description: "Transform your business with cutting-edge digital solutions. We help organizations adapt, innovate, and thrive in the digital era through strategic technology implementation.",
       icon: <Globe className="w-8 h-8" />,
       buttonText: "Explore Services",
-      color: "from-sky-600 to-blue-700"
+      color: "from-sky-600 to-blue-700",
+      path: "/digital-transformation"
     },
     {
       image: "/app-bghero.png",
-      fallbackImage: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
       title: "Enterprise Application Development",
       tagline: "Our Expertise",
       description: "Build robust, scalable enterprise solutions tailored to your business needs. Our full-stack development services deliver secure, efficient, and future-proof applications.",
       icon: <Code className="w-8 h-8" />,
       buttonText: "View Projects",
-      color: "from-sky-600 to-blue-700"
+      color: "from-sky-600 to-blue-700",
+      path: "/application-development"
     },
     {
       image: "/cloud-bghero.png",
-      fallbackImage: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
       title: "Cloud Computing & DevOps Solutions",
       tagline: "Our Services",
       description: "Accelerate your digital journey with our cloud and DevOps expertise. Streamline operations, enhance scalability, and improve deployment efficiency.",
       icon: <Cloud className="w-8 h-8" />,
       buttonText: "Learn More",
-      color: "from-sky-600 to-blue-700"
+      color: "from-sky-600 to-blue-700",
+      path: "/cloud-applications"
     },
     {
       image: "/ai-bghero.png",
-      fallbackImage: "https://images.unsplash.com/photo-1555255707-c07966088b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
       title: "AI & Machine Learning Implementation",
       tagline: "Innovation",
       description: "Leverage artificial intelligence to gain competitive advantage. Our AI/ML solutions drive intelligent automation and data-driven decision making.",
       icon: <Cpu className="w-8 h-8" />,
       buttonText: "Discover AI",
-      color: "from-sky-600 to-blue-700"
+      color: "from-sky-600 to-blue-700",
+      path: "/big-data-analytics"
     },
     {
       image: "/fullstack-bghero.png",
-      fallbackImage: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
       title: "Full-Stack Development & UI/UX Design",
       tagline: "Technology",
       description: "Create exceptional digital experiences with our full-stack development and user-centric design services. From concept to deployment, we've got you covered.",
       icon: <Users className="w-8 h-8" />,
       buttonText: "See Portfolio",
-      color: "from-sky-600 to-blue-700"
+      color: "from-sky-600 to-blue-700",
+      path: "/application-development"
     },
     {
       image: "/amazing-bghero.png",
-      fallbackImage: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
       title: "Let's Build Something Amazing Together",
       tagline: "Our Moto",
       description: "Collaborate with our expert team to turn your vision into reality. We combine innovation, expertise, and passion to deliver exceptional results.",
       icon: <Target className="w-8 h-8" />,
       buttonText: "Start Project",
-      color: "from-sky-600 to-blue-700"
+      color: "from-sky-600 to-blue-700",
+      path: "/about-company"
     }
   ];
 
-  // Handle image error
-  const handleImageError = (index: number) => {
-    console.error(`Failed to load image for slide ${index}: ${slides[index].image}`);
-    setImageErrors(prev => ({ ...prev, [index]: true }));
-  };
-
-  // Start animations for current slide
-  const startAnimationsForSlide = (slideIndex: number) => {
-    // Clear any existing animations for this slide
-    setSlideAnimations(prev => ({ 
-      ...prev, 
-      [`${slideIndex}_image`]: false,
-      [`${slideIndex}_tagline`]: false,
-      [`${slideIndex}_title`]: false,
-      [`${slideIndex}_description`]: false,
-      [`${slideIndex}_buttons`]: false,
-      [`${slideIndex}_icon`]: false,
-      [`${slideIndex}_arrow1`]: false,
-      [`${slideIndex}_arrow2`]: false
-    }));
-
-    // First animate the image
-    const timeout1 = window.setTimeout(() => {
-      setSlideAnimations(prev => ({ ...prev, [`${slideIndex}_image`]: true }));
-    }, 100);
-    
-    // Then animate tagline from bottom
-    const timeout2 = window.setTimeout(() => {
-      setSlideAnimations(prev => ({ ...prev, [`${slideIndex}_tagline`]: true }));
-    }, 500);
-    
-    // Then animate title from bottom
-    const timeout3 = window.setTimeout(() => {
-      setSlideAnimations(prev => ({ ...prev, [`${slideIndex}_title`]: true }));
-    }, 800);
-    
-    // Then animate description from bottom
-    const timeout4 = window.setTimeout(() => {
-      setSlideAnimations(prev => ({ ...prev, [`${slideIndex}_description`]: true }));
-    }, 1100);
-    
-    // Then animate button from bottom
-    const timeout5 = window.setTimeout(() => {
-      setSlideAnimations(prev => ({ ...prev, [`${slideIndex}_buttons`]: true }));
-    }, 1400);
-    
-    // Then animate icon in tagline
-    const timeout6 = window.setTimeout(() => {
-      setSlideAnimations(prev => ({ ...prev, [`${slideIndex}_icon`]: true }));
-    }, 550);
-    
-    // Then animate left arrow
-    const timeout7 = window.setTimeout(() => {
-      setSlideAnimations(prev => ({ ...prev, [`${slideIndex}_arrow1`]: true }));
-    }, 1600);
-    
-    // Then animate right arrow
-    const timeout8 = window.setTimeout(() => {
-      setSlideAnimations(prev => ({ ...prev, [`${slideIndex}_arrow2`]: true }));
-    }, 1700);
-
-    timeoutRefs.current.push(timeout1, timeout2, timeout3, timeout4, timeout5, timeout6, timeout7, timeout8);
-  };
-
-  // Preload all images on component mount
+  // Preload only first image, lazy load others
   useEffect(() => {
-    const preloadImages = () => {
-      const promises = slides.map((slide, index) => {
-        return new Promise((resolve) => {
-          const img = new Image();
-          img.src = slide.image;
-          img.onload = () => {
-            console.log(`Successfully loaded: ${slide.image}`);
-            resolve(true);
-          };
-          img.onerror = () => {
-            console.warn(`Failed to load: ${slide.image}, will use fallback when needed`);
-            handleImageError(index);
-            // Preload fallback image
-            const fallbackImg = new Image();
-            fallbackImg.src = slide.fallbackImage;
-            fallbackImg.onload = () => resolve(true);
-            fallbackImg.onerror = () => {
-              console.error(`Failed to load fallback for slide ${index}`);
-              resolve(true); // Resolve anyway to continue
+    const loadFirstImage = () => {
+      const img = new Image();
+      img.src = slides[0].image;
+      img.onload = () => {
+        const loadedState = new Array(slides.length).fill(false);
+        loadedState[0] = true;
+        setImagesLoaded(loadedState);
+        
+        // Start loading next images gradually
+        for (let i = 1; i < slides.length; i++) {
+          setTimeout(() => {
+            const nextImg = new Image();
+            nextImg.src = slides[i].image;
+            nextImg.onload = () => {
+              setImagesLoaded(prev => {
+                const newState = [...prev];
+                newState[i] = true;
+                return newState;
+              });
             };
-          };
-        });
-      });
-
-      Promise.all(promises)
-        .then(() => {
-          setImagesLoaded(true);
-          // Start animations for initial slide
-          startAnimationsForSlide(0);
-        })
-        .catch((error) => {
-          console.error('Error in preloading:', error);
-          setImagesLoaded(true);
-          startAnimationsForSlide(0);
-        });
+          }, i * 1000); // Load one image per second
+        }
+      };
     };
 
-    preloadImages();
+    loadFirstImage();
   }, []);
 
-  // Auto slide every 5 seconds
+  // Simplified auto slide
   useEffect(() => {
-    if (!imagesLoaded) return;
+    if (!imagesLoaded[0]) return;
 
-    const interval = window.setInterval(() => {
-      const nextSlide = (currentSlide + 1) % slides.length;
-      setCurrentSlide(nextSlide);
-      startAnimationsForSlide(nextSlide);
-    }, 5000);
+    const startInterval = () => {
+      if (intervalRef.current) window.clearInterval(intervalRef.current);
+      intervalRef.current = window.setInterval(() => {
+        if (!isAnimating) {
+          setCurrentSlide(prev => (prev + 1) % slides.length);
+        }
+      }, 5000);
+    };
 
-    return () => window.clearInterval(interval);
-  }, [currentSlide, imagesLoaded, slides.length]);
+    startInterval();
+    return () => {
+      if (intervalRef.current) window.clearInterval(intervalRef.current);
+    };
+  }, [imagesLoaded[0], isAnimating, slides.length]);
 
-  // const goToSlide = (index: number) => {
-  //   if (index === currentSlide) return;
-    
-  //   setCurrentSlide(index);
-  //   startAnimationsForSlide(index);
-  // };
+  // Simplified animation trigger
+  useEffect(() => {
+    setIsAnimating(true);
+    if (animationTimeoutRef.current) window.clearTimeout(animationTimeoutRef.current);
+    animationTimeoutRef.current = window.setTimeout(() => {
+      setIsAnimating(false);
+    }, 1500);
+  }, [currentSlide]);
 
   const nextSlide = () => {
-    const next = (currentSlide + 1) % slides.length;
-    setCurrentSlide(next);
-    startAnimationsForSlide(next);
+    if (intervalRef.current) window.clearInterval(intervalRef.current);
+    setCurrentSlide(prev => (prev + 1) % slides.length);
   };
 
   const prevSlide = () => {
-    const prev = (currentSlide - 1 + slides.length) % slides.length;
-    setCurrentSlide(prev);
-    startAnimationsForSlide(prev);
+    if (intervalRef.current) window.clearInterval(intervalRef.current);
+    setCurrentSlide(prev => (prev - 1 + slides.length) % slides.length);
   };
 
-  // Helper function to check if animation is active for current slide
-  const isAnimationActive = (type: string) => {
-    return slideAnimations[`${currentSlide}_${type}`] || false;
+  const handleButtonClick = (path: string) => {
+    navigate(path);
   };
 
   return (
-    <section id="/" className="relative w-full h-screen overflow-hidden mb-0 pb-0">
-      {/* Loading Skeleton */}
-      {/* {!imagesLoaded && (
-        <div className="absolute inset-0 z-0 bg-gradient-to-r from-gray-900 to-gray-800 animate-pulse">
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-white">
-              <div className="w-12 h-12 border-4 border-sky-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-              <p className="text-center">Loading hero images...</p>
-            </div>
+    <section className="relative w-full h-screen overflow-hidden">
+      {/* Loading indicator with company name */}
+      {!imagesLoaded[0] && (
+        <div className="absolute inset-0 z-50 bg-gradient-to-r from-sky-600 to-blue-600 flex flex-col items-center justify-center">
+          <div className="text-center">
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Ximax Automation</h1>
+            <div className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin mx-auto"></div>
+            <p className="text-white/80 text-sm mt-4">Loading amazing experiences...</p>
           </div>
         </div>
-      )} */}
+      )}
 
-      {/* Slides Container - 70% height */}
+      {/* Slides Container */}
       <div className="relative w-full h-full">
-        {slides.map((slide, index) => {
-          const isActive = index === currentSlide;
-          const useFallback = imageErrors[index];
-          
-          return (
-            <div
-              key={index}
-              className={`absolute inset-0 w-full h-full transition-all duration-700 ease-in-out ${
-                isActive
-                  ? "opacity-100 z-10" 
-                  : "opacity-0 z-0"
-              }`}
-            >
-              {/* Background Image with animation - 70% height - FADE IN FIRST */}
-              <div className={`absolute top-0 left-0 w-full h-[80%] transition-all duration-1000 ease-out transform ${
-                isAnimationActive('image')
-                  ? 'scale-100 opacity-100' 
-                  : 'scale-110 opacity-0'
-              }`}>
+        {slides.map((slide, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ${
+              index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
+            }`}
+          >
+            {/* Background Image */}
+            <div className="absolute top-0 left-0 w-full h-[80%]">
+              {imagesLoaded[index] && (
                 <img 
-                  src={useFallback ? slide.fallbackImage : slide.image} 
+                  src={slide.image} 
                   alt={slide.title} 
                   className="w-full h-full object-cover"
-                  loading="eager"
-                  onError={() => handleImageError(index)}
+                  loading={index === 0 ? "eager" : "lazy"}
                 />
-              </div>
-              
-              {/* Black Gradient Overlay - Bottom Heavy for 70% */}
-              <div className="absolute top-0 left-0 w-full h-[80%] bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
-              
-              {/* Skyblue Accent Gradient */}
-              <div className={`absolute top-0 left-0 w-full h-[80%] bg-gradient-to-br ${slide.color}/10 opacity-20`}></div>
+              )}
+              {!imagesLoaded[index] && (
+                <div className="w-full h-full bg-gradient-to-r from-sky-800 to-blue-800 animate-pulse"></div>
+              )}
             </div>
-          );
-        })}
+            
+            {/* Gradient Overlay */}
+            <div className="absolute top-0 left-0 w-full h-[80%] bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
+          </div>
+        ))}
       </div>
 
-      {/* Content Container - Center of height with left alignment */}
-      <div className="absolute inset-0 z-20 flex items-center justify-start">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="flex flex-col lg:flex-row items-start justify-between">
-            {/* Left Content - Takes 2/3 width */}
-            <div className="lg:w-2/3 text-white">
-              {/* Tagline with Icon - Comes from bottom SLOWLY after image */}
-              <div className={`mb-2 transition-all duration-1000 ease-out transform ${
-                isAnimationActive('tagline')
-                  ? 'translate-y-0 opacity-100' 
-                  : 'translate-y-16 opacity-0'
-              }`}>
-                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/20">
-                  {/* Icon with its own animation */}
-                  <span className={`transition-all duration-700 ease-out ${
-                    isAnimationActive('icon')
-                      ? 'scale-100 opacity-100 rotate-0' 
-                      : 'scale-0 opacity-0 -rotate-180'
-                  }`}>
-                    {slides[currentSlide].icon}
-                  </span>
-                  <span className="text-sky-300 font-semibold text-sm tracking-wider">
-                    {slides[currentSlide].tagline}
-                  </span>
-                </span>
-              </div>
-
-              {/* Title - Comes from bottom SLOWLY after tagline */}
-              <div className={`transition-all duration-1000 ease-out transform ${
-                isAnimationActive('title')
-                  ? 'translate-y-0 opacity-100' 
-                  : 'translate-y-20 opacity-0'
-              }`}>
-                <h1 className="text-3xl sm:text-4xl font-bold mb-2 leading-tight max-w-3xl">
-                  {slides[currentSlide].title}
-                </h1>
-              </div>
-
-              {/* Description - Comes from bottom SLOWLY after title */}
-              <div className={`transition-all duration-1000 ease-out transform ${
-                isAnimationActive('description')
-                  ? 'translate-y-0 opacity-100' 
-                  : 'translate-y-24 opacity-0'
-              }`}>
-                <p className="text-sm sm:text-base text-gray-200 mb-2 max-w-2xl leading-relaxed">
-                  {slides[currentSlide].description}
-                </p>
-              </div>
-
-              {/* Buttons - Comes from bottom SLOWLY after description */}
-              <div className={`transition-all duration-1000 ease-out transform ${
-                isAnimationActive('buttons')
-                  ? 'translate-y-0 opacity-100' 
-                  : 'translate-y-28 opacity-0'
-              }`}>
-                <div className="flex flex-wrap gap-3">
-                  <button className="group bg-sky-600 hover:bg-sky-700 text-white px-6 py-1 sm:px-8 sm:py-3 rounded-lg font-semibold text-base sm:text-lg flex items-center gap-2 transition-all duration-300 hover:shadow-xl hover:shadow-sky-600/25">
-                    {slides[currentSlide].buttonText}
-                    {/* Arrow icon with animation */}
-                    <span className={`transition-all duration-500 ${
-                      isAnimationActive('buttons')
-                        ? 'translate-x-0 opacity-100' 
-                        : '-translate-x-5 opacity-0'
-                    }`}>
-                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+      {/* Content Container - Only renders when images are loaded */}
+      {imagesLoaded[currentSlide] && (
+        <div className="absolute inset-0 z-20 flex items-center justify-start">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div className="flex flex-col lg:flex-row items-start justify-between">
+              {/* Left Content */}
+              <div className="lg:w-2/3 text-white">
+                {/* Tagline */}
+                <div className={`mb-2 transition-all duration-700 transform ${
+                  !isAnimating ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'
+                }`}>
+                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/20">
+                    <span className="text-sky-300 font-semibold text-sm tracking-wider">
+                      {slides[currentSlide].tagline}
                     </span>
-                  </button>
+                  </span>
+                </div>
+
+                {/* Title */}
+                <div className={`transition-all duration-700 delay-100 transform ${
+                  !isAnimating ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
+                }`}>
+                  <h1 className="text-3xl sm:text-4xl font-bold mb-2 leading-tight max-w-3xl">
+                    {slides[currentSlide].title}
+                  </h1>
+                </div>
+
+                {/* Description */}
+                <div className={`transition-all duration-700 delay-200 transform ${
+                  !isAnimating ? 'translate-y-0 opacity-100' : 'translate-y-24 opacity-0'
+                }`}>
+                  <p className="text-sm  text-gray-200 mb-2 max-w-2xl leading-relaxed">
+                    {slides[currentSlide].description}
+                  </p>
+                </div>
+
+                {/* Button */}
+                <div className={`transition-all duration-700 delay-300 transform ${
+                  !isAnimating ? 'translate-y-0 opacity-100' : 'translate-y-28 opacity-0'
+                }`}>
+                  <div className="flex flex-wrap gap-3">
+                    <button 
+                      onClick={() => handleButtonClick(slides[currentSlide].path)}
+                      className="group bg-sky-600 hover:bg-sky-700 text-white px-8 py-3 rounded-lg font-semibold text-lg flex items-center gap-2 transition-all duration-300 hover:shadow-xl hover:shadow-sky-600/25"
+                    >
+                      {slides[currentSlide].buttonText}
+                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Right Side - Navigation Controls */}
-            <div className="lg:w-1/3 flex justify-end mt-8 lg:mt-0">
-              <div className="flex flex-col items-end gap-4">
-                {/* Slide Navigation Dots */}
-                {/* <div className="flex gap-2">
-                  {slides.map((_, dotIndex) => (
-                    <button
-                      key={dotIndex}
-                      onClick={() => goToSlide(dotIndex)}
-                      className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                        dotIndex === currentSlide
-                          ? 'bg-sky-500 w-8'
-                          : 'bg-white/30 hover:bg-white/50'
-                      }`}
-                      aria-label={`Go to ${slides[dotIndex].title}`}
-                    />
-                  ))}
-                </div> */}
-
-                {/* Arrow Navigation with animations */}
+              {/* Navigation Controls */}
+              <div className="lg:w-1/3 flex justify-end mt-8 lg:mt-0">
                 <div className="flex gap-3">
                   <button
                     onClick={prevSlide}
-                    className="p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all duration-300 active:scale-95"
+                    className="p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all duration-300"
                     aria-label="Previous slide"
                   >
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -381,7 +257,7 @@ const HeroSection: React.FC = () => {
                   
                   <button
                     onClick={nextSlide}
-                    className="p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all duration-300 active:scale-95"
+                    className="p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all duration-300"
                     aria-label="Next slide"
                   >
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -393,26 +269,7 @@ const HeroSection: React.FC = () => {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Mobile Navigation Dots - Bottom Center */}
-      {/* {imagesLoaded && (
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 lg:hidden z-30">
-          <div className="flex justify-center gap-3">
-            {slides.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => goToSlide(index)}
-                className={`w-3 h-3 rounded-full transition-all ${
-                  index === currentSlide ? 'bg-sky-500' : 'bg-white/30'
-                }`}
-                aria-label={`Slide ${index + 1}`}
-              />
-            ))}
-          </div>
-        </div>
-      )} */}
-
+      )}
     </section>
   );
 };
