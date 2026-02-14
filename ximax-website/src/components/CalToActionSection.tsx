@@ -22,7 +22,7 @@ const CalToActionSection: React.FC = () => {
                     <span className="text-[#38B2FF] block">Business with Cloud & AI?</span>
                   </h2>
 
-                  <p className="text-gray-600 mb-6 leading-relaxed text-sm md:text-base">
+                  <p className="text-gray-600 mb-2 leading-relaxed text-sm md:text-base">
                     Partner with Ximax Automation to leverage cutting-edge big data, cloud applications, and AI development solutions. Our expert team delivers tailored IT strategies that drive growth, optimize operations, and accelerate your digital transformation journey.
                   </p>
 

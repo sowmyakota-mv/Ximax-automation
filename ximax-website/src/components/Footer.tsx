@@ -230,25 +230,25 @@ const Footer = () => {
           {/* Legal Links */}
           <div className="flex flex-wrap gap-6">
             <button 
-              onClick={() => navigateTo('/privacy-policy')}
+              onClick={() => navigateTo('/')}
               className="text-gray-400 hover:text-white text-sm transition-colors"
             >
               Privacy Policy
             </button>
             <button 
-              onClick={() => navigateTo('/terms-of-service')}
+              onClick={() => navigateTo('/')}
               className="text-gray-400 hover:text-white text-sm transition-colors"
             >
               Terms of Service
             </button>
             <button 
-              onClick={() => navigateTo('/cookie-policy')}
+              onClick={() => navigateTo('/')}
               className="text-gray-400 hover:text-white text-sm transition-colors"
             >
               Cookie Policy
             </button>
             <button 
-              onClick={() => navigateTo('/sitemap')}
+              onClick={() => navigateTo('/')}
               className="text-gray-400 hover:text-white text-sm transition-colors"
             >
               Sitemap

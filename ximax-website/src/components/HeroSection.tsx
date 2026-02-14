@@ -157,7 +157,7 @@ const HeroSection: React.FC = () => {
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Ximax Automation</h1>
             <div className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin mx-auto"></div>
-            <p className="text-white/80 text-sm mt-4">Loading amazing experiences...</p>
+            {/* <p className="text-white/80 text-sm mt-4">Loading amazing experiences...</p> */}
           </div>
         </div>
       )}

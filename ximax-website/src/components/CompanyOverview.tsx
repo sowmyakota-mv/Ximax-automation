@@ -13,7 +13,7 @@ const AboutSection = () => {
               <span className="inline-flex items-center px-4 py-2 rounded-full bg-sky-50 text-sky-600 text-sm font-semibold mb-2">
                 About Our Company
               </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-2">
+              <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-2">
                 About <span className="text-sky-600">Ximax Automation</span>
               </h2>
               <div className="h-1 w-20 bg-sky-600 mb-3"></div>
@@ -21,11 +21,11 @@ const AboutSection = () => {
 
             {/* Company Info */}
             <div className="space-y-3 mb-">
-              <p className="text-lg text-gray-700 leading-relaxed">
+              <p className="text-sm md:text-lg text-gray-700 leading-relaxed">
                 <span className="font-semibold text-sky-700">Ximax Automation</span> is a premier IT consulting and software services company, bringing <span className="font-semibold">18+ years</span> of industry expertise since our foundation. We specialize in delivering cutting-edge automation and digital transformation solutions that drive business growth and operational excellence.
               </p>
               
-              <p className="text-lg text-gray-700 leading-relaxed">
+              <p className="text-sm md:text-lg text-gray-700 leading-relaxed">
                 Our comprehensive suite of services spans across analysis, design, development, and maintenance of advanced IT systems. We empower our clients to generate revenue, reduce costs, and access critical business intelligence through innovative technology solutions delivered on time, every time.
               </p>
             </div>

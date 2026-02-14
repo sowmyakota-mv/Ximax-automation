@@ -185,7 +185,7 @@ const TechIndustrySection: React.FC = () => {
 
             {/* Right Side - Paragraph */}
             <div className="lg:w-3/5">
-              <div className="lg:pl-8 mt-8">
+              <div className="lg:pl-8 md:mt-8">
                 <p className="text-xs md:text-sm text-gray-600 leading-relaxed">
                   We combine cutting-edge technology expertise with deep industry knowledge to deliver 
                   tailored solutions that drive business growth and innovation across various sectors.
@@ -306,9 +306,9 @@ const TechIndustrySection: React.FC = () => {
               >
                 <ChevronLeft className="w-6 h-6" />
               </button>
-              <div className="text-gray-600 text-xs md:text-sm font-medium">
+              {/* <div className="text-gray-600 text-xs md:text-sm font-medium">
                 {allItems.length} Solutions
-              </div>
+              </div> */}
               <button
                 onClick={() => scrollContainer('right')}
                 className="p-3 bg-[#1e3a8a] text-white hover:bg-[#1e40af] rounded-full"
