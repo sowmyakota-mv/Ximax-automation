@@ -16,10 +16,12 @@ const WhatsAppIcon = ({ size = 20 }: { size?: number }) => (
 );
 
 const Header = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [hoverDropdown, setHoverDropdown] = useState<string | null>(null);
+  const desktopDropdownRef = useRef<HTMLDivElement | null>(null);
+  const mobileDropdownRef = useRef<HTMLDivElement | null>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Dropdown data
   const dropdowns = {
@@ -29,40 +31,36 @@ const Header = () => {
       { name: 'Our Capabilities', href: '/capabilities' },
     ],
     'Services': [
-      { name: 'Big Data & Analytics', href: '/services/big-data-analytics' },
-      { name: 'Cloud Applications', href: '/services/cloud-applications' },
-      { name: 'Application Development', href: '/services/application-development' },
-      { name: 'Digital Transformation', href: '/services/digital-transformation' },
-      { name: 'Testing & QA', href: '/services/testing-qa' },
-      { name: 'ERP Development', href: '/services/erp-development' },
+      { name: 'Big Data & Analytics', href: '/big-data-analytics' },
+      { name: 'Cloud Applications', href: '/cloud-applications' },
+      { name: 'Application Development', href: '/application-development' },
+      { name: 'Digital Transformation', href: '/digital-transformation' },
+      { name: 'Testing & QA', href: '/testing-qa' },
+      { name: 'ERP Development', href: '/erp-development' },
     ],
     'Technology': [
-      { name: 'Microsoft .NET', href: '/technology/microsoft-dotnet' },
-      { name: 'Java/J2EE', href: '/technology/java-j2ee' },
-      { name: 'Enterprise Web Services', href: '/technology/enterprise-web-services' },
-      { name: 'Middleware', href: '/technology/middleware' },
-      { name: 'Oracle', href: '/technology/oracle' },
+      { name: 'Microsoft .NET', href: '/microsoft-dotnet' },
+      { name: 'Java/J2EE', href: '/java-j2ee' },
+      { name: 'Enterprise Web Services', href: '/enterprise-web-services' },
+      { name: 'Middleware', href: '/middleware' },
+      { name: 'Oracle', href: '/oracle' },
     ],
     'Industry Verticals': [
-      { name: 'Banking & Financial Services', href: '/industry/banking-financial' },
-      { name: 'Healthcare Solutions', href: '/industry/healthcare' },
-      { name: 'E-commerce', href: '/industry/ecommerce' },
-      { name: 'Manufacturing', href: '/industry/manufacturing' },
-      { name: 'Telecommunication', href: '/industry/telecommunication' },
-      { name: 'Travel, Transport & Logistics', href: '/industry/travel-transport-logistics' },
+      { name: 'Financial Services', href: '/financial' },
+      { name: 'Healthcare Solutions', href: '/healthcare' },
+      { name: 'E-commerce', href: '/ecommerce' },
+      { name: 'Manufacturing', href: '/manufacturing' },
+      { name: 'Telecommunication', href: '/telecommunication' },
+      { name: 'Logistics', href: '/logistics' },
     ],
   };
 
-  const contactLinks = [
-    { icon: Mail, text: 'info@ximax.com', href: 'mailto:info@ximax.com' },
-    { icon: Phone, text: '+1 234 567 8900', href: 'tel:+12345678900' },
-  ];
-
-  // Close dropdown when clicking outside
+  // Close dropdown when clicking outside for desktop (top header)
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (desktopDropdownRef.current && !desktopDropdownRef.current.contains(event.target as Node)) {
         setActiveDropdown(null);
+        setHoverDropdown(null);
       }
     };
 
@@ -70,34 +68,65 @@ const Header = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  // Close dropdown when clicking outside for mobile
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 100);
+    const handleClickOutside = (event: MouseEvent) => {
+      if (mobileDropdownRef.current && !mobileDropdownRef.current.contains(event.target as Node)) {
+        setActiveDropdown(null);
+        setHoverDropdown(null);
+      }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  // Removed scroll effect as it's not being used
 
   const toggleDropdown = (dropdownName: string) => {
     setActiveDropdown(activeDropdown === dropdownName ? null : dropdownName);
+    setHoverDropdown(null);
+  };
+
+  const handleMouseEnter = (dropdownName: string) => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    setHoverDropdown(dropdownName);
+    setActiveDropdown(dropdownName);
+  };
+
+  const handleMouseLeave = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    timeoutRef.current = setTimeout(() => {
+      setHoverDropdown(null);
+      setActiveDropdown(null);
+    }, 200);
+  };
+
+  const handleDropdownMouseEnter = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+  };
+
+  const handleDropdownMouseLeave = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    timeoutRef.current = setTimeout(() => {
+      setHoverDropdown(null);
+      setActiveDropdown(null);
+    }, 200);
   };
 
   const handleNavigation = (href: string) => {
-    // For external links (mailto, tel) use window.location
-    if (href.startsWith('mailto:') || href.startsWith('tel:')) {
-      window.location.href = href;
-    } else {
-      // For internal links, use pushState for client-side navigation
-      window.history.pushState({}, '', href);
-      
-      // Dispatch a popstate event to notify any listeners
-      const popStateEvent = new PopStateEvent('popstate', { state: {} });
-      window.dispatchEvent(popStateEvent);
-    }
-    
+    window.location.href = href;
     setIsMobileMenuOpen(false);
     setActiveDropdown(null);
+    setHoverDropdown(null);
   };
 
   const navLinks = [
@@ -107,20 +136,35 @@ const Header = () => {
     { name: 'Technology', href: '/technology', hasDropdown: true },
     { name: 'Industry Verticals', href: '/verticals', hasDropdown: true },
     { name: 'Career', href: '/career', hasDropdown: false },
-    { name: 'Contact Us', href: '/contact', hasDropdown: false },
+    { name: 'Contact Us', href: '/contact-us', hasDropdown: false },
   ];
+
+  const currentDropdown = hoverDropdown || activeDropdown;
 
   return (
     <>
       {/* Desktop Header */}
-      <header className="hidden lg:block fixed top-0 w-full z-50 transition-all duration-300" ref={dropdownRef}>
-        {/* Top Small Header - Hidden when scrolled */}
-        <div className={`bg-sky-600 text-white transition-all duration-300 ${isScrolled ? 'opacity-0 h-0 overflow-hidden' : 'py-2 px-6'}`}>
-          <div className="max-w-7xl mx-auto flex justify-between items-center">
-            {/* All Navigation Links - Left */}
-            <nav className="flex space-x-8">
+      <header className="hidden lg:block fixed top-0 w-full z-50 transition-all duration-300 bg-white shadow-md">
+        <div className="bg-white py-3 px-6">
+          <div className="max-w-7xl mx-auto flex items-center h-10">
+            <div className="flex items-center">
+              <button onClick={() => handleNavigation('/')} className="flex items-center">
+                <img 
+                  src="/ximax-logo1.png" 
+                  alt="Ximax Logo" 
+                  className="h-16 w-auto"
+                />
+              </button>
+            </div>
+            
+            <nav className="flex-1 flex justify-center space-x-8" ref={desktopDropdownRef}>
               {navLinks.map((link) => (
-                <div key={link.name} className="relative">
+                <div 
+                  key={link.name} 
+                  className="relative"
+                  onMouseEnter={() => link.hasDropdown && handleMouseEnter(link.name)}
+                  onMouseLeave={handleMouseLeave}
+                >
                   <button
                     onClick={() => {
                       if (link.hasDropdown) {
@@ -129,17 +173,20 @@ const Header = () => {
                         handleNavigation(link.href);
                       }
                     }}
-                    className="text-sm font-medium hover:text-sky-100 transition-colors flex items-center gap-1"
+                    className="text-sm font-medium text-gray-700 hover:text-sky-600 transition-colors flex items-center gap-1"
                   >
                     {link.name}
                     {link.hasDropdown && (
-                      <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === link.name ? 'rotate-180' : ''}`} />
+                      <ChevronDown className={`w-4 h-4 transition-transform ${currentDropdown === link.name ? 'rotate-180' : ''}`} />
                     )}
                   </button>
                   
-                  {/* Dropdown Menu */}
-                  {link.hasDropdown && activeDropdown === link.name && (
-                    <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50">
+                  {link.hasDropdown && currentDropdown === link.name && (
+                    <div 
+                      className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-[100]"
+                      onMouseEnter={handleDropdownMouseEnter}
+                      onMouseLeave={handleDropdownMouseLeave}
+                    >
                       {dropdowns[link.name as keyof typeof dropdowns]?.map((item) => (
                         <button
                           key={item.name}
@@ -158,134 +205,18 @@ const Header = () => {
               ))}
             </nav>
 
-            {/* Contact Links - Right */}
-            <div className="flex items-center space-x-6">
-              {contactLinks.map((link) => (
-                <button
-                  key={link.text}
-                  onClick={() => handleNavigation(link.href)}
-                  className="flex items-center space-x-2 text-sm hover:text-sky-100 transition-colors"
-                >
-                  <link.icon size={16} />
-                  <span>{link.text}</span>
-                </button>
-              ))}
-              
-              {/* Social Media Icons */}
-              <div className="flex items-center space-x-4 border-l border-sky-500 pl-4">
-                <a
-                  href="https://wa.me/12345678900"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-green-300 transition-colors"
-                  title="WhatsApp"
-                >
-                  <WhatsAppIcon size={18} />
-                </a>
-                <a
-                  href="https://linkedin.com/company/ximax"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-sky-100 transition-colors"
-                  title="LinkedIn"
-                >
-                  <Linkedin size={18} />
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Main Header with Logo Image - Hidden when scrolled */}
-        <div className={`bg-white shadow-md transition-all duration-300 ${isScrolled ? 'opacity-0 h-0 overflow-hidden' : 'py-'}`}>
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="flex justify-center items-center">
-              {/* Logo Image */}
-              <img 
-                src="/ximax-logo1.png" 
-                alt="Ximax Logo" 
-                className="h-24 w-auto max-w-full object-contain"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Scrolled Header - Only shows when scrolling */}
-        {isScrolled && (
-          <div className="bg-white shadow-lg py-3 transition-all duration-300">
-            <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-              {/* Logo/Title - Left */}
-              <div className="flex items-center">
-                <img 
-                  src="/ximax-logo1.png" 
-                  alt="Ximax Logo" 
-                  className="h-10 w-auto mr-4"
-                />
-              </div>
-
-              {/* Navigation Links with Dropdowns - Center */}
-              <nav className="flex space-x-8">
-                {navLinks.map((link) => (
-                  <div key={link.name} className="relative">
-                    <button
-                      onClick={() => {
-                        if (link.hasDropdown) {
-                          toggleDropdown(link.name);
-                        } else {
-                          handleNavigation(link.href);
-                        }
-                      }}
-                      className="text-gray-800 hover:text-sky-600 font-medium transition-colors text-lg flex items-center gap-1"
-                    >
-                      {link.name}
-                      {link.hasDropdown && (
-                        <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === link.name ? 'rotate-180' : ''}`} />
-                      )}
-                    </button>
-                    
-                    {/* Dropdown Menu for Scrolled State */}
-                    {link.hasDropdown && activeDropdown === link.name && (
-                      <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50">
-                        {dropdowns[link.name as keyof typeof dropdowns]?.map((item) => (
-                          <button
-                            key={item.name}
-                            onClick={() => handleNavigation(item.href)}
-                            className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-sky-50 hover:text-sky-600 transition-colors"
-                          >
-                            <div className="flex items-center gap-3">
-                              <ChevronRight className="w-4 h-4 text-sky-500" />
-                              <span className="font-medium">{item.name}</span>
-                            </div>
-                          </button>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </nav>
-            </div>
-          </div>
-        )}
-      </header>
-
-      {/* Mobile & Tablet Header */}
-      <header className="lg:hidden fixed top-0 w-full z-50" ref={dropdownRef}>
-        {/* Top Small Header - Hidden when scrolled */}
-        <div className={`bg-sky-600 text-white transition-all duration-300 ${isScrolled ? 'opacity-0 h-0 overflow-hidden' : 'py-1 px-4'}`}>
-          <div className="flex justify-between items-center">
-            {/* Left Icons */}
             <div className="flex items-center space-x-4">
-              <button onClick={() => handleNavigation('mailto:info@ximax.com')} className="hover:text-sky-100">
+              <button onClick={() => handleNavigation('mailto:info@ximax.com')} className="text-gray-600 hover:text-sky-600">
                 <Mail size={20} />
               </button>
-              <button onClick={() => handleNavigation('tel:+12345678900')} className="hover:text-sky-100">
+              <button onClick={() => handleNavigation('tel:+12345678900')} className="text-gray-600 hover:text-sky-600">
                 <Phone size={20} />
               </button>
               <a
                 href="https://wa.me/12345678900"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-green-300"
+                className="text-gray-600 hover:text-green-600"
                 title="WhatsApp"
               >
                 <WhatsAppIcon size={20} />
@@ -294,61 +225,71 @@ const Header = () => {
                 href="https://linkedin.com/company/ximax"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-sky-100"
+                className="text-gray-600 hover:text-sky-600"
                 title="LinkedIn"
               >
                 <Linkedin size={20} />
               </a>
             </div>
-
-            {/* Hamburger Menu - Right */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-1 hover:bg-sky-500 rounded"
-            >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
           </div>
         </div>
+      </header>
 
-        {/* Main Header with Logo Image - Hidden when scrolled */}
-        <div className={`bg-white transition-all duration-300 ${isScrolled ? 'opacity-0 h-0 overflow-hidden' : 'py-2'}`}>
-          <div className="flex justify-center items-center">
-            <img 
-              src="/ximax-logo1.png" 
-              alt="Ximax Logo" 
-              className="h-20 w-auto max-w-full object-contain"
-            />
-          </div>
-        </div>
-
-        {/* Scrolled Header for Mobile - Shows when scrolled */}
-        {isScrolled && (
-          <div className="bg-white shadow-lg py-3 px-4 flex justify-between items-center">
-            {/* Logo - Left */}
+      {/* Mobile & Tablet Header */}
+      <header className="lg:hidden fixed top-0 w-full z-50">
+        <div className="bg-white shadow-md py-2 px-4">
+          <div className="flex justify-between items-center h-10">
             <div className="flex items-center">
-              <img 
-                src="/ximax-logo1.png" 
-                alt="Ximax Logo" 
-                className="h-10 w-auto"
-              />
+              <button onClick={() => handleNavigation('/')}>
+                <img 
+                  src="/ximax-logo1.png" 
+                  alt="Ximax Logo" 
+                  className="h-8 w-auto"
+                />
+              </button>
             </div>
 
-            {/* Hamburger Menu - Right */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-1 hover:bg-gray-100 rounded"
-            >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+            <div className="flex items-center space-x-4">
+              <button onClick={() => handleNavigation('mailto:info@ximax.com')} className="text-gray-600 hover:text-sky-600">
+                <Mail size={20} />
+              </button>
+              <button onClick={() => handleNavigation('tel:+12345678900')} className="text-gray-600 hover:text-sky-600">
+                <Phone size={20} />
+              </button>
+              <a
+                href="https://wa.me/12345678900"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-green-600"
+                title="WhatsApp"
+              >
+                <WhatsAppIcon size={20} />
+              </a>
+              <a
+                href="https://linkedin.com/company/ximax"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-sky-600"
+                title="LinkedIn"
+              >
+                <Linkedin size={20} />
+              </a>
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="p-1 hover:bg-gray-100 rounded"
+              >
+                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
           </div>
-        )}
+        </div>
 
-        {/* Mobile Menu Dropdown */}
         {isMobileMenuOpen && (
-          <div className="absolute top-full left-0 right-0 bg-white shadow-lg border-t border-gray-200 max-h-[80vh] overflow-y-auto">
+          <div 
+            className="absolute top-full left-0 right-0 bg-white shadow-lg border-t border-gray-200 max-h-[80vh] overflow-y-auto"
+            ref={mobileDropdownRef}
+          >
             <div className="px-4 py-6">
-              {/* Navigation Links with Mobile Dropdowns */}
               <nav className="space-y-1">
                 {navLinks.map((link) => (
                   <div key={link.name} className="border-b border-gray-100 last:border-b-0">
@@ -362,7 +303,6 @@ const Header = () => {
                           <ChevronDown className={`w-5 h-5 transition-transform ${activeDropdown === link.name ? 'rotate-180' : ''}`} />
                         </button>
                         
-                        {/* Mobile Dropdown Content */}
                         {activeDropdown === link.name && (
                           <div className="pl-8 pr-4 pb-3 space-y-2">
                             {dropdowns[link.name as keyof typeof dropdowns]?.map((item) => (
@@ -391,51 +331,10 @@ const Header = () => {
                   </div>
                 ))}
               </nav>
-
-              {/* Contact Information */}
-              <div className="mt-8 pt-6 border-t border-gray-200">
-                <h3 className="font-semibold text-gray-900 mb-4 text-lg">Contact Us</h3>
-                <div className="space-y-4">
-                  {contactLinks.map((link) => (
-                    <button
-                      key={link.text}
-                      onClick={() => handleNavigation(link.href)}
-                      className="flex items-center space-x-3 text-gray-700 hover:text-sky-600 py-2 w-full text-left"
-                    >
-                      <link.icon size={20} className="text-sky-600" />
-                      <span className="text-lg">{link.text}</span>
-                    </button>
-                  ))}
-                  
-                  <div className="flex space-x-4 mt-4">
-                    <a
-                      href="https://wa.me/12345678900"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 flex items-center justify-center space-x-2 bg-green-600 text-white px-4 py-3 rounded-lg font-medium hover:bg-green-700 transition-colors"
-                    >
-                      <WhatsAppIcon size={20} />
-                      <span>WhatsApp</span>
-                    </a>
-                    <a
-                      href="https://linkedin.com/company/ximax"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 flex items-center justify-center space-x-2 bg-sky-600 text-white px-4 py-3 rounded-lg font-medium hover:bg-sky-700 transition-colors"
-                    >
-                      <Linkedin size={20} />
-                      <span>LinkedIn</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         )}
       </header>
-
-      {/* Spacer to prevent content from hiding behind fixed header */}
-      <div className={`${isScrolled ? 'h-20' : 'h-32'} lg:${isScrolled ? 'h-20' : 'h-32'}`}></div>
     </>
   );
 };

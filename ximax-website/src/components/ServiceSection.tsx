@@ -39,17 +39,17 @@ const ServicesSection = () => {
   ];
 
   return (
-    <section id="services" className="py-16 md:py-24 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="services" className="py-5 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
         {/* Section Header */}
-        <div className="text-center mb-12 md:mb-16">
-          <span className="inline-flex items-center px-4 py-2 rounded-full bg-sky-50 text-sky-600 text-sm font-semibold mb-4">
+        <div className="text-center mb-8">
+          <span className="inline-flex items-center px-4 py-2 rounded-full bg-sky-50 text-sky-600 text-sm font-semibold mb-2">
             Our Services
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3">
             Comprehensive <span className="text-sky-600">IT Solutions</span>
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-sm text-gray-600 max-w-4xl mx-auto">
             We deliver end-to-end technology solutions that transform businesses and drive growth. 
             Our expertise spans across various domains, ensuring comprehensive coverage for all your IT needs.
           </p>
@@ -60,17 +60,17 @@ const ServicesSection = () => {
           {mainServices.map((service) => (
             <div
               key={service.id}
-              className="bg-sky-50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col h-full border-b-4 border-sky-500"
+              className="bg-sky-50 rounded-xl p-4 shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col h-full border-b-4 border-sky-500"
             >
-              <div className="flex items-start gap-4 mb-4">
+              <div className="flex items-start gap-4 mb-2">
                 <div className={`p-3 rounded-lg ${service.color} flex-shrink-0`}>
                   {service.icon}
                 </div>
-                <h3 className="text-xl font-bold text-gray-900">
+                <h3 className="text-lg font-bold text-gray-900">
                   {service.title}
                 </h3>
               </div>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-gray-600 text-sm leading-relaxed">
                 {service.description}
               </p>
             </div>

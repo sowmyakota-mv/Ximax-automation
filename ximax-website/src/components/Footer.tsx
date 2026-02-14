@@ -53,7 +53,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-gray-900 text-white pt-5 pb-8">
+    <footer className="bg-sky-900 text-white pt-5 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
         {/* First Row - 4 Columns */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -64,7 +64,7 @@ const Footer = () => {
               {/* Logo/Image in place of title */}
               <div className="mb-2">
                 <img 
-                  src="/ximax-logo1.png" 
+                  src="/ximax-logo.jpeg" 
                   alt="Ximax Automation" 
                   className="h-12 w-auto"
                   onError={(e) => {

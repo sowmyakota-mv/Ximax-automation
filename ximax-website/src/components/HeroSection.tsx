@@ -95,31 +95,53 @@ const HeroSection: React.FC = () => {
       [`${slideIndex}_tagline`]: false,
       [`${slideIndex}_title`]: false,
       [`${slideIndex}_description`]: false,
-      [`${slideIndex}_buttons`]: false
+      [`${slideIndex}_buttons`]: false,
+      [`${slideIndex}_icon`]: false,
+      [`${slideIndex}_arrow1`]: false,
+      [`${slideIndex}_arrow2`]: false
     }));
 
-    // Start staggered animations with timeouts
+    // First animate the image
     const timeout1 = window.setTimeout(() => {
       setSlideAnimations(prev => ({ ...prev, [`${slideIndex}_image`]: true }));
     }, 100);
     
+    // Then animate tagline from bottom
     const timeout2 = window.setTimeout(() => {
       setSlideAnimations(prev => ({ ...prev, [`${slideIndex}_tagline`]: true }));
-    }, 400);
+    }, 500);
     
+    // Then animate title from bottom
     const timeout3 = window.setTimeout(() => {
       setSlideAnimations(prev => ({ ...prev, [`${slideIndex}_title`]: true }));
-    }, 700);
+    }, 800);
     
+    // Then animate description from bottom
     const timeout4 = window.setTimeout(() => {
       setSlideAnimations(prev => ({ ...prev, [`${slideIndex}_description`]: true }));
-    }, 1000);
+    }, 1100);
     
+    // Then animate button from bottom
     const timeout5 = window.setTimeout(() => {
       setSlideAnimations(prev => ({ ...prev, [`${slideIndex}_buttons`]: true }));
-    }, 1300);
+    }, 1400);
+    
+    // Then animate icon in tagline
+    const timeout6 = window.setTimeout(() => {
+      setSlideAnimations(prev => ({ ...prev, [`${slideIndex}_icon`]: true }));
+    }, 550);
+    
+    // Then animate left arrow
+    const timeout7 = window.setTimeout(() => {
+      setSlideAnimations(prev => ({ ...prev, [`${slideIndex}_arrow1`]: true }));
+    }, 1600);
+    
+    // Then animate right arrow
+    const timeout8 = window.setTimeout(() => {
+      setSlideAnimations(prev => ({ ...prev, [`${slideIndex}_arrow2`]: true }));
+    }, 1700);
 
-    timeoutRefs.current.push(timeout1, timeout2, timeout3, timeout4, timeout5);
+    timeoutRefs.current.push(timeout1, timeout2, timeout3, timeout4, timeout5, timeout6, timeout7, timeout8);
   };
 
   // Preload all images on component mount
@@ -202,7 +224,7 @@ const HeroSection: React.FC = () => {
   };
 
   return (
-    <section id="/" className="relative w-full h-screen overflow-hidden">
+    <section id="/" className="relative w-full h-screen overflow-hidden mb-0 pb-0">
       {/* Loading Skeleton */}
       {/* {!imagesLoaded && (
         <div className="absolute inset-0 z-0 bg-gradient-to-r from-gray-900 to-gray-800 animate-pulse">
@@ -230,8 +252,8 @@ const HeroSection: React.FC = () => {
                   : "opacity-0 z-0"
               }`}
             >
-              {/* Background Image with animation - 70% height */}
-              <div className={`absolute top-0 left-0 w-full h-[70%] transition-all duration-1000 ease-out transform ${
+              {/* Background Image with animation - 70% height - FADE IN FIRST */}
+              <div className={`absolute top-0 left-0 w-full h-[80%] transition-all duration-1000 ease-out transform ${
                 isAnimationActive('image')
                   ? 'scale-100 opacity-100' 
                   : 'scale-110 opacity-0'
@@ -246,10 +268,10 @@ const HeroSection: React.FC = () => {
               </div>
               
               {/* Black Gradient Overlay - Bottom Heavy for 70% */}
-              <div className="absolute top-0 left-0 w-full h-[70%] bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
+              <div className="absolute top-0 left-0 w-full h-[80%] bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
               
               {/* Skyblue Accent Gradient */}
-              <div className={`absolute top-0 left-0 w-full h-[70%] bg-gradient-to-br ${slide.color}/10 opacity-20`}></div>
+              <div className={`absolute top-0 left-0 w-full h-[80%] bg-gradient-to-br ${slide.color}/10 opacity-20`}></div>
             </div>
           );
         })}
@@ -261,52 +283,66 @@ const HeroSection: React.FC = () => {
           <div className="flex flex-col lg:flex-row items-start justify-between">
             {/* Left Content - Takes 2/3 width */}
             <div className="lg:w-2/3 text-white">
-              {/* Tagline - Comes from bottom */}
-              <div className={`mb-2 transition-all duration-700 ease-out transform ${
+              {/* Tagline with Icon - Comes from bottom SLOWLY after image */}
+              <div className={`mb-2 transition-all duration-1000 ease-out transform ${
                 isAnimationActive('tagline')
                   ? 'translate-y-0 opacity-100' 
-                  : 'translate-y-8 opacity-0'
+                  : 'translate-y-16 opacity-0'
               }`}>
-                <span className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20">
-                  {slides[currentSlide].icon}
+                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/20">
+                  {/* Icon with its own animation */}
+                  <span className={`transition-all duration-700 ease-out ${
+                    isAnimationActive('icon')
+                      ? 'scale-100 opacity-100 rotate-0' 
+                      : 'scale-0 opacity-0 -rotate-180'
+                  }`}>
+                    {slides[currentSlide].icon}
+                  </span>
                   <span className="text-sky-300 font-semibold text-sm tracking-wider">
                     {slides[currentSlide].tagline}
                   </span>
                 </span>
               </div>
 
-              {/* Title - Comes from bottom after tagline */}
-              <div className={`transition-all duration-700 ease-out transform delay-150 ${
+              {/* Title - Comes from bottom SLOWLY after tagline */}
+              <div className={`transition-all duration-1000 ease-out transform ${
                 isAnimationActive('title')
                   ? 'translate-y-0 opacity-100' 
-                  : 'translate-y-12 opacity-0'
+                  : 'translate-y-20 opacity-0'
               }`}>
-                <h1 className="text-3xl font-bold mb-2 leading-tight max-w-3xl">
+                <h1 className="text-3xl sm:text-4xl font-bold mb-2 leading-tight max-w-3xl">
                   {slides[currentSlide].title}
                 </h1>
               </div>
 
-              {/* Description - Comes from bottom after title */}
-              <div className={`transition-all duration-700 ease-out transform delay-300 ${
+              {/* Description - Comes from bottom SLOWLY after title */}
+              <div className={`transition-all duration-1000 ease-out transform ${
                 isAnimationActive('description')
                   ? 'translate-y-0 opacity-100' 
-                  : 'translate-y-16 opacity-0'
+                  : 'translate-y-24 opacity-0'
               }`}>
-                <p className="text-base text-gray-200 mb-2 max-w-2xl leading-relaxed">
+                <p className="text-sm sm:text-base text-gray-200 mb-2 max-w-2xl leading-relaxed">
                   {slides[currentSlide].description}
                 </p>
               </div>
 
-              {/* Buttons - Comes from bottom after description */}
-              <div className={`transition-all duration-700 ease-out transform delay-450 ${
+              {/* Buttons - Comes from bottom SLOWLY after description */}
+              <div className={`transition-all duration-1000 ease-out transform ${
                 isAnimationActive('buttons')
                   ? 'translate-y-0 opacity-100' 
-                  : 'translate-y-20 opacity-0'
+                  : 'translate-y-28 opacity-0'
               }`}>
                 <div className="flex flex-wrap gap-3">
-                  <button className="group bg-sky-600 hover:bg-sky-700 text-white px-6 py-2 rounded-lg font-semibold text-base flex items-center gap-2 transition-all duration-300 hover:shadow-xl hover:shadow-sky-600/25">
+                  <button className="group bg-sky-600 hover:bg-sky-700 text-white px-6 py-1 sm:px-8 sm:py-3 rounded-lg font-semibold text-base sm:text-lg flex items-center gap-2 transition-all duration-300 hover:shadow-xl hover:shadow-sky-600/25">
                     {slides[currentSlide].buttonText}
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    {/* Arrow icon with animation */}
+                    <span className={`transition-all duration-500 ${
+                      isAnimationActive('buttons')
+                        ? 'translate-x-0 opacity-100' 
+                        : '-translate-x-5 opacity-0'
+                    }`}>
+                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    </span>
                   </button>
                 </div>
               </div>
@@ -331,11 +367,11 @@ const HeroSection: React.FC = () => {
                   ))}
                 </div> */}
 
-                {/* Arrow Navigation */}
+                {/* Arrow Navigation with animations */}
                 <div className="flex gap-3">
                   <button
                     onClick={prevSlide}
-                    className="p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-colors active:scale-95"
+                    className="p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all duration-300 active:scale-95"
                     aria-label="Previous slide"
                   >
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -345,7 +381,7 @@ const HeroSection: React.FC = () => {
                   
                   <button
                     onClick={nextSlide}
-                    className="p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-colors active:scale-95"
+                    className="p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all duration-300 active:scale-95"
                     aria-label="Next slide"
                   >
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
