@@ -164,7 +164,7 @@ const WhyUsPage: React.FC = () => {
     <div id='why-us' className="min-h-screen bg-gray-50">
       {/* Hero Section with Gradient Background and Background Image */}
       <section 
-  className="pt-76 py-5 relative overflow-hidden"
+  className="pt-28 md:pt-76 py-5 relative overflow-hidden"
   // style={{
   //   background: 'linear-gradient(135deg, #0A6B7E 0%, #075985 50%, #0C4A6E 100%)'
   // }}
@@ -174,7 +174,7 @@ const WhyUsPage: React.FC = () => {
     <img 
       src="/about-us.jpg" 
       alt="Ximax Automation Background" 
-      className="w-full h-full object-cover opacity-44"
+      className="w-full h-full object-contain md:object-cover opacity-44"
     />
     {/* <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-blue-800/80 mix-blend-multiply"></div> */}
   </div>
