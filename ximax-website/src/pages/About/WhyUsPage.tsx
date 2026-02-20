@@ -10,6 +10,7 @@ import {
   FaLaptopCode,
   FaCheckCircle
 } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 // Dropdown Component
 interface DropdownItem {
@@ -80,6 +81,7 @@ const IconCard: React.FC<IconCardProps> = ({ icon, title, description }) => (
 
 // Main Component
 const WhyUsPage: React.FC = () => {
+  const navigate=useNavigate()
   // Advantage items
   const advantageItems = [
     {
@@ -159,39 +161,40 @@ const WhyUsPage: React.FC = () => {
   ];
 
   return (
-    <div id='why-us' className="min-h-screen bg-gray-50 -mt-8">
+    <div id='why-us' className="min-h-screen bg-gray-50">
       {/* Hero Section with Gradient Background and Background Image */}
       <section 
-        className="pt-28 py-5 relative overflow-hidden"
-        style={{
-          background: 'linear-gradient(135deg, #0A6B7E 0%, #075985 50%, #0C4A6E 100%)'
-        }}
-      >
-        {/* Background Image Overlay */}
-        <div className="absolute inset-0 z-0">
-          <img 
-            src="/ximax-why-bg.jpg" 
-            alt="Ximax Automation Why Us Background" 
-            className="w-full h-full object-cover opacity-10"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-blue-800/80 mix-blend-multiply"></div>
-        </div>
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center">
-            <div className="inline-flex items-center justify-center mb-3">
-              <h1 className="text-3xl md:text-3xl lg:text-4xl font-bold text-white">
-                Why Ximax Automation?
-              </h1>
-            </div>
-            
-            <p className="text-xs md:text-base text-white/90 max-w-3xl mx-auto mb-12">
-              In achieving financial success, it takes a perfect combination of having the right IT solution 
+  className="pt-76 py-5 relative overflow-hidden"
+  // style={{
+  //   background: 'linear-gradient(135deg, #0A6B7E 0%, #075985 50%, #0C4A6E 100%)'
+  // }}
+>
+  {/* Background Image Overlay */}
+  <div className="absolute inset-0 z-0">
+    <img 
+      src="/about-us.jpg" 
+      alt="Ximax Automation Background" 
+      className="w-full h-full object-cover opacity-44"
+    />
+    {/* <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-blue-800/80 mix-blend-multiply"></div> */}
+  </div>
+  
+  <div className="container mx-auto px-4 relative z-10">
+    <div className="flex flex-col items-center justify-center text-center">
+      <div className="inline-flex items-center justify-center mb-3">
+        <h1 className="text-3xl md:text-3xl lg:text-5xl font-bold">
+          <span className="text-sky-800">Why Ximax Automation?</span>{' '}
+          {/* <span className="text-blue-600">Us</span> */}
+        </h1>
+      </div>
+      
+      <p className="text-xs md:text-base text-gray-900 font-semibold max-w-3xl mx-auto mb-12">
+         In achieving financial success, it takes a perfect combination of having the right IT solution 
               that addresses the unique needs of your business and partnering with the right people.
             </p>
-          </div>
-        </div>
-      </section>
+    </div>
+  </div>
+</section>
 
       {/* Main Content Section - Two Column Layout 60/40 */}
       <section className="py-5 bg-white">
@@ -239,7 +242,7 @@ const WhyUsPage: React.FC = () => {
 
       {/* Strategic Partnerships Section */}
       <section className="py-5 bg-gray-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 mt-">
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
             {/* Left Side - Content - 70% width on desktop */}
             <div className="order-1 lg:order-1 w-full lg:w-[70%]">
@@ -273,14 +276,14 @@ const WhyUsPage: React.FC = () => {
             
             {/* Right Side - Image - 30% width on desktop */}
             <div className="order-2 lg:order-2 w-full lg:w-[30%]">
-              <div className="relative rounded-xl overflow-hidden shadow-xl">
+              <div className="relative">
                 <div className="aspect-[4/3] lg:aspect-square relative">
                   <img 
-                    src="/ximax-partnerships.jpg" 
+                    src="/about-img1.jpg" 
                     alt="Ximax Automation Strategic Partnerships" 
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-blue-900/60 to-transparent"></div>
+                  {/* <div className="absolute inset-0 bg-gradient-to-t from-blue-900/60 to-transparent"></div> */}
                   <div className="absolute bottom-0 left-0 right-0 p-4">
                     <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/20 backdrop-blur-sm rounded-full">
                       <FaHandshake className="w-4 h-4 text-white" />
@@ -339,24 +342,37 @@ const WhyUsPage: React.FC = () => {
 
       {/* CTA Section */}
       <section 
-        className="py-5 bg-gradient-to-r from-blue-900 to-blue-800"
-        style={{
-          background: 'linear-gradient(135deg, #0A6B7E 0%, #075985 50%, #0C4A6E 100%)'
-        }}
-      >
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-3">
-            Ready to Experience the Ximax Automation Advantage?
-          </h2>
-          <p className="text-white/90 text-xs md:text-sm mb-6 max-w-2xl mx-auto">
-            Partner with an industry specialist you can trust. Let us help you achieve optimum productivity and financial success.
-          </p>
-          <button className="inline-flex items-center gap-2 bg-white text-blue-900 hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-300 hover:shadow-lg">
-            Partner With Us
-            <FaHandshake className="text-blue-600" />
-          </button>
-        </div>
-      </section>
+  className="py-5 relative overflow-hidden"
+  style={{
+    background: 'linear-gradient(135deg, #0A6B7E 0%, #075985 50%, #0C4A6E 100%)'
+  }}
+>
+  {/* Background Image Overlay */}
+  <div className="absolute inset-0 z-0">
+    <img 
+      src="/caltoaction2.png" 
+      alt="Technology Partnership Background" 
+      className="w-full h-full object-cover object-top opacity-90"
+    />
+    {/* Optional: Add a gradient overlay to ensure text readability */}
+    <div className="absolute inset-0 bg-gradient-to-r from-blue-900/60 to-blue-800/60 mix-blend-multiply"></div>
+  </div>
+  
+  <div className="container mx-auto px-4 relative z-10 mt-40 mb-12">
+    <div className="text-center">
+      <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-3">
+        Ready to Experience the Ximax Automation Advantage?
+      </h2>
+      <p className="text-white/90 text-xs md:text-sm mb-6 max-w-2xl mx-auto">
+        Partner with an industry specialist you can trust. Let us help you achieve optimum productivity and financial success.
+      </p>
+      <button onClick={()=>navigate("/contact-us")} className="inline-flex items-center gap-2 bg-white text-blue-900 hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-300 hover:shadow-lg">
+        Partner With Us
+        <FaHandshake className="text-blue-600" />
+      </button>
+    </div>
+  </div>
+</section>
     </div>
   );
 };

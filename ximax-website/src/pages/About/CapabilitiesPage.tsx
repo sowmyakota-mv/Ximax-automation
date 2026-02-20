@@ -13,6 +13,7 @@ import {
   FaClipboardList,
   FaNetworkWired
 } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 // Dropdown Component
 interface DropdownItem {
@@ -85,6 +86,7 @@ const CultureCard: React.FC<CultureCardProps> = ({ icon, title, description }) =
 
 // Main Component
 const CapabilitiesPage: React.FC = () => {
+  const navigate=useNavigate()
   // Capabilities items for the grid
   const capabilityItems = [
     {
@@ -134,39 +136,40 @@ const CapabilitiesPage: React.FC = () => {
   ];
 
   return (
-    <div id='capabilities' className="min-h-screen bg-gray-50 -mt-8">
+    <div id='capabilities' className="min-h-screen bg-gray-50">
       {/* Hero Section with Gradient Background and Background Image */}
       <section 
-        className="pt-28 py-5 relative overflow-hidden"
-        style={{
-          background: 'linear-gradient(135deg, #0A6B7E 0%, #075985 50%, #0C4A6E 100%)'
-        }}
-      >
-        {/* Background Image Overlay */}
-        <div className="absolute inset-0 z-0">
-          <img 
-            src="/ximax-hero-bg.jpg" 
-            alt="Ximax Automation Background" 
-            className="w-full h-full object-cover opacity-10"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-blue-800/80 mix-blend-multiply"></div>
-        </div>
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center">
-            <div className="inline-flex items-center justify-center mb-3">
-              <h1 className="text-3xl md:text-3xl lg:text-4xl font-bold text-white">
-                Our Capabilities
-              </h1>
-            </div>
-            
-            <p className="text-xs md:text-base text-white/90 max-w-3xl mx-auto mb-12">
-              Bringing proven commercial software design and development experience to bear on the computing problems that clients face.
+  className="pt-76 py-5 relative overflow-hidden"
+  // style={{
+  //   background: 'linear-gradient(135deg, #0A6B7E 0%, #075985 50%, #0C4A6E 100%)'
+  // }}
+>
+  {/* Background Image Overlay */}
+  <div className="absolute inset-0 z-0">
+    <img 
+      src="/about-us.jpg" 
+      alt="Ximax Automation Background" 
+      className="w-full h-full object-cover opacity-44"
+    />
+    {/* <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-blue-800/80 mix-blend-multiply"></div> */}
+  </div>
+  
+  <div className="container mx-auto px-4 relative z-10">
+    <div className="flex flex-col items-center justify-center text-center">
+      <div className="inline-flex items-center justify-center mb-3">
+        <h1 className="text-3xl md:text-3xl lg:text-5xl font-bold">
+          <span className="text-sky-800">Our Capabilities</span>{' '}
+          {/* <span className="text-blue-600">Us</span> */}
+        </h1>
+      </div>
+      
+      <p className="text-xs md:text-base text-gray-900 font-semibold max-w-3xl mx-auto mb-12">
+       Bringing proven commercial software design and development experience to bear on the computing problems that clients face.
             </p>
-          </div>
-        </div>
-      </section>
-
+    </div>
+  </div>
+</section>
+      
       {/* Introduction Section - Two Column Layout */}
       <section className="py-5 bg-white">
         <div className="container mx-auto px-4 mt-10">
@@ -261,26 +264,39 @@ const CapabilitiesPage: React.FC = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
+{/* CTA Section */}
       <section 
-        className="py-5"
-        style={{
-          background: 'linear-gradient(135deg, #0A6B7E 0%, #075985 50%, #0C4A6E 100%)'
-        }}
-      >
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-3">
-            Ready to Work With Our Team?
-          </h2>
-          <p className="text-white/90 text-xs md:text-sm mb-6 max-w-2xl mx-auto">
-            Partner with Ximax Automation and experience the difference our capabilities can make for your business
+  className="py-5 relative overflow-hidden"
+  style={{
+    background: 'linear-gradient(135deg, #0A6B7E 0%, #075985 50%, #0C4A6E 100%)'
+  }}
+>
+  {/* Background Image Overlay */}
+  <div className="absolute inset-0 z-0">
+    <img 
+      src="/caltoaction2.png" 
+      alt="Technology Partnership Background" 
+      className="w-full h-full object-cover object-top opacity-90"
+    />
+    {/* Optional: Add a gradient overlay to ensure text readability */}
+    <div className="absolute inset-0 bg-gradient-to-r from-blue-900/60 to-blue-800/60 mix-blend-multiply"></div>
+  </div>
+  
+  <div className="container mx-auto px-4 relative z-10 mt-40 mb-20">
+    <div className="text-center">
+      <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-3">
+        Ready to Work With Our Team?
+      </h2>
+      <p className="text-white/90 text-xs md:text-sm mb-6 max-w-2xl mx-auto">
+        Partner with Ximax Automation and experience the difference our capabilities can make for your business
           </p>
-          <button className="inline-flex items-center gap-2 bg-white text-blue-900 hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-300 hover:shadow-lg">
-            Get In Touch
+      <button onClick={()=>navigate("/contact-us")} className="inline-flex items-center gap-2 bg-white text-blue-900 hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-300 hover:shadow-lg">
+        Get In Touch
             <FaRocket className="text-blue-600" />
-          </button>
-        </div>
-      </section>
+      </button>
+    </div>
+  </div>
+</section>
     </div>
   );
 };

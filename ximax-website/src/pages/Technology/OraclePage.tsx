@@ -10,7 +10,8 @@ import {
   FaLaptopCode,
   FaMicrosoft,
   FaJava,
-  FaGlobe
+  FaGlobe,
+  FaRocket
 } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
@@ -105,33 +106,35 @@ const technologyPortfolio = [
     <div id='oracle' className="min-h-screen bg-gray-50 -mt-8">
       {/* Hero Section with Skyblue Theme Background */}
       <section 
-        className="pt-28 py-5 relative overflow-hidden"
-        style={{
-          background: 'linear-gradient(135deg, #38B2FF 0%, #7ED4FF 50%, #B0E6FF 100%)'
-        }}
+        className="pt-48 py-5 relative overflow-hidden min-h-[500px] md:min-h-[500px] flex items-start"
+        // style={{
+        //   background: 'linear-gradient(135deg, #38B2FF 0%, #7ED4FF 50%, #B0E6FF 100%)'
+        // }}
       >
         {/* Background Image Overlay */}
         <div className="absolute inset-0 z-0">
           <img 
-            src="/ximax-hero-bg.jpg" 
+            src="/technology5.png" 
             alt="Ximax Automation Background" 
-            className="w-full h-full object-cover opacity-10"
+            className="w-full h-full object-cover opacity-"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-sky-600/80 to-sky-500/80 mix-blend-multiply"></div>
+          {/* <div className="absolute inset-0 bg-gradient-to-r from-sky-600/80 to-sky-500/80 mix-blend-multiply"></div> */}
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center">
-            <div className="inline-flex items-center justify-center mb-3">
-              <h1 className="text-3xl md:text-3xl lg:text-4xl font-bold text-white">
-                Oracle
-              </h1>
-            </div>
-            
-            <p className="text-xs md:text-base text-white/90 max-w-3xl mx-auto mb-12">
-              Our Oracle Enterprise Application Competency Group has capabilities to provide ERP, CRM, and Strategic Enterprise Management (SEM) and DSS Life Cycle Implementation processes for the Oracle suite of Enterprise Applications products.
+          <div className="flex justify-end">
+  <div className="w-full lg:w-[30%] text-center">
+    <div className="inline-flex items-center justify-center mb-3">
+      <h1 className="text-3xl md:text-3xl lg:text-5xl font-bold text-white">
+        Oracle
+      </h1>
+    </div>
+    
+    <p className="text-xs md:text-sm text-white/90 text-center max-w-xl mx-auto mb-12">
+      Our Oracle Enterprise Application Competency Group has capabilities to provide ERP, CRM, and Strategic Enterprise Management (SEM) and DSS Life Cycle Implementation processes for the Oracle suite of Enterprise Applications products.
             </p>
-          </div>
+  </div>
+</div>
         </div>
       </section>
 
@@ -145,7 +148,7 @@ const technologyPortfolio = [
                 Oracle <span className="text-[#38B2FF]">E-Business Suite</span>
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-[#38B2FF] to-[#7ED4FF] mx-auto mb-6"></div>
-              <p className="text-xs md:text-sm text-gray-700 leading-relaxed max-w-4xl mx-auto">
+              <p className="text-xs md:text-sm text-gray-700  leading-relaxed max-w-4xl mx-auto">
                 <span className="font-semibold text-[#38B2FF]">Ximax</span> has the capabilities to provide the complete Life Cycle Implementation process for the Oracle Enterprise Application Products. We are proud to say that we have 100% Oracle E-Business implementation history and we are providing Excellent Production Support. We are sure that we can reach your expectations in E-Business Technology.
               </p>
             </div>
@@ -364,22 +367,36 @@ const technologyPortfolio = [
       </section>
 
       {/* CTA Section */}
-      <section 
-        className="py-5"
+            <section 
+        className="py-5 relative overflow-hidden"
         style={{
-          background: 'linear-gradient(135deg, #38B2FF 0%, #7ED4FF 50%, #B0E6FF 100%)'
+          background: 'linear-gradient(135deg, #0A6B7E 0%, #075985 50%, #0C4A6E 100%)'
         }}
       >
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-3">
-            Ready to Transform Your Oracle E-Business Suite?
+        {/* Background Image Overlay */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="/caltoaction2.png" 
+            alt="Technology Partnership Background" 
+            className="w-full h-full object-cover object-top opacity-90"
+          />
+          {/* Optional: Add a gradient overlay to ensure text readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/60 to-blue-800/60 mix-blend-multiply"></div>
+        </div>
+        
+        <div className="container mx-auto px-4 relative z-10 mt-40 mb-12">
+          <div className="text-center">
+            <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-3">
+              Ready to Transform Your Oracle E-Business Suite?
           </h2>
           <p className="text-white/90 text-xs md:text-sm mb-6 max-w-2xl mx-auto">
             Partner with us for Full Life Cycle Implementation and support for your Oracle applications
           </p>
-          <button className="inline-flex items-center gap-2 bg-white text-sky-600 hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-300 hover:shadow-lg">
-            Get Started Today
-          </button>
+            <button onClick={()=>navigate("/contact-us")} className="inline-flex items-center gap-2 bg-white text-blue-900 hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-300 hover:shadow-lg">
+              Get Started Today
+              <FaRocket className="text-blue-600" />
+            </button>
+          </div>
         </div>
       </section>
     </div>

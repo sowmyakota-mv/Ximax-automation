@@ -27,7 +27,7 @@ const CalToActionSection: React.FC = () => {
                   </p>
 
                   <button 
-                    onClick={() => navigate("/contact")} 
+                    onClick={() => navigate("/contact-us")} 
                     className="group relative px-6 py-3 bg-gradient-to-r from-[#38B2FF] to-[#7ED4FF] border-2 border-transparent text-white rounded-full font-semibold text-sm md:text-base hover:from-[#2A8ECC] hover:to-[#5FB4E0] transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl active:scale-105 flex items-center justify-center"
                   >
                     <MessageCircle className="h-5 w-5 mr-2" />
@@ -44,7 +44,7 @@ const CalToActionSection: React.FC = () => {
                   <div className="relative z-10 text-center">
                     <div className="w-60 h-60 md:h-84 md:w-84 mx-auto flex items-center justify-center">
                       <img
-                        src="/contact-hero1.png"
+                        src="/caltoaction.png"
                         alt="Ximax Automation Technology Solutions"
                         className="w-full h-full object-cover md:mt-16"
                       />

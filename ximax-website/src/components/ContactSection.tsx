@@ -9,11 +9,12 @@ import {
   FaCog,
   FaComment,
   FaPaperPlane,
-  FaTag
+  FaTag,
+  FaCheckCircle,
+  FaExclamationCircle
 } from 'react-icons/fa';
 
 const ContactPage: React.FC = () => {
-
   // Form state
   const [formData, setFormData] = useState({
     firstName: '',
@@ -27,29 +28,60 @@ const ContactPage: React.FC = () => {
     message: ''
   });
 
+  // Submission response state
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: 'success' | 'error' | null;
+    message: string;
+  }>({ type: null, message: '' });
+
   // Handle form input changes
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    // Clear any previous status when user starts typing again
+    if (submitStatus.type) {
+      setSubmitStatus({ type: null, message: '' });
+    }
   };
 
   // Handle form submission
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Add your form submission logic here
-    console.log('Form submitted:', formData);
-    // Reset form
-    setFormData({
-      firstName: '',
-      lastName: '',
-      email: '',
-      contactNumber: '',
-      companyName: '',
-      websiteUrl: '',
-      subject: '',
-      service: '',
-      message: ''
-    });
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: '' });
+
+    try {
+      // Simulate API call - Replace this with your actual API endpoint
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      // Success response
+      setSubmitStatus({
+        type: 'success',
+        message: 'Thank you for contacting us! We will get back to you within 24 hours.'
+      });
+      
+      // Reset form
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        contactNumber: '',
+        companyName: '',
+        websiteUrl: '',
+        subject: '',
+        service: '',
+        message: ''
+      });
+    } catch (error) {
+      // Error response
+      setSubmitStatus({
+        type: 'error',
+        message: 'Something went wrong. Please try again or contact us directly.'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   // Services options for dropdown
@@ -68,35 +100,31 @@ const ContactPage: React.FC = () => {
     <div id='contact' className="min-h-screen bg-gray-50 -mt-8">
       {/* Hero Section with Skyblue Theme Background */}
       <section 
-        className="pt-28 py-5 relative overflow-hidden"
-        style={{
-          background: 'linear-gradient(135deg, #38B2FF 0%, #7ED4FF 50%, #B0E6FF 100%)'
-        }}
-      >
-        {/* Background Image Overlay */}
-        <div className="absolute inset-0 z-0">
-          <img 
-            src="/ximax-hero-bg.jpg" 
-            alt="Ximax Automation Background" 
-            className="w-full h-full object-cover opacity-10"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-sky-600/80 to-sky-500/80 mix-blend-multiply"></div>
-        </div>
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center">
-            <div className="inline-flex items-center justify-center mb-3">
-              <h1 className="text-3xl md:text-3xl lg:text-4xl font-bold text-white">
-                Contact Us
-              </h1>
-            </div>
-{/*             
-            <p className="text-xs md:text-base text-white/90 max-w-3xl mx-auto mb-12">
-              Get in touch with our team to discuss how Ximax Automation can help transform your business with innovative IT solutions and services.
-            </p> */}
-          </div>
-        </div>
-      </section>
+  className="pt-30 py-5 relative overflow-hidden min-h-[500px] md:min-h-[400px] flex items-start"
+  // style={{
+  //   background: 'linear-gradient(135deg, #38B2FF 0%, #7ED4FF 50%, #B0E6FF 100%)'
+  // }}
+>
+  {/* Background Image Overlay */}
+  <div className="absolute inset-0 z-0">
+    <img 
+      src="/contact2.png" 
+      alt="Ximax Automation Background" 
+      className="w-full h-full object-bottom opacity-"
+    />
+    <div className="absolute inset-0 bg-gradient-to-r from-sky-600/80 to-sky-500/80 mix-blend-multiply"></div>
+  </div>
+  
+  <div className="container mx-auto px-4 relative z-10 mt-16 md:mt-24">
+    <div className="text-center">
+      <div className="inline-flex items-center justify-center mb-3">
+        <h1 className="text-3xl md:text-3xl lg:text-6xl font-bold text-white">
+          Contact Us
+        </h1>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* Main Content Section */}
       <section className="py-5 bg-white">
@@ -118,11 +146,11 @@ const ContactPage: React.FC = () => {
           <div className="max-w-6xl mx-auto w-4/5 py-5">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-5">
               {/* Phone Card */}
-              <div className="bg-white rounded-2xl p-8 border border-gray-200 hover:border-[#7ED4FF] shadow-lg hover:shadow-2xl transition-all duration-500 group text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-[#38B2FF]/10 to-[#7ED4FF]/10 rounded-2xl flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300">
+              <div className="bg-white rounded-2xl p-4 border border-gray-200 hover:border-[#7ED4FF] shadow-lg hover:shadow-2xl transition-all duration-500 group text-center">
+                <div className="w-16 h-16 bg-gradient-to-br from-[#38B2FF]/10 to-[#7ED4FF]/10 rounded-2xl flex items-center justify-center mb-2 mx-auto group-hover:scale-110 transition-transform duration-300">
                   <FaPhone className="text-3xl text-[#38B2FF]" />
                 </div>
-                <h4 className="text-med md:text-xl font-semibold text-gray-800 mb-3 group-hover:text-[#38B2FF] transition-colors duration-300">
+                <h4 className="text-med md:text-xl font-semibold text-gray-800 mb-2 group-hover:text-[#38B2FF] transition-colors duration-300">
                   Phone
                 </h4>
                 <p className="text-gray-600 text-xs md:text-sm leading-relaxed">
@@ -131,17 +159,17 @@ const ContactPage: React.FC = () => {
                 <p className="text-gray-600 text-xs md:text-sm leading-relaxed">
                   +1 (555) 987-6543
                 </p>
-                <p className="text-gray-500 text-xs mt-3">
+                <p className="text-gray-500 text-xs mt-2">
                   Mon-Fri 9am-6pm
                 </p>
               </div>
 
               {/* Email Card */}
-              <div className="bg-white rounded-2xl p-8 border border-gray-200 hover:border-[#7ED4FF] shadow-lg hover:shadow-2xl transition-all duration-500 group text-center">
+              <div className="bg-white rounded-2xl p-4 border border-gray-200 hover:border-[#7ED4FF] shadow-lg hover:shadow-2xl transition-all duration-500 group text-center">
                 <div className="w-16 h-16 bg-gradient-to-br from-[#38B2FF]/10 to-[#7ED4FF]/10 rounded-2xl flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300">
                   <FaEnvelope className="text-3xl text-[#7ED4FF]" />
                 </div>
-                <h4 className="text-med md:text-xl font-semibold text-gray-800 mb-3 group-hover:text-[#38B2FF] transition-colors duration-300">
+                <h4 className="text-med md:text-xl font-semibold text-gray-800 mb-2 group-hover:text-[#38B2FF] transition-colors duration-300">
                   Email
                 </h4>
                 <p className="text-gray-600 text-xs md:text-sm leading-relaxed">
@@ -150,17 +178,17 @@ const ContactPage: React.FC = () => {
                 <p className="text-gray-600 text-xs md:text-sm leading-relaxed">
                   support@ximax.com
                 </p>
-                <p className="text-gray-600 text-xs md:text-sm leading-relaxed">
+                {/* <p className="text-gray-600 text-xs md:text-sm leading-relaxed">
                   sales@ximax.com
-                </p>
+                </p> */}
               </div>
 
               {/* Address Card */}
-              <div className="bg-white rounded-2xl p-8 border border-gray-200 hover:border-[#7ED4FF] shadow-lg hover:shadow-2xl transition-all duration-500 group text-center">
+              <div className="bg-white rounded-2xl p-4 border border-gray-200 hover:border-[#7ED4FF] shadow-lg hover:shadow-2xl transition-all duration-500 group text-center">
                 <div className="w-16 h-16 bg-gradient-to-br from-[#38B2FF]/10 to-[#7ED4FF]/10 rounded-2xl flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300">
                   <FaMapMarkerAlt className="text-3xl text-[#38B2FF]" />
                 </div>
-                <h4 className="text-med md:text-xl font-semibold text-gray-800 mb-3 group-hover:text-[#38B2FF] transition-colors duration-300">
+                <h4 className="text-med md:text-xl font-semibold text-gray-800 mb-2 group-hover:text-[#38B2FF] transition-colors duration-300">
                   Address
                 </h4>
                 <p className="text-gray-600 text-xs md:text-sm leading-relaxed">
@@ -185,6 +213,22 @@ const ContactPage: React.FC = () => {
               <p className="text-xs md:text-sm text-gray-600 text-center max-w-3xl mx-auto mb-10">
                 Fill out the form below and we'll get back to you within 24 hours
               </p>
+
+              {/* Submission Response Message */}
+              {submitStatus.type && (
+                <div className={`max-w-4xl mx-auto mb-6 p-4 rounded-lg flex items-center gap-3 ${
+                  submitStatus.type === 'success' 
+                    ? 'bg-green-50 text-green-700 border border-green-200' 
+                    : 'bg-red-50 text-red-700 border border-red-200'
+                }`}>
+                  {submitStatus.type === 'success' ? (
+                    <FaCheckCircle className="text-lg flex-shrink-0" />
+                  ) : (
+                    <FaExclamationCircle className="text-lg flex-shrink-0" />
+                  )}
+                  <p className="text-xs md:text-sm">{submitStatus.message}</p>
+                </div>
+              )}
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {/* Form - Left Side */}
@@ -350,10 +394,20 @@ const ContactPage: React.FC = () => {
                     <div className="text-center mt-8">
                       <button
                         type="submit"
-                        className="inline-flex items-center gap-2 bg-gradient-to-r from-[#38B2FF] to-[#7ED4FF] hover:from-[#2A8ECC] hover:to-[#5FB4E0] text-white font-semibold px-10 py-4 rounded-lg text-sm transition-all duration-300 transform hover:scale-105 shadow-lg"
+                        disabled={isSubmitting}
+                        className={`inline-flex items-center gap-2 bg-gradient-to-r from-[#38B2FF] to-[#7ED4FF] hover:from-[#2A8ECC] hover:to-[#5FB4E0] text-white font-semibold px-10 py-4 rounded-lg text-sm transition-all duration-300 transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100`}
                       >
-                        <FaPaperPlane className="text-sm" />
-                        Send Message
+                        {isSubmitting ? (
+                          <>
+                            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                            Sending...
+                          </>
+                        ) : (
+                          <>
+                            <FaPaperPlane className="text-sm" />
+                            Send Message
+                          </>
+                        )}
                       </button>
                     </div>
                   </form>

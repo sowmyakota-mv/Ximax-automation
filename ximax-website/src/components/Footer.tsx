@@ -19,29 +19,29 @@ const Footer = () => {
   // Quick Links
   const quickLinks = [
     { name: 'Home', path: '/' },
-    { name: 'About Us', path: '/about' },
-    { name: 'Industry Verticals', path: '/industry-verticals' },
-    { name: 'Careers', path: '/careers' },
-    { name: 'Contact Us', path: '/contact' }
+    { name: 'About Us', path: '/about-company' },
+    { name: 'Industry Verticals', path: '/financial' },
+    { name: 'Careers', path: '/career' },
+    { name: 'Contact Us', path: '/contact-us' }
   ];
 
   // Services
   const services = [
-    { name: 'Big Data & Analytics', path: '/services/big-data-analytics' },
-    { name: 'Cloud Applications', path: '/services/cloud-applications' },
-    { name: 'Application Development', path: '/services/application-development' },
-    { name: 'Digital Transformation', path: '/services/digital-transformation' },
+    { name: 'Big Data & Analytics', path: '/big-data-analytics' },
+    { name: 'Cloud Applications', path: '/cloud-applications' },
+    { name: 'Application Development', path: '/application-development' },
+    { name: 'Digital Transformation', path: '/digital-transformation' },
     // { name: 'Testing & QA', path: '/services/testing-qa' },
-    { name: 'ERP Development', path: '/services/erp-development' }
+    { name: 'ERP Development', path: '/erp-development' }
   ];
 
   // Technologies
   const technologies = [
-    { name: 'Microsoft .NET', path: '/technology/microsoft-dotnet' },
-    { name: 'Java/J2EE', path: '/technology/java-j2ee' },
-    { name: 'Enterprise Web Services', path: '/technology/enterprise-web-services' },
-    { name: 'Middleware', path: '/technology/middleware' },
-    { name: 'Oracle', path: '/technology/oracle' }
+    { name: 'Microsoft .NET', path: '/microsoft-dotnet' },
+    { name: 'Java/J2EE', path: '/java-j2ee' },
+    { name: 'Enterprise Web Services', path: '/enterprise-web-services' },
+    { name: 'Middleware', path: '/middleware' },
+    { name: 'Oracle', path: '/oracle' }
   ];
 
   // Social Media Links
@@ -206,7 +206,7 @@ const Footer = () => {
                 {socialLinks.map((social, index) => (
                   <a
                     key={index}
-                    href={social.url}
+                    // href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-2 rounded-lg bg-gray-800 hover:bg-sky-700 transition-colors"

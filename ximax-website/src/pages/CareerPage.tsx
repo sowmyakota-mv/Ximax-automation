@@ -3,10 +3,13 @@ import {
   FaCheckCircle,
   FaHeadset,
   FaLaptop,
+  FaRocket,
   FaTools,
 } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const CareerPage: React.FC = () => {
+    const navigate=useNavigate()
 
   // Job Openings
   const jobOpenings = [
@@ -44,23 +47,23 @@ const CareerPage: React.FC = () => {
     <div id='career' className="min-h-screen bg-gray-50 -mt-8">
       {/* Hero Section with Skyblue Theme Background */}
       <section 
-        className="pt-28 py-5 relative overflow-hidden"
-        style={{
-          background: 'linear-gradient(135deg, #38B2FF 0%, #7ED4FF 50%, #B0E6FF 100%)'
-        }}
+        className="pt-48 py-5 relative overflow-hidden min-h-[500px] md:min-h-[500px] flex items-start"
+        // style={{
+        //   background: 'linear-gradient(135deg, #38B2FF 0%, #7ED4FF 50%, #B0E6FF 100%)'
+        // }}
       >
         {/* Background Image Overlay */}
         <div className="absolute inset-0 z-0">
           <img 
-            src="/ximax-hero-bg.jpg" 
+            src="/career.png" 
             alt="Ximax Automation Background" 
-            className="w-full h-full object-cover opacity-10"
+            className="w-full h-full object-cover object-top opacity-"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-sky-600/80 to-sky-500/80 mix-blend-multiply"></div>
         </div>
         
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center">
+        <div className="container mx-auto px-4 relative z-10">        
+  <div className="text-center">
             <div className="inline-flex items-center justify-center mb-3">
               <h1 className="text-3xl md:text-3xl lg:text-4xl font-bold text-white">
                 Career @ Ximax
@@ -71,7 +74,7 @@ const CareerPage: React.FC = () => {
               Ximax is looking for skilled IT professionals who are customer focused and dedicated helping solve the IT requirements of the clients we serve. All of our representatives should have reliable transportation and effective interactive skills. We are also looking for individuals who possess a can-do spirit and positive attitude.
             </p>
           </div>
-        </div>
+</div>
       </section>
 
       {/* Main Content Section */}
@@ -115,7 +118,7 @@ const CareerPage: React.FC = () => {
                     {job.description}
                   </p>
                   <div className="mt-6">
-                    <button className="w-full bg-gradient-to-r from-[#38B2FF] to-[#7ED4FF] hover:from-[#2A8ECC] hover:to-[#5FB4E0] text-white font-semibold px-4 py-2 rounded-lg text-xs md:text-sm transition-all duration-300 hover:shadow-lg">
+                    <button onClick={()=>navigate("/contact-us")} className="w-full bg-gradient-to-r from-[#38B2FF] to-[#7ED4FF] hover:from-[#2A8ECC] hover:to-[#5FB4E0] text-white font-semibold px-4 py-2 rounded-lg text-xs md:text-sm transition-all duration-300 hover:shadow-lg">
                       Apply Now
                     </button>
                   </div>
@@ -199,22 +202,36 @@ const CareerPage: React.FC = () => {
       </section>
 
       {/* CTA Section */}
-      <section 
-        className="py-5"
+            <section 
+        className="py-5 relative overflow-hidden"
         style={{
-          background: 'linear-gradient(135deg, #38B2FF 0%, #7ED4FF 50%, #B0E6FF 100%)'
+          background: 'linear-gradient(135deg, #0A6B7E 0%, #075985 50%, #0C4A6E 100%)'
         }}
       >
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-3">
-            Ready to Join Our Team?
+        {/* Background Image Overlay */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="/caltoaction2.png" 
+            alt="Technology Partnership Background" 
+            className="w-full h-full object-cover object-top opacity-90"
+          />
+          {/* Optional: Add a gradient overlay to ensure text readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/60 to-blue-800/60 mix-blend-multiply"></div>
+        </div>
+        
+        <div className="container mx-auto px-4 relative z-10 mt-40 mb-12">
+          <div className="text-center">
+            <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-3">
+              Ready to Join Our Team?
           </h2>
           <p className="text-white/90 text-xs md:text-sm mb-6 max-w-2xl mx-auto">
             Send us your resume and cover letter to start your career journey with Ximax
           </p>
-          <button className="inline-flex items-center gap-2 bg-white text-sky-600 hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-300 hover:shadow-lg">
-            Submit Application
-          </button>
+            <button onClick={()=>navigate("/contact-us")} className="inline-flex items-center gap-2 bg-white text-blue-900 hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-300 hover:shadow-lg">
+              Submit Application
+              <FaRocket className="text-blue-600" />
+            </button>
+          </div>
         </div>
       </section>
     </div>

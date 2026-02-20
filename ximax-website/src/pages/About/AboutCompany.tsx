@@ -15,6 +15,7 @@ import {
   FaAward,
   FaRegBuilding
 } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 // Dropdown Component
 interface DropdownItem {
@@ -102,6 +103,7 @@ const ValueCard: React.FC<ValueCardProps> = ({ icon, title }) => (
 
 // Main Component
 const AboutPage: React.FC = () => {
+  const navigate=useNavigate()
   // Culture items
   const cultureItems = [
     {
@@ -160,42 +162,39 @@ const AboutPage: React.FC = () => {
   ];
 
   return (
-    <div id='about-company' className="min-h-screen bg-gray-50 -mt-8">
-      {/* Hero Section with Gradient Background and Background Image */}
-      <section 
-        className="pt-28 py-5 relative overflow-hidden"
-        style={{
-          background: 'linear-gradient(135deg, #0A6B7E 0%, #075985 50%, #0C4A6E 100%)'
-        }}
-      >
-        {/* Background Image Overlay */}
-        <div className="absolute inset-0 z-0">
-          <img 
-            src="/ximax-hero-bg.jpg" 
-            alt="Ximax Automation Background" 
-            className="w-full h-full object-cover opacity-10"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-blue-800/80 mix-blend-multiply"></div>
+    <div id='about-company' className="min-h-screen bg-gray-50">
+        {/* Hero Section with Gradient Background and Background Image */}
+  <section 
+    className="pt-76 py-5 relative overflow-hidden"
+    // style={{
+    //   background: 'linear-gradient(135deg, #0A6B7E 0%, #075985 50%, #0C4A6E 100%)'
+    // }}
+  >
+    {/* Background Image Overlay */}
+    <div className="absolute inset-0 z-0">
+      <img 
+        src="/about-us.jpg" 
+        alt="Ximax Automation Background" 
+        className="w-full h-full object-cover opacity-44"
+      />
+      {/* <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-blue-800/80 mix-blend-multiply"></div> */}
+    </div>
+    
+    <div className="container mx-auto px-4 relative z-10">
+      <div className="flex flex-col items-center justify-center text-center ">
+        <div className="inline-flex items-center justify-center mb-3 ">
+          <h1 className="text-3xl md:text-3xl lg:text-5xl font-bold text-sky-800">
+            About Us
+          </h1>
         </div>
         
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center">
-            <div className="inline-flex items-center justify-center mb-3">
-              <h1 className="text-3xl md:text-3xl lg:text-4xl font-bold text-white">
-                About Us
-              </h1>
-            </div>
-            
-            <p className="text-xs md:text-base text-white/90 max-w-3xl mx-auto mb-12">
-              Pioneering IT consulting and software services since 2006, transforming businesses worldwide 
-              through innovation, expertise, and a commitment to excellence.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Spacer for images */}
-      {/* <div className="h-48 lg:h-56"></div> */}
+        <p className="text-xs md:text-base font-semibold text-gray-900 max-w-3xl mx-auto mb-12">
+          Pioneering IT consulting and software services since 2006, transforming businesses worldwide 
+          through innovation, expertise, and a commitment to excellence.
+        </p>
+      </div>
+    </div>
+  </section>
 
       {/* About Content Section - Two Column Layout - Modified font sizes */}
       <section className="py-5 bg-white">
@@ -256,14 +255,14 @@ const AboutPage: React.FC = () => {
     <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
       {/* Left Side - Image - 30% width on desktop, below content on mobile */}
       <div className="order-2 lg:order-1 w-full lg:w-[30%]">
-        <div className="relative rounded-xl overflow-hidden shadow-xl">
-          <div className="aspect-[4/3] lg:aspect-square relative">
+        <div className="relative ">
+          <div className="aspect-[3/3] lg:aspect-square relative ">
             <img 
-              src="/ximax-staffing.jpg" 
+              src="/about-img1.jpg" 
               alt="Ximax Automation Staffing & Consulting" 
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-blue-900/60 to-transparent"></div>
+            {/* <div className="absolute inset-0 bg-gradient-to-t from-blue-900/60 to-transparent"></div> */}
             <div className="absolute bottom-0 left-0 right-0 p-4">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/20 backdrop-blur-sm rounded-full">
                 <FaUsers className="w-4 h-4 text-white" />
@@ -400,24 +399,39 @@ const AboutPage: React.FC = () => {
         </div>
       </section>
 
-      {/* CTA Section - Modified to match reference */}
-      <section className="py-5 bg-gradient-to-r from-blue-900 to-blue-800"
-      style={{
-          background: 'linear-gradient(135deg, #0A6B7E 0%, #075985 50%, #0C4A6E 100%)'
-        }}>
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-3">
-            Ready to Transform Your Business?
-          </h2>
-          <p className="text-white/90 text-xs md:text-sm mb-6 max-w-2xl mx-auto">
-            Join our 100+ satisfied clients and experience the Ximax Automation difference
-          </p>
-          <button className="inline-flex items-center gap-2 bg-white text-blue-900 hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-300 hover:shadow-lg">
-            Get In Touch
+{/* CTA Section */}
+      <section 
+  className="py-5 relative overflow-hidden"
+  style={{
+    background: 'linear-gradient(135deg, #0A6B7E 0%, #075985 50%, #0C4A6E 100%)'
+  }}
+>
+  {/* Background Image Overlay */}
+  <div className="absolute inset-0 z-0">
+    <img 
+      src="/caltoaction2.png" 
+      alt="Technology Partnership Background" 
+      className="w-full h-full object-cover object-top opacity-90"
+    />
+    {/* Optional: Add a gradient overlay to ensure text readability */}
+    <div className="absolute inset-0 bg-gradient-to-r from-blue-900/60 to-blue-800/60 mix-blend-multiply"></div>
+  </div>
+  
+  <div className="container mx-auto px-4 relative z-10 mt-40 mb-20">
+    <div className="text-center">
+      <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-3">
+        Ready to Transform Your Business?
+      </h2>
+      <p className="text-white/90 text-xs md:text-sm mb-6 max-w-2xl mx-auto">
+         Join our 100+ satisfied clients and experience the Ximax Automation difference
+           </p>
+      <button onClick={()=>navigate("/contact-us")} className="inline-flex items-center gap-2 bg-white text-blue-900 hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-300 hover:shadow-lg">
+        Get In Touch
             <FaRocket className="text-blue-600" />
-          </button>
-        </div>
-      </section>
+      </button>
+    </div>
+  </div>
+</section>
     </div>
   );
 };
