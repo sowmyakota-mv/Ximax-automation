@@ -11,7 +11,7 @@ const TechIndustrySection: React.FC = () => {
       name: ".NET Framework",
       description: "Full-stack development using Microsoft's .NET ecosystem for enterprise applications",
       image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      link: "/technology/dotnet",
+      link: "/microsoft-dotnet",
       tagline: "Enterprise Development Platform",
       shortDesc: "Enterprise-grade .NET solutions",
       hoverDesc: "Build and deploy robust enterprise applications using Microsoft's powerful .NET framework. Our expertise spans ASP.NET, .NET Core, and modern C# development for scalable solutions."
@@ -21,7 +21,7 @@ const TechIndustrySection: React.FC = () => {
       name: "Java & J2EE",
       description: "Scalable enterprise applications using robust Java technologies and frameworks",
       image: "https://images.unsplash.com/photo-1516116216624-53e697fedbea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      link: "/technology/java",
+      link: "/java-j2ee",
       tagline: "Robust Enterprise Solutions",
       shortDesc: "Scalable Java applications",
       hoverDesc: "Leverage the power of Java and J2EE for mission-critical enterprise applications. We deliver scalable, secure, and high-performance solutions using Spring Boot, Hibernate, and microservices architecture."
@@ -31,7 +31,7 @@ const TechIndustrySection: React.FC = () => {
       name: "Web Services",
       description: "Seamless integration through RESTful APIs and SOAP services for modern applications",
       image: "/web-service.jpg",
-      link: "/technology/web-services",
+      link: "/enterprise-web-services",
       tagline: "API Integration Services",
       shortDesc: "RESTful & SOAP APIs",
       hoverDesc: "Connect your systems seamlessly with our comprehensive web services solutions. We specialize in RESTful API design, SOAP services, and API gateway implementations for modern applications."
@@ -41,7 +41,7 @@ const TechIndustrySection: React.FC = () => {
       name: "Oracle",
       description: "Comprehensive database solutions and enterprise application development",
       image: "/oracle.jpg",
-      link: "/technology/oracle",
+      link: "/oracle",
       tagline: "Database Management Systems",
       shortDesc: "Enterprise database solutions",
       hoverDesc: "Optimize your data management with Oracle database expertise. We provide end-to-end Oracle solutions including PL/SQL development, database optimization, and enterprise application integration."
@@ -51,7 +51,7 @@ const TechIndustrySection: React.FC = () => {
       name: "Middleware",
       description: "Advanced integration solutions and enterprise messaging systems",
       image: "/middleware.jpg",
-      link: "/technology/middleware",
+      link: "/middleware",
       tagline: "Integration Technology",
       shortDesc: "Advanced integration solutions",
       hoverDesc: "Enable seamless communication between enterprise systems with our middleware solutions. We implement IBM WebSphere, Oracle Fusion, and open-source messaging platforms for robust integration."
@@ -62,7 +62,7 @@ const TechIndustrySection: React.FC = () => {
       name: "Banking & Financial Services",
       description: "Secure and compliant financial technology solutions for modern banking",
       image: "https://images.unsplash.com/photo-1550565118-3a14e8d0386f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      link: "/industry/banking",
+      link: "/financial",
       tagline: "FinTech Solutions",
       shortDesc: "Secure banking solutions",
       hoverDesc: "Transform financial services with our secure and compliant FinTech solutions. We deliver core banking systems, payment gateways, and regulatory technology for modern financial institutions."
@@ -72,7 +72,7 @@ const TechIndustrySection: React.FC = () => {
       name: "E-commerce",
       description: "Scalable online retail platforms and digital marketplaces for global commerce",
       image: "/e-commerce.jpg",
-      link: "/industry/ecommerce",
+      link: "/ecommerce",
       tagline: "Digital Retail Platforms",
       shortDesc: "Scalable retail platforms",
       hoverDesc: "Launch and scale your online retail business with our e-commerce expertise. We build custom digital marketplaces, shopping cart solutions, and omnichannel platforms for global commerce."
@@ -82,7 +82,7 @@ const TechIndustrySection: React.FC = () => {
       name: "Healthcare",
       description: "Advanced healthcare technology and patient management systems",
       image: "/healthcare.jpg",
-      link: "/industry/healthcare",
+      link: "/healthcare",
       tagline: "Medical Technology",
       shortDesc: "Healthcare technology",
       hoverDesc: "Advance patient care with our innovative healthcare technology solutions. We develop EHR systems, telemedicine platforms, and medical practice management software for healthcare providers."
@@ -92,7 +92,7 @@ const TechIndustrySection: React.FC = () => {
       name: "Manufacturing",
       description: "Industrial automation and supply chain optimization solutions",
       image: "/manufacture.jpg",
-      link: "/industry/manufacturing",
+      link: "/manufacturing",
       tagline: "Industrial Automation",
       shortDesc: "Industrial automation",
       hoverDesc: "Optimize your manufacturing operations with Industry 4.0 solutions. We implement MES, supply chain management, and IoT platforms for smart factory automation and process optimization."
@@ -102,7 +102,7 @@ const TechIndustrySection: React.FC = () => {
       name: "Telecommunication",
       description: "Advanced communication networks and service delivery platforms",
       image: "/telecommunication.jpg",
-      link: "/industry/telecommunication",
+      link: "/telecommunication",
       tagline: "Communication Networks",
       shortDesc: "Advanced networks",
       hoverDesc: "Build next-generation communication networks with our telecom expertise. We deliver OSS/BSS solutions, 5G readiness, and network management systems for telecommunications providers."
@@ -112,7 +112,7 @@ const TechIndustrySection: React.FC = () => {
       name: "Travel, Transport & Logistics",
       description: "Comprehensive transportation and logistics management systems",
       image: "/logistics.jpg",
-      link: "/industry/logistics",
+      link: "/logistics",
       tagline: "Transportation Solutions",
       shortDesc: "Logistics management",
       hoverDesc: "Streamline your logistics operations with our comprehensive transportation solutions. We develop fleet management systems, route optimization, and real-time tracking platforms for global supply chains."

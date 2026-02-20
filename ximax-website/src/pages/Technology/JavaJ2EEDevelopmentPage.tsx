@@ -19,7 +19,7 @@ const technologyPortfolio = [
     icon: <FaMicrosoft className="text-2xl text-[#38B2FF]" />,
     title: "Microsoft .NET",
     description: "Full-stack development using Microsoft's .NET ecosystem for building robust, scalable enterprise applications and web solutions",
-    path: "/technology/microsoft-dotnet"
+    path: "/microsoft-dotnet"
   },
 //   {
 //     icon: <FaJava className="text-2xl text-[#7ED4FF]" />,
@@ -31,19 +31,19 @@ const technologyPortfolio = [
     icon: <FaGlobe className="text-2xl text-[#38B2FF]" />,
     title: "Enterprise Web Services",
     description: "Comprehensive web services including RESTful APIs, SOAP services, API gateway implementations, and seamless system integration",
-    path: "/technology/enterprise-web-services"
+    path: "/enterprise-web-services"
   },
   {
     icon: <FaNetworkWired className="text-2xl text-[#7ED4FF]" />,
     title: "Middleware",
     description: "Advanced integration solutions using IBM WebSphere, Oracle Fusion, and messaging platforms for robust enterprise communication",
-    path: "/technology/middleware"
+    path: "/middleware"
   },
   {
     icon: <FaDatabase className="text-2xl text-[#38B2FF]" />,
     title: "Oracle",
     description: "End-to-end Oracle solutions including database management, PL/SQL development, optimization, and enterprise application integration",
-    path: "/technology/oracle"
+    path: "/oracle"
   }
 ];
 
