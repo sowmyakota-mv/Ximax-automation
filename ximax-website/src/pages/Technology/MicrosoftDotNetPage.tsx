@@ -145,7 +145,7 @@ const technologyPortfolio = [
     <div id='microsoft-dotnet' className="min-h-screen bg-gray-50 -mt-8">
       {/* Hero Section with Skyblue Theme Background */}
       <section 
-        className="pt-56 py-5 relative overflow-hidden min-h-[300px] md:min-h-[500px] flex items-start"
+        className="pt-52 py-5 relative overflow-hidden min-h-[300px] md:min-h-[440px] flex items-start"
         // style={{
         //   background: 'linear-gradient(135deg, #38B2FF 0%, #7ED4FF 50%, #B0E6FF 100%)'
         // }}
