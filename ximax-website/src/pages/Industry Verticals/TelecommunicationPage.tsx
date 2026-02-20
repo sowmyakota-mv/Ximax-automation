@@ -139,7 +139,7 @@ const industryVerticalsPortfolio = [
     <div id='telecommunication' className="min-h-screen bg-gray-50 -mt-8">
       {/* Hero Section with Skyblue Theme Background */}
       <section 
-  className="pt-28 py-5 relative overflow-hidden min-h-[500px] md:min-h-[500px] flex items-start"
+  className="pt-24 py-5 relative overflow-hidden min-h-[300px] md:min-h-[500px] flex items-start"
   // style={{
   //   background: 'linear-gradient(135deg, #38B2FF 0%, #7ED4FF 50%, #B0E6FF 100%)'
   // }}
@@ -149,7 +149,7 @@ const industryVerticalsPortfolio = [
     <img 
       src="/industry1.png" 
       alt="Ximax Automation Background" 
-      className="w-full h-full object-cover opacity-"
+      className="w-full h-full md:object-cover opacity-"
     />
     {/* <div className="absolute inset-0 bg-gradient-to-r from-sky-600/80 to-sky-500/80 mix-blend-multiply"></div> */}
   </div>

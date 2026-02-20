@@ -124,7 +124,7 @@ const technologyPortfolio = [
           <img 
             src="/technology5.png" 
             alt="Ximax Automation Background" 
-            className="w-full h-full object-cover opacity-"
+            className="w-full h-full md:object-cover opacity-"
           />
           {/* <div className="absolute inset-0 bg-gradient-to-r from-sky-600/80 to-sky-500/80 mix-blend-multiply"></div> */}
         </div>

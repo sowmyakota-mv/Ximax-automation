@@ -105,7 +105,7 @@ const ERPDevelopmentPage: React.FC = () => {
     <div id='erp-development' className="min-h-screen bg-gray-50 -mt-8">
       {/* Hero Section with Skyblue Theme Background */}
       <section 
-        className="pt-56 py-5 relative overflow-hidden"
+        className="pt-44 md:pt-76 py-5 relative overflow-hidden min-h-[300px] md:min-h-[500px] flex items-start"
         // style={{
         //   background: 'linear-gradient(135deg, #38B2FF 0%, #7ED4FF 50%, #B0E6FF 100%)'
         // }}
@@ -115,7 +115,7 @@ const ERPDevelopmentPage: React.FC = () => {
           <img 
             src="/service-bghero.jpg" 
             alt="Ximax Automation Background" 
-            className="w-full h-full object-cover "
+            className="w-full h-full md:object-cover "
           />
           {/* <div className="absolute inset-0 bg-gradient-to-r from-sky-600/80 to-sky-500/80 mix-blend-multiply"></div> */}
         </div>
