@@ -165,7 +165,7 @@ const AboutPage: React.FC = () => {
     <div id='about-company' className="min-h-screen bg-gray-50">
         {/* Hero Section with Gradient Background and Background Image */}
   <section 
-    className="pt-36 md:pt-76 py-5 relative overflow-hidden min-h-[300px] md:min-h-[500px] flex items-start"
+    className="pt-40 md:pt-76 py-5 relative overflow-hidden min-h-[300px] md:min-h-[500px] flex items-start"
     // style={{
     //   background: 'linear-gradient(135deg, #0A6B7E 0%, #075985 50%, #0C4A6E 100%)'
     // }}
