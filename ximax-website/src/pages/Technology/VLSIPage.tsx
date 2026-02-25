@@ -1,6 +1,5 @@
 import {
   FaCheckCircle,
-  FaCogs,
   FaRocket,
   FaMicrochip,
   FaCode,
@@ -94,32 +93,32 @@ const VLSIPage: React.FC = () => {
   ];
 
   // Technologies by node
-  const nodeTechnologies = [
-    {
-      icon: <FaMicrochip className="text-3xl text-[#38B2FF]" />,
-      title: "32nm Technology"
-    },
-    {
-      icon: <FaMicrochip className="text-3xl text-[#7ED4FF]" />,
-      title: "45nm Technology"
-    },
-    {
-      icon: <FaMicrochip className="text-3xl text-[#38B2FF]" />,
-      title: "65nm Technology"
-    },
-    {
-      icon: <FaMicrochip className="text-3xl text-[#7ED4FF]" />,
-      title: "90nm Technology"
-    },
-    {
-      icon: <FaMicrochip className="text-3xl text-[#38B2FF]" />,
-      title: "130nm Technology"
-    },
-    {
-      icon: <FaCogs className="text-3xl text-[#7ED4FF]" />,
-      title: "Synopsys & Cadence Flows"
-    }
-  ];
+//   const nodeTechnologies = [
+//     {
+//       icon: <FaMicrochip className="text-3xl text-[#38B2FF]" />,
+//       title: "32nm Technology"
+//     },
+//     {
+//       icon: <FaMicrochip className="text-3xl text-[#7ED4FF]" />,
+//       title: "45nm Technology"
+//     },
+//     {
+//       icon: <FaMicrochip className="text-3xl text-[#38B2FF]" />,
+//       title: "65nm Technology"
+//     },
+//     {
+//       icon: <FaMicrochip className="text-3xl text-[#7ED4FF]" />,
+//       title: "90nm Technology"
+//     },
+//     {
+//       icon: <FaMicrochip className="text-3xl text-[#38B2FF]" />,
+//       title: "130nm Technology"
+//     },
+//     {
+//       icon: <FaCogs className="text-3xl text-[#7ED4FF]" />,
+//       title: "Synopsys & Cadence Flows"
+//     }
+//   ];
 
   // Function to handle solution click
   const handleSolutionClick = (path: string) => {
