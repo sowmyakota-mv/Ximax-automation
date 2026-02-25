@@ -159,7 +159,7 @@ const MortgageServicesPage: React.FC = () => {
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-[#38B2FF] to-[#7ED4FF] mx-auto mb-6"></div>
               <p className="text-xs md:text-sm text-gray-700 leading-relaxed max-w-4xl mx-auto">
-                <span className="font-semibold text-[#38B2FF]">Truefy Technologies</span> is a business process transformation company providing comprehensive solutions driven by technology for mortgage servicing and offshore services. We deliver cost-effective, efficient, and quality-driven solutions, adapting to the evolving industry requirements.
+                <span className="font-semibold text-[#38B2FF]">Ximax Automation</span> is a business process transformation company providing comprehensive solutions driven by technology for mortgage servicing and offshore services. We deliver cost-effective, efficient, and quality-driven solutions, adapting to the evolving industry requirements.
               </p>
             </div>
           </div>
@@ -179,7 +179,7 @@ const MortgageServicesPage: React.FC = () => {
                     Dedicated to Client Success
                   </h3>
                   <p className="text-xs md:text-sm text-white/95 mb-6 leading-relaxed">
-                    Truefy Technologies is a business process transformation company providing comprehensive solutions driven by technology for mortgage servicing and offshore services. We deliver cost-effective, efficient, and quality-driven solutions, adapting to the evolving industry requirements.
+                    Ximax Automation is a business process transformation company providing comprehensive solutions driven by technology for mortgage servicing and offshore services. We deliver cost-effective, efficient, and quality-driven solutions, adapting to the evolving industry requirements.
                   </p>
                   <p className="text-xs md:text-sm text-white/95 mb-6 leading-relaxed">
                     Our team consists of industry experts with extensive knowledge and experience in collaborating with top-tier origination and servicing companies. Trueintech's management team holds certifications from the Mortgage Bankers Association's education arm in servicing and origination, ensuring firsthand understanding of the dynamic nature of the mortgage industry. Together, we offer immediate insights into industry changes, regulatory updates, and compliance requirements, enabling us to deliver top-notch solutions.

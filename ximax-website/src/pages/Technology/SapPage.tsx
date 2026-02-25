@@ -139,7 +139,7 @@ const SAPPage: React.FC = () => {
               </div>
               
               <p className="text-xs md:text-sm text-white/90 text-center max-w-xl mx-auto mb-12">
-                Green Technosoft has broad involvement in giving SAP counseling administrations to assortment of enterprises including producing, retail, oil and gas, media, cutting edge and others.
+                Ximax has broad involvement in giving SAP counseling administrations to assortment of enterprises including producing, retail, oil and gas, media, cutting edge and others.
               </p>
             </div>
           </div>
@@ -157,7 +157,7 @@ const SAPPage: React.FC = () => {
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-[#38B2FF] to-[#7ED4FF] mx-auto mb-6"></div>
               <p className="text-xs md:text-sm text-gray-700 leading-relaxed max-w-4xl mx-auto">
-                <span className="font-semibold text-[#38B2FF]">Green Technosoft</span> has broad involvement in giving SAP counseling administrations to assortment of enterprises including producing, retail, oil and gas, media, cutting edge and others. One of the center parts of the SAP business structure is a business insight arrangement called SAP Business Information Warehouse (SAP BW). SAP BW is an entire information stockroom and data conveyance system and is firmly combined with the SAP R/3 Online Transaction Processing condition. This makes it simpler to actualize a self-governing information distribution center condition without the test of managing SAP R/3 information extraction and information administration complexities.
+                <span className="font-semibold text-[#38B2FF]">Ximax</span> has broad involvement in giving SAP counseling administrations to assortment of enterprises including producing, retail, oil and gas, media, cutting edge and others. One of the center parts of the SAP business structure is a business insight arrangement called SAP Business Information Warehouse (SAP BW). SAP BW is an entire information stockroom and data conveyance system and is firmly combined with the SAP R/3 Online Transaction Processing condition. This makes it simpler to actualize a self-governing information distribution center condition without the test of managing SAP R/3 information extraction and information administration complexities.
               </p>
             </div>
           </div>
@@ -166,7 +166,7 @@ const SAPPage: React.FC = () => {
           <div className="max-w-7xl mx-auto ">
             <div className="bg-gradient-to-br from-[#38B2FF]/5 to-[#7ED4FF]/5 rounded-3xl p-8 md:p-12">
               <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 text-center">
-                Most Important SAP Modules that <span className="text-[#38B2FF]">Green Technosoft</span> implements
+                Most Important SAP Modules that <span className="text-[#38B2FF]">Ximax</span> implements
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {sapModules.map((module, index) => (

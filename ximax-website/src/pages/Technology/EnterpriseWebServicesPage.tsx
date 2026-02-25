@@ -153,7 +153,7 @@ const technologyPortfolio = [
     </div>
     
     <p className="text-xs md:text-sm text-white/90 text-center max-w-xl mx-auto mb-12">
-      FloorEdge helps you quickstart your organization's Web 2.0 initiative. Enterprise Web 2.0 supported by SaaS and PaaS helps companies grow their revenue, provide better customer experiences and achieve greater market share and competitive advantage.
+      Ximax helps you quickstart your organization's Web 2.0 initiative. Enterprise Web 2.0 supported by SaaS and PaaS helps companies grow their revenue, provide better customer experiences and achieve greater market share and competitive advantage.
             </p>
   </div>
 </div>
@@ -171,7 +171,7 @@ const technologyPortfolio = [
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-[#38B2FF] to-[#7ED4FF] mx-auto mb-6"></div>
               <p className="text-xs md:text-sm text-gray-700 leading-relaxed max-w-4xl mx-auto">
-                <span className="font-semibold text-[#38B2FF]">FloorEdge</span> helps you quickstart your organization's Web 2.0 initiative. Enterprise Web 2.0 supported by SaaS and PaaS helps companies grow their revenue, provide better customer experiences and achieve greater market share and competitive advantage. We help organizations build Web 2.0 and leverage Social Media in these areas.
+                <span className="font-semibold text-[#38B2FF]">Ximax</span> helps you quickstart your organization's Web 2.0 initiative. Enterprise Web 2.0 supported by SaaS and PaaS helps companies grow their revenue, provide better customer experiences and achieve greater market share and competitive advantage. We help organizations build Web 2.0 and leverage Social Media in these areas.
               </p>
             </div>
           </div>
@@ -180,10 +180,10 @@ const technologyPortfolio = [
           <div className="max-w-7xl mx-auto ">
             <div className="bg-gradient-to-br from-[#38B2FF]/5 to-[#7ED4FF]/5 rounded-3xl p-8 md:p-12">
               <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 text-center">
-                FloorEdge's Representative <span className="text-[#38B2FF]">Web 2.0 Engagements</span>
+               Ximax Automation's Representative <span className="text-[#38B2FF]">Web 2.0 Engagements</span>
               </h3>
               <p className="text-xs md:text-sm text-gray-600 text-center mb-8 max-w-3xl mx-auto">
-                Below are some of FloorEdge's Web 2.0 engagements
+                Below are some of Ximax's Web 2.0 engagements
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {webEngagements.map((engagement, index) => (

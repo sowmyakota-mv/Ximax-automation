@@ -161,7 +161,7 @@ const industryVerticalsPortfolio = [
       </div>
       
       <p className="text-xs md:text-base text-white/90 max-w-3xl mx-auto mb-12">
-        FloorEdge can help the travel industry in creating new propositions for its customers - online booking, remote travel management, and new age CRM programs.
+        Ximax can help the travel industry in creating new propositions for its customers - online booking, remote travel management, and new age CRM programs.
             </p>
     </div>
   </div>

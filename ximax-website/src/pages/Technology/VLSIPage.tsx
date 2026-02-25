@@ -155,7 +155,7 @@ const VLSIPage: React.FC = () => {
               </div>
               
               <p className="text-xs md:text-sm text-white/90 text-center max-w-xl mx-auto mb-12">
-                Green Technosoft provides comprehensive VLSI and embedded solutions with expertise spanning from RTL design to finished chips, serving industries from automotive to aerospace.
+                Ximax provides comprehensive VLSI and embedded solutions with expertise spanning from RTL design to finished chips, serving industries from automotive to aerospace.
               </p>
             </div>
           </div>
@@ -186,7 +186,7 @@ const VLSIPage: React.FC = () => {
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-[#38B2FF] to-[#7ED4FF] mx-auto mb-6"></div>
               <p className="text-xs md:text-sm text-gray-700 leading-relaxed max-w-4xl mx-auto">
-                Green Technosoft has different engagement models, from consulting to Final delivery of chips. We provide consulting services in all ASIC Design domains.
+                Ximax has different engagement models, from consulting to Final delivery of chips. We provide consulting services in all ASIC Design domains.
               </p>
             </div>
           </div>
@@ -198,7 +198,7 @@ const VLSIPage: React.FC = () => {
                 <span className="text-[#38B2FF]">VLSI</span> Services
               </h3>
               <p className="text-xs md:text-sm text-gray-700 leading-relaxed mb-6 text-center max-w-4xl mx-auto">
-                Green Technosoft team expertise in Design Implementation encompasses flows/methodologies from front-end to the back-end. The core-skills include RTL Design, Verification, RTL Synthesis, Timing Analysis, DFT, Formal Verification, Physical Design Closure (Floor planning, Clock Tree Synthesis, P&R, Timing, Noise, Power & IR-Drop/Electro migration Analysis and Physical Verification).
+                Ximax team expertise in Design Implementation encompasses flows/methodologies from front-end to the back-end. The core-skills include RTL Design, Verification, RTL Synthesis, Timing Analysis, DFT, Formal Verification, Physical Design Closure (Floor planning, Clock Tree Synthesis, P&R, Timing, Noise, Power & IR-Drop/Electro migration Analysis and Physical Verification).
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {vlsiServices.map((service, index) => (
@@ -262,18 +262,18 @@ const VLSIPage: React.FC = () => {
             </div>
 
             {/* Additional Info */}
-            <div className="mt-8 p-6 bg-gradient-to-br from-[#38B2FF]/5 to-[#7ED4FF]/5 rounded-3xl">
+            {/* <div className="mt-8 p-6 bg-gradient-to-br from-[#38B2FF]/5 to-[#7ED4FF]/5 rounded-3xl">
               <p className="text-xs md:text-sm text-gray-700 leading-relaxed">
                 Green Technosoft has credentials in working on Physical Design expertise across complex blocks and has experience with timing closure on flat as well as hierarchical designs.
               </p>
               <p className="text-xs md:text-sm text-gray-700 leading-relaxed mt-4">
                 We have a successfully executed turn key projects – Spec to Tested Chips, Consultation services we have right from RTL design to Finished chips. We have good relations with multiple Semiconductor fabs, can give you cost effective solution.
               </p>
-            </div>
+            </div> */}
           </div>
 
           {/* Technologies by Node */}
-          <div className="max-w-7xl mx-auto py-5">
+          {/* <div className="max-w-7xl mx-auto py-5">
             <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 text-center mt-10">
               Technology <span className="text-[#38B2FF]">Nodes</span>
             </h3>
@@ -298,7 +298,7 @@ const VLSIPage: React.FC = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
 

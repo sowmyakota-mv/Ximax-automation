@@ -189,7 +189,7 @@ const AboutPage: React.FC = () => {
         </div>
         
         <p className="text-xs md:text-base font-semibold text-gray-900 max-w-3xl mx-auto mb-12">
-          Pioneering IT consulting and software services since 2006, transforming businesses worldwide 
+          Pioneering IT consulting and software services since 2003, transforming businesses worldwide 
           through innovation, expertise, and a commitment to excellence.
         </p>
       </div>
@@ -211,8 +211,8 @@ const AboutPage: React.FC = () => {
               IT Consulting & Software Services Company
             </h2>
             <p className="text-gray-700 text-xs md:text-sm text-left leading-relaxed">
-              <strong>Ximax Automation</strong> is an IT consulting and software services company founded in March 2006. 
-              Running its operations from its base in London with 100+ strong work forces, Ximax Automation offers 
+              <strong>Ximax Automation</strong> is an IT consulting and software services company founded in March 2003. 
+              Running its operations from its base in Bangalore with 100+ strong work forces, Ximax Automation offers 
               Software Product Development, Application Development, Web Development, Outsourced IT Managed & Infrastructure 
               services, IT Staffing and Technology Consulting services to its clients across the globe.
             </p>
