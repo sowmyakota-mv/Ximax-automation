@@ -1,6 +1,6 @@
 // components/Header.tsx
 import { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { href, useNavigate } from 'react-router-dom';
 import { Menu, X, Mail, Phone, Linkedin, ChevronDown, ChevronRight } from 'lucide-react';
 
 // WhatsApp Icon Component
@@ -38,6 +38,7 @@ const Header = () => {
       { name: 'Digital Transformation', href: '/digital-transformation' },
       { name: 'Testing & QA', href: '/testing-qa' },
       { name: 'ERP Development', href: '/erp-development' },
+      { name: 'Mortgage Services', href: '/mortgage-services'}
     ],
     'Technology': [
       { name: 'Microsoft .NET', href: '/microsoft-dotnet' },
@@ -45,6 +46,8 @@ const Header = () => {
       { name: 'Enterprise Web Services', href: '/enterprise-web-services' },
       { name: 'Middleware', href: '/middleware' },
       { name: 'Oracle', href: '/oracle' },
+      { name: 'SAP', href: '/sap'},
+      { name: 'VLSI', href: '/vlsi'}
     ],
     'Industry Verticals': [
       { name: 'Financial Services', href: '/financial' },

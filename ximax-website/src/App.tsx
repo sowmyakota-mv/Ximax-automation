@@ -30,6 +30,9 @@ import LogisticsPage from './pages/Industry Verticals/LogisticsPage';
 import CareerPage from './pages/CareerPage';
 import ContactPage from './components/ContactSection';
 import ScrollToTop from './animation/ScrollToTop';
+import SAPPage from './pages/Technology/SapPage';
+import VLSIPage from './pages/Technology/VLSIPage';
+import MortgageServicesPage from './pages/Services/MortgageServicesPage';
 
 function App() {
   return (
@@ -69,6 +72,9 @@ function App() {
        <Route path='/logistics' element={<LogisticsPage/>}/>
        <Route path='/career' element={<CareerPage/>}/>
        <Route path='/contact-us' element={<ContactPage/>}/>
+       <Route path='/sap' element={<SAPPage/>}/>
+       <Route path='/vlsi' element={<VLSIPage/>}/>
+       <Route path='/mortgage-services' element={<MortgageServicesPage/>}/>
        </Routes> 
         <Footer/>       
         </Router>

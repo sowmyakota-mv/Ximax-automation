@@ -15,7 +15,7 @@ const HeroSection: React.FC = () => {
   // Combined slides array with optimized image paths
   const slides = [
     {
-      image: "/digital-bghero.webp",
+      image: "/digital-bghero.jpg",
       title: "Digital Transformation Services",
       tagline: "Our Expertise",
       description: "Transform your business with cutting-edge digital solutions. We help organizations adapt, innovate, and thrive in the digital era through strategic technology implementation.",

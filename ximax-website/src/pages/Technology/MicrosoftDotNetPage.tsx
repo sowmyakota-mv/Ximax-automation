@@ -13,7 +13,9 @@ import {
   FaJava,
   FaGlobe,
   FaNetworkWired,
-  FaRocket
+  FaRocket,
+  FaServer,
+  FaMicrochip
 } from 'react-icons/fa';
 import { 
   SiDotnet,
@@ -55,6 +57,18 @@ const technologyPortfolio = [
     title: "Oracle",
     description: "End-to-end Oracle solutions including database management, PL/SQL development, optimization, and enterprise application integration",
     path: "/oracle"
+  },
+  {
+    icon: <FaServer className="text-2xl text-[#7ED4FF]" />,
+    title: "SAP",
+    description: "Comprehensive SAP implementation, customization, and integration services including SAP, SAP Fiori, and SAP Business Suite for enterprise resource planning",
+    path: "/sap"
+  },
+  {
+    icon: <FaMicrochip className="text-2xl text-[#38B2FF]" />,
+    title: "VLSI",
+    description: "Advanced VLSI design and verification services including ASIC design, FPGA implementation, RTL coding, and semiconductor solutions for hardware development",
+    path: "/vlsi"
   }
 ];
 
@@ -319,12 +333,12 @@ const technologyPortfolio = [
           
           {/* Services Grid */}
           <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-6 gap-8">
               {technologyPortfolio.map((service, idx) => (
                 <div 
                   key={idx}
                   onClick={() => handleSolutionClick(service.path)}
-                  className="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-2xl transition-all duration-300 hover:border-[#7ED4FF] cursor-pointer group h-full flex flex-col"
+                  className="bg-white rounded-xl border border-gray-200 p-3 hover:shadow-2xl transition-all duration-300 hover:border-[#7ED4FF] cursor-pointer group h-full flex flex-col"
                 >
                   <div className="flex items-start justify-between mb-3">
                     <div className="p-3 bg-gray-50 rounded-lg group-hover:bg-[#7ED4FF]/10 transition-colors duration-300">

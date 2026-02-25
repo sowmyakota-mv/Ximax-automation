@@ -9,11 +9,14 @@ import {
   Instagram,
   ChevronRight
 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Footer = () => {
+  const navigate = useNavigate();
+  
   // Navigation functions
   const navigateTo = (path: string) => {
-    window.location.href = path;
+    navigate(path);
   };
 
   // Quick Links
@@ -79,16 +82,6 @@ const Footer = () => {
                 team is anxious to work with your organization to make both yours and ours stronger.
               </p>
             </div>
-            
-            {/* <div className="flex items-center gap-3">
-              <button 
-                onClick={() => navigateTo('/contact')}
-                className="group inline-flex items-center gap-2 bg-sky-600 hover:bg-sky-700 text-white px-5 py-2.5 rounded-lg font-medium transition-all duration-300"
-              >
-                Get In Touch
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </button>
-            </div> */}
           </div>
 
           {/* Column 2: Quick Links */}
@@ -171,12 +164,6 @@ const Footer = () => {
                 +1 (555) 123-4567<br />
                 +1 (555) 987-6543
               </p>
-              {/* <button 
-                onClick={() => navigateTo('tel:+15551234567')}
-                className="text-sky-400 hover:text-sky-300 text-sm font-medium mt-2"
-              >
-                Call Now →
-              </button> */}
             </div>
           </div>
 
@@ -190,12 +177,6 @@ const Footer = () => {
                 info@ximaxautomation.com<br />
                 support@ximaxautomation.com
               </p>
-              {/* <button 
-                onClick={() => navigateTo('mailto:info@ximaxautomation.com')}
-                className="text-sky-400 hover:text-sky-300 text-sm font-medium mt-2"
-              >
-                Send Email →
-              </button> */}
             </div>
           </div>
 
@@ -206,7 +187,7 @@ const Footer = () => {
                 {socialLinks.map((social, index) => (
                   <a
                     key={index}
-                    // href={social.url}
+                    href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-2 rounded-lg bg-gray-800 hover:bg-sky-700 transition-colors"
@@ -228,32 +209,32 @@ const Footer = () => {
           </div>
 
           {/* Legal Links */}
-          <div className="flex flex-wrap gap-6">
+          {/* <div className="flex flex-wrap gap-6">
             <button 
-              onClick={() => navigateTo('/')}
+              onClick={() => navigateTo('/privacy-policy')}
               className="text-gray-400 hover:text-white text-sm transition-colors"
             >
               Privacy Policy
             </button>
             <button 
-              onClick={() => navigateTo('/')}
+              onClick={() => navigateTo('/terms-of-service')}
               className="text-gray-400 hover:text-white text-sm transition-colors"
             >
               Terms of Service
             </button>
             <button 
-              onClick={() => navigateTo('/')}
+              onClick={() => navigateTo('/cookie-policy')}
               className="text-gray-400 hover:text-white text-sm transition-colors"
             >
               Cookie Policy
             </button>
             <button 
-              onClick={() => navigateTo('/')}
+              onClick={() => navigateTo('/sitemap')}
               className="text-gray-400 hover:text-white text-sm transition-colors"
             >
               Sitemap
             </button>
-          </div>
+          </div> */}
 
           {/* Back to Top */}
           <button

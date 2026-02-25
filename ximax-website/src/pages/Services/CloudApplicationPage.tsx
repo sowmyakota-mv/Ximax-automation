@@ -11,6 +11,7 @@ import {
   FaAws,
   FaServer,
   FaCode,
+  FaHome,
 } from 'react-icons/fa';
 import { SiGooglecloud, SiSalesforce, SiHeroku, SiVmware, SiAmazonapigateway } from 'react-icons/si';
 import { useNavigate } from 'react-router-dom';
@@ -56,6 +57,12 @@ const CloudApplicationsPage: React.FC = () => {
       title: "ERP Development",
       description: "ERP Implementation, Post Implementation Support and customization services",
       path: "/erp-development"
+    },
+    {
+      icon: <FaHome className="text-2xl text-[#38B2FF]" />,
+      title: "Mortgage Services",
+      description: "End-to-end mortgage servicing solutions including Pre-Underwriting, Post-Closing QC, Loan Onboarding and more",
+      path: "/mortgage-services"
     }
   ];
 
@@ -373,12 +380,12 @@ const CloudApplicationsPage: React.FC = () => {
           
           {/* Services Grid */}
           <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-6 gap-6">
               {servicesPortfolio.map((service, idx) => (
                 <div 
                   key={idx}
                   onClick={() => handleSolutionClick(service.path)}
-                  className="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-2xl transition-all duration-300 hover:border-[#7ED4FF] cursor-pointer group h-full flex flex-col"
+                  className="bg-white rounded-xl border border-gray-200 p-3 hover:shadow-2xl transition-all duration-300 hover:border-[#7ED4FF] cursor-pointer group h-full flex flex-col"
                 >
                   <div className="flex items-start justify-between mb-3">
                     <div className="p-3 bg-gray-50 rounded-lg group-hover:bg-[#7ED4FF]/10 transition-colors duration-300">
